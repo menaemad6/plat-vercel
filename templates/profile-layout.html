@@ -1,0 +1,435 @@
+{% load static %}
+{% load i18n %}
+{% get_current_language as LANGUAGE_CODE %}
+
+
+<!DOCTYPE html>
+
+<html lang="en" class="light-style layout-menu-fixed" dir="ltr" data-theme="theme-default" data-assets-path="../assets/"
+  data-template="vertical-menu-template-free">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
+
+
+
+  <meta name="description" content="" />
+
+<!-- Favicon -->
+<link rel="icon" type="image/x-icon" href="{% static 'profile/assets/img/favicon/favicon.ico' %}" />
+<!-- Favicon -->
+
+
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
+    rel="stylesheet" />
+
+  <!-- Icons. Uncomment required icon fonts -->
+  <link rel="stylesheet" href="{% static 'profile/assets/vendor/fonts/boxicons.css' %}" />
+
+  <!-- Core CSS -->
+  <link rel="stylesheet" href="{% static 'profile/assets/vendor/css/core.css' %}"
+    class="template-customizer-core-css" />
+  <link rel="stylesheet" href="{% static 'profile/assets/vendor/css/theme-default.css' %}"
+    class="template-customizer-theme-css" />
+  <link rel="stylesheet" href="{% static 'profile/assets/css/demo.css' %}" />
+
+  <!-- Bar Chart CSS  -->
+  <link rel="stylesheet" href="{% static 'profile/assets/css/bar-chart.css' %}" />
+
+  <!-- Vendors CSS -->
+  <link rel="stylesheet" href="{% static 'profile/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css' %}" />
+  <link rel="stylesheet" href="{% static 'profile/assets/vendor/libs/apex-charts/apex-charts.css' %}" />
+
+
+  <!-- Navbar Css  -->
+  <link rel="stylesheet" href="{% static 'profile/assets/css/navbar.css' %}" />
+
+  <!-- Main Css  -->
+  <link rel="stylesheet" href="{% static 'profile/assets/css/core.css' %}" />
+
+  <!-- Bar Chart CSS  -->
+  <link rel="stylesheet" href="{% static 'profile/assets/css/bar-chart.css' %}" />
+  <!-- Helpers -->
+  <script src="{% static 'profile/assets/vendor/js/helpers.js' %}"></script>
+
+  <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
+  <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
+  <script src="{% static 'profile/assets/js/config.js' %}"></script>
+
+
+
+
+  <!-- Aos Library  -->
+  <link href="{% static 'aos/dist/aos.css' %}" rel="stylesheet">
+<!-- Aos Library  -->
+
+
+
+  <!-- Animated Background Css  -->
+  <style>
+    @import url("https://fonts.googleapis.com/css?family=Montserrat:700");
+
+    .hero {
+      background-color: #f5f5f9;
+      /* background-color: #0040C1; */
+      position: relative;
+      height: 300px;
+      /* height: 100vh; */
+      overflow: hidden;
+      /* font-family: "Montserrat", sans-serif; */
+    }
+
+    .hero__title {
+      z-index: 1;
+      padding: 0;
+    }
+
+    .cube {
+      position: absolute;
+      top: 20%;
+      left: 45vw;
+      width: 10px;
+      height: 10px;
+      border: solid 1px #7a6ad8;
+      /* border: solid 1px #003298; */
+      transform-origin: top left;
+      transform: scale(0) rotate(0deg) translate(-50%, -50%);
+      -webkit-animation: cube 1s ease-in forwards infinite;
+      animation: cube 1s ease-in forwards infinite;
+    }
+
+    .cube:nth-child(2n) {
+      /* border-color: #0051f4; */
+      border-color: #00ff84;
+
+    }
+
+    .cube:nth-child(2) {
+      -webkit-animation-delay: 2s;
+      animation-delay: 2s;
+      left: 25vw;
+      top: 40vh;
+    }
+
+    .cube:nth-child(3) {
+      -webkit-animation-delay: 4s;
+      animation-delay: 4s;
+      left: 75vw;
+      top: 50vh;
+    }
+
+    .cube:nth-child(4) {
+      -webkit-animation-delay: 4s;
+      animation-delay: 4s;
+      left: 90vw;
+      top: 10vh;
+    }
+
+    .cube:nth-child(5) {
+      -webkit-animation-delay: 6s;
+      animation-delay: 6s;
+      left: 10vw;
+      top: 85vh;
+    }
+
+    .cube:nth-child(6) {
+      -webkit-animation-delay: 6s;
+      animation-delay: 6s;
+      left: 50vw;
+      top: 10vh;
+    }
+
+    @-webkit-keyframes cube {
+      from {
+        transform: scale(0) rotate(0deg) translate(-50%, -50%);
+        opacity: 1;
+      }
+
+      to {
+        transform: scale(20) rotate(960deg) translate(-50%, -50%);
+        opacity: 0;
+      }
+    }
+
+    @keyframes cube {
+      from {
+        transform: scale(0) rotate(0deg) translate(-50%, -50%);
+        opacity: 1;
+      }
+
+      to {
+        transform: scale(20) rotate(960deg) translate(-50%, -50%);
+        opacity: 0;
+      }
+    }
+
+
+    .menu-link-active{
+      border-right: 20px solid #00ff84
+    }
+  </style>
+  <!-- Animated Background Css  -->
+
+
+
+
+  <!-- Animated Background Css  -->
+  <style>
+    .header-section-body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      min-height: 300px;
+      background: #f5f5f9;
+      /* background: #000; */
+      overflow: hidden;
+    }
+
+    .glowing {
+      position: relative;
+      min-width: 700px;
+      height: 300px;
+      margin: -150px;
+      transform-origin: right;
+      animation: colorChange 10s linear infinite;
+    }
+
+    .glowing:nth-child(even) {
+      transform-origin: left;
+    }
+
+    @keyframes colorChange {
+      0% {
+        filter: hue-rotate(0deg);
+        transform: rotate(0deg);
+      }
+
+      100% {
+        filter: hue-rotate(360deg);
+        transform: rotate(360deg);
+      }
+    }
+
+    .glowing span {
+      position: absolute;
+      top: calc(80px * var(--i));
+      left: calc(80px * var(--i));
+      bottom: calc(80px * var(--i));
+      right: calc(80px * var(--i));
+    }
+
+    .glowing span::before {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: -8px;
+      width: 15px;
+      height: 15px;
+      background: #7a6ad8;
+      border-radius: 50%;
+    }
+
+    .glowing span:nth-child(3n + 1)::before {
+      background: #00ff84;
+      box-shadow: 0 0 20px #00ff84,
+        0 0 40px #00ff84,
+        0 0 60px #00ff84,
+        0 0 80px #00ff84,
+        0 0 0 8px rgba(134, 255, 0, .1);
+    }
+
+    .glowing span:nth-child(3n + 2)::before {
+      background: rgba(255, 214, 0, 1);
+      box-shadow: 0 0 20px rgba(255, 214, 0, 1),
+        0 0 40px rgba(255, 214, 0, 1),
+        0 0 60px rgba(255, 214, 0, 1),
+        0 0 80px rgba(255, 214, 0, 1),
+        0 0 0 8px rgba(255, 214, 0, .1);
+    }
+
+    .glowing span:nth-child(3n + 3)::before {
+      background: rgba(0, 226, 255, 1);
+      box-shadow: 0 0 20px rgba(0, 226, 255, 1),
+        0 0 40px rgba(0, 226, 255, 1),
+        0 0 60px rgba(0, 226, 255, 1),
+        0 0 80px rgba(0, 226, 255, 1),
+        0 0 0 8px rgba(0, 226, 255, .1);
+    }
+
+    .glowing span:nth-child(3n + 1) {
+      animation: animate 10s alternate infinite;
+    }
+
+    .glowing span:nth-child(3n + 2) {
+      animation: animate-reverse 3s alternate infinite;
+    }
+
+    .glowing span:nth-child(3n + 3) {
+      animation: animate 8s alternate infinite;
+    }
+
+    @keyframes animate {
+      0% {
+        transform: rotate(180deg);
+      }
+
+      50% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    @keyframes animate-reverse {
+      0% {
+        transform: rotate(360deg);
+      }
+
+      50% {
+        transform: rotate(180deg);
+      }
+
+      100% {
+        transform: rotate(0deg);
+      }
+    }
+  </style>
+  <!-- Animated Background Css  -->
+  {% block head %}
+  {% endblock head %}
+
+
+
+
+
+</head>
+
+<body>
+
+
+
+  <!-- ***** Preloader Start ***** -->
+  <div id="js-preloader" class="js-preloader">
+    <div class="preloader-inner">
+      <span class="dot"></span>
+      <div class="dots">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </div>
+  <!-- ***** Preloader End ***** -->
+
+
+
+
+  <!-- Messages  -->
+  {% if messages %}
+  {% for message in messages %}
+
+  <div
+    class="bs-toast toast toast-placement-ex m-2 bottom-0 end-0 show {% if message.tags %} bg-{{message.tags}} {% endif %}"
+    role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-header">
+      <i class="bx bx-bell me-2"></i>
+      <div class="me-auto fw-semibold"></div>
+      <small>Just Now</small>
+      <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+    <div class="toast-body">
+      {{message}}
+    </div>
+  </div>
+
+  {% endfor %}
+  {% endif %}
+  <!-- Messages  -->
+
+
+
+  
+
+  {% block content %}
+
+  {% endblock content %}
+
+
+
+
+
+
+
+  <!-- <div class="buy-now">
+    <a href="https://themeselection.com/products/sneat-bootstrap-html-admin-template/" target="_blank"
+      class="btn btn-danger btn-buy-now">Upgrade to Pro</a>
+  </div> -->
+
+  <!-- Info JS -->
+  <script src="{% static 'profile/assets/js/info.js' %}"></script>
+
+
+
+
+
+  <!-- Core JS -->
+  <!-- build:js assets/vendor/js/core.js -->
+  <script src="{% static 'profile/assets/vendor/libs/jquery/jquery.js' %}"></script>
+  <script src="{% static 'profile/assets/vendor/libs/popper/popper.js' %}"></script>
+  <script src="{% static 'profile/assets/vendor/js/bootstrap.js' %}"></script>
+  <script src="{% static 'profile/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js' %}"></script>
+
+  <script src="{% static 'profile/assets/vendor/js/menu.js' %}"></script>
+  <!-- endbuild -->
+
+  <!-- Vendors JS -->
+  <script src="{% static 'profile/assets/vendor/libs/apex-charts/apexcharts.js' %}"></script>
+
+  <!-- Main JS -->
+  <script src="{% static 'profile/assets/js/main.js' %}"></script>
+
+  <!-- Navbar JS -->
+  <script src="{% static 'profile/assets/js/navbar.js' %}"></script>
+
+  <!-- Page JS -->
+  <script src="{% static 'profile/assets/js/dashboards-analytics.js' %}"></script>
+
+
+
+  <!-- Form Counter Js  -->
+  <script src="{% static 'profile/assets/js/form.js' %}"></script>
+
+  <!-- Place this tag in your head or just before your close body tag. -->
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+  <!-- Preloader JS  -->
+  <script src="{% static 'profile/assets/js/preloader.js' %}"></script>
+
+
+  <!-- Font Awesome Icons -->
+  <script src="https://kit.fontawesome.com/1454af8120.js" crossorigin="anonymous"></script>
+  <!-- Font Awesome Icons -->
+
+
+  <!-- Aos Library  -->
+  <script src="{% static 'aos/dist/aos.js' %}"></script>
+
+  <script>
+    AOS.init();
+  </script>
+<!-- Aos Library  -->
+
+
+</body>
+
+</html>

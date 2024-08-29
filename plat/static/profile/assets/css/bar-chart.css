@@ -1,0 +1,45 @@
+
+  /* Circle Chart */
+  .circle-chart-container {
+    clear: left;
+    float: left;
+    position: relative;
+    max-width: 165px;
+    width: 100%;
+  }
+  
+  .circle-chart {
+    overflow: visible;
+  }
+  
+  .circle-chart-circle {
+    animation: circle-chart-fill 1.75s reverse;
+    -webkit-transform: rotate(-90deg);
+    -moz-transform: rotate(-90deg);
+    -o-transform: rotate(-90deg);
+    -ms-transform: rotate(-90deg);
+    transform: rotate(-90deg);
+    transform-origin: center;
+  }
+  
+
+  
+  .circle-chart-percentage {
+    -webkit-animation: fade-in-text 2.2s 0.1s forwards;
+    -moz-animation: fade-in-text 2.2s 0.1s forwards;
+    animation: fade-in-text 2.2s 0.1s forwards;
+    font-size: 22px;
+    font-weight: 700;
+    position: absolute;
+  }
+  
+  .circle-chart-one-percentage {
+    color: #7a6ad8;
+    left: 65px;
+    top: 60px;
+  }
+  
+  
+  @keyframes circle-chart-fill {
+    to { stroke-dasharray: 0 100; }
+  }

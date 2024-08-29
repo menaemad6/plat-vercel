@@ -1,0 +1,1228 @@
+{% extends "profile-layout.html" %}
+{% load static %}
+
+
+{% block head %}
+<!-- Page Title  -->
+<title>{{profile.name}} - Profile</title>
+<!-- Page Title  -->
+
+
+<!-- Favicon -->
+<link rel="icon" type="image/x-icon" href="{% static 'profile/assets/img/favicon/favicon.ico' %}" />
+<!-- Favicon -->
+{% endblock head %}
+
+
+{% block content %}
+<!-- Layout wrapper -->
+<div class="layout-wrapper layout-content-navbar">
+  <div class="layout-container">
+
+    <!-- Menu -->
+    <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
+      <div class="app-brand demo">
+        <a href="/" class="app-brand-link">
+          <span class="app-brand-logo demo">
+            <svg width="25" viewBox="0 0 25 42" version="1.1" xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink">
+              <defs>
+                <path
+                  d="M13.7918663,0.358365126 L3.39788168,7.44174259 C0.566865006,9.69408886 -0.379795268,12.4788597 0.557900856,15.7960551 C0.68998853,16.2305145 1.09562888,17.7872135 3.12357076,19.2293357 C3.8146334,19.7207684 5.32369333,20.3834223 7.65075054,21.2172976 L7.59773219,21.2525164 L2.63468769,24.5493413 C0.445452254,26.3002124 0.0884951797,28.5083815 1.56381646,31.1738486 C2.83770406,32.8170431 5.20850219,33.2640127 7.09180128,32.5391577 C8.347334,32.0559211 11.4559176,30.0011079 16.4175519,26.3747182 C18.0338572,24.4997857 18.6973423,22.4544883 18.4080071,20.2388261 C17.963753,17.5346866 16.1776345,15.5799961 13.0496516,14.3747546 L10.9194936,13.4715819 L18.6192054,7.984237 L13.7918663,0.358365126 Z"
+                  id="path-1"></path>
+                <path
+                  d="M5.47320593,6.00457225 C4.05321814,8.216144 4.36334763,10.0722806 6.40359441,11.5729822 C8.61520715,12.571656 10.0999176,13.2171421 10.8577257,13.5094407 L15.5088241,14.433041 L18.6192054,7.984237 C15.5364148,3.11535317 13.9273018,0.573395879 13.7918663,0.358365126 C13.5790555,0.511491653 10.8061687,2.3935607 5.47320593,6.00457225 Z"
+                  id="path-3"></path>
+                <path
+                  d="M7.50063644,21.2294429 L12.3234468,23.3159332 C14.1688022,24.7579751 14.397098,26.4880487 13.008334,28.506154 C11.6195701,30.5242593 10.3099883,31.790241 9.07958868,32.3040991 C5.78142938,33.4346997 4.13234973,34 4.13234973,34 C4.13234973,34 2.75489982,33.0538207 2.37032616e-14,31.1614621 C-0.55822714,27.8186216 -0.55822714,26.0572515 -4.05231404e-15,25.8773518 C0.83734071,25.6075023 2.77988457,22.8248993 3.3049379,22.52991 C3.65497346,22.3332504 5.05353963,21.8997614 7.50063644,21.2294429 Z"
+                  id="path-4"></path>
+                <path
+                  d="M20.6,7.13333333 L25.6,13.8 C26.2627417,14.6836556 26.0836556,15.9372583 25.2,16.6 C24.8538077,16.8596443 24.4327404,17 24,17 L14,17 C12.8954305,17 12,16.1045695 12,15 C12,14.5672596 12.1403557,14.1461923 12.4,13.8 L17.4,7.13333333 C18.0627417,6.24967773 19.3163444,6.07059163 20.2,6.73333333 C20.3516113,6.84704183 20.4862915,6.981722 20.6,7.13333333 Z"
+                  id="path-5"></path>
+              </defs>
+              <g id="g-app-brand" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                <g id="Brand-Logo" transform="translate(-27.000000, -15.000000)">
+                  <g id="Icon" transform="translate(27.000000, 15.000000)">
+                    <g id="Mask" transform="translate(0.000000, 8.000000)">
+                      <mask id="mask-2" fill="white">
+                        <use xlink:href="#path-1"></use>
+                      </mask>
+                      <use fill="#696cff" xlink:href="#path-1"></use>
+                      <g id="Path-3" mask="url(#mask-2)">
+                        <use fill="#696cff" xlink:href="#path-3"></use>
+                        <use fill-opacity="0.2" fill="#FFFFFF" xlink:href="#path-3"></use>
+                      </g>
+                      <g id="Path-4" mask="url(#mask-2)">
+                        <use fill="#696cff" xlink:href="#path-4"></use>
+                        <use fill-opacity="0.2" fill="#FFFFFF" xlink:href="#path-4"></use>
+                      </g>
+                    </g>
+                    <g id="Triangle"
+                      transform="translate(19.000000, 11.000000) rotate(-300.000000) translate(-19.000000, -11.000000) ">
+                      <use fill="#696cff" xlink:href="#path-5"></use>
+                      <use fill-opacity="0.2" fill="#FFFFFF" xlink:href="#path-5"></use>
+                    </g>
+                  </g>
+                </g>
+              </g>
+            </svg>
+          </span>
+          <span class="app-brand-text demo menu-text fw-bolder ms-2">
+            {% if LANGUAGE_CODE == 'ar' %}
+            الرئيسية
+            {% else %}
+            Home
+            {% endif %}
+          </span>
+          
+        </a>
+
+        <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
+          <i class="bx bx-chevron-left bx-sm align-middle"></i>
+        </a>
+      </div>
+
+      <div class="menu-inner-shadow"></div>
+
+      <ul class="menu-inner py-1">
+        <!-- Dashboard -->
+        <li class="menu-item active">
+          <a href="{% url 'main' profile.user %}" class="menu-link">
+            <i class="menu-icon tf-icons bx bx-home-circle"></i>
+            <div data-i18n="Analytics">
+              {% if LANGUAGE_CODE == 'ar' %}
+              لوحة التحكم
+              {% else %}
+              Dashboard
+              {% endif %}
+            </div>
+          </a>
+        </li>
+        
+        <li class="menu-item">
+          <a href="javascript:void(0);" class="menu-link menu-toggle">
+            <i class="menu-icon tf-icons bx bx-wallet"></i>
+            <div data-i18n="Layouts">
+              {% if LANGUAGE_CODE == 'ar' %}
+              المحفظة
+              {% else %}
+              Wallet
+              {% endif %}
+            </div>
+          </a>
+        
+          <ul class="menu-sub">
+            <li class="menu-item">
+              <a href="{% url 'wallet-recharge' profile.user %}" class="menu-link">
+                <div data-i18n="Without menu">
+                  {% if LANGUAGE_CODE == 'ar' %}
+                  شحن
+                  {% else %}
+                  Recharge
+                  {% endif %}
+                </div>
+              </a>
+            </li>
+            <li class="menu-item">
+              <a href="{% url 'wallet-subscriptions' profile.user %}" class="menu-link">
+                <div data-i18n="Without navbar">
+                  {% if LANGUAGE_CODE == 'ar' %}
+                  الاشتراكات
+                  {% else %}
+                  Subscriptions
+                  {% endif %}
+                </div>
+              </a>
+            </li>
+            <li class="menu-item">
+              <a href="{% url 'wallet-transactions' profile.user %}" class="menu-link">
+                <div data-i18n="Without navbar">
+                  {% if LANGUAGE_CODE == 'ar' %}
+                  المعاملات
+                  {% else %}
+                  Transactions
+                  {% endif %}
+                </div>
+              </a>
+            </li>
+          </ul>
+        </li>
+        
+        <li class="menu-item">
+          <a href="{% url 'groups' profile.user %}" class="menu-link">
+            <i class="menu-icon tf-icons bx bx-group"></i>
+            <div data-i18n="Analytics">
+              {% if LANGUAGE_CODE == 'ar' %}
+              المجموعات
+              {% else %}
+              Groups
+              {% endif %}
+            </div>
+          </a>
+        </li>
+        
+        <li class="menu-header small text-uppercase">
+          <span class="menu-header-text">
+            {% if LANGUAGE_CODE == 'ar' %}
+            الحساب
+            {% else %}
+            Account
+            {% endif %}
+          </span>
+        </li>
+        <li class="menu-item">
+          <a href="javascript:void(0);" class="menu-link menu-toggle">
+            <i class="menu-icon tf-icons bx bx-user"></i>
+            <div data-i18n="Account Settings">
+              {% if LANGUAGE_CODE == 'ar' %}
+              الحساب
+              {% else %}
+              Account
+              {% endif %}
+            </div>
+          </a>
+          <ul class="menu-sub">
+            <li class="menu-item">
+              <a href="{% url 'account' profile.user %}" class="menu-link">
+                <div data-i18n="Account">
+                  {% if LANGUAGE_CODE == 'ar' %}
+                  إعدادات الحساب
+                  {% else %}
+                  Account Settings
+                  {% endif %}
+                </div>
+              </a>
+            </li>
+            <li class="menu-item">
+              <a href="{% url 'account-connections' profile.user %}" class="menu-link">
+                <div data-i18n="Connections">
+                  {% if LANGUAGE_CODE == 'ar' %}
+                  الاتصالات
+                  {% else %}
+                  Connections
+                  {% endif %}
+                </div>
+              </a>
+            </li>
+            <li class="menu-item">
+              <a href="{% url 'account-login-history' profile.user %}" class="menu-link">
+                <div data-i18n="Connections">
+                  {% if LANGUAGE_CODE == 'ar' %}
+                  تاريخ تسجيل الدخول
+                  {% else %}
+                  Login History
+                  {% endif %}
+                </div>
+              </a>
+            </li>
+          </ul>
+        </li>
+        
+        <li class="menu-item">
+          <a href="{% url 'notifications' profile.user %}" class="menu-link">
+            <i class="menu-icon tf-icons bx bx-bell"></i>
+            <div data-i18n="Analytics">
+              {% if LANGUAGE_CODE == 'ar' %}
+              الإشعارات
+              {% else %}
+              Notifications
+              {% endif %}
+            </div>
+          </a>
+        </li>
+        
+        <li class="menu-item">
+          <a href="{% url 'inbox' profile.user %}" class="menu-link">
+            <i class="menu-icon tf-icons bx bx-message"></i>
+            <div data-i18n="Analytics">
+              {% if LANGUAGE_CODE == 'ar' %}
+              الرسائل
+              {% else %}
+              Inbox
+              {% endif %}
+              {% if new_replys_count == 0 %}
+              {% else %}
+              <span class="badge rounded-pill badge-center h-px-20 w-px-20 bg-danger"
+                style="margin-left: 7px;">{{new_replys_count}}</span>
+              {% endif %}
+            </div>
+          </a>
+        </li>
+        
+        <li class="menu-header small text-uppercase">
+          <span class="menu-header-text">
+            {% if LANGUAGE_CODE == 'ar' %}
+            أخرى
+            {% else %}
+            Other
+            {% endif %}
+          </span>
+        </li>
+        
+        <li class="menu-item">
+          <a href="{% url 'lectures' profile.user %}" class="menu-link">
+            <i class="menu-icon tf-icons bx bx-video"></i>
+            <div data-i18n="Basic">
+              {% if LANGUAGE_CODE == 'ar' %}
+              محاضراتي
+              {% else %}
+              My Lectures
+              {% endif %}
+            </div>
+          </a>
+        </li>
+        
+        <li class="menu-item">
+          <a href="{% url 'homeworks' profile.user %}" class="menu-link">
+            <i class="menu-icon tf-icons bx bx-file"></i>
+            <div data-i18n="Basic">
+              {% if LANGUAGE_CODE == 'ar' %}
+              واجباتي
+              {% else %}
+              My Homeworks
+              {% endif %}
+            </div>
+          </a>
+        </li>
+        
+        <li class="menu-item">
+          <a href="{% url 'exams' profile.user %}" class="menu-link">
+            <i class="menu-icon tf-icons bx bx-file"></i>
+            <div data-i18n="Basic">
+              {% if LANGUAGE_CODE == 'ar' %}
+              امتحاناتي
+              {% else %}
+              My Exams
+              {% endif %}
+            </div>
+          </a>
+        </li>
+        
+        <li class="menu-item">
+          <a href="{% url 'statistics' profile.user %}" class="menu-link">
+            <i class="menu-icon tf-icons bx bx-stats"></i>
+            <div data-i18n="Basic">
+              {% if LANGUAGE_CODE == 'ar' %}
+              إحصاءاتي
+              {% else %}
+              My Statistics
+              {% endif %}
+            </div>
+          </a>
+        </li>
+        
+
+
+
+      </ul>
+    </aside>
+    <!-- / Menu -->
+
+
+
+
+
+
+
+    <!-- Layout container -->
+    <div class="layout-page">
+
+      <!-- Navbar -->
+      <nav
+      class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme"
+      id="layout-navbar">
+      <div class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0 d-xl-none">
+        <a class="nav-item nav-link px-0 me-xl-4" href="javascript:void(0)">
+          <i class="bx bx-menu bx-sm"></i>
+        </a>
+      </div>
+    
+      <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
+    
+        <ul class="navbar-nav flex-row align-items-center ms-auto">
+          <!-- User -->
+          <li class="nav-item navbar-dropdown dropdown-user dropdown">
+            <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
+              <div class="avatar avatar-online">
+                {% if profile.image %}
+                <img src="{{profile.image.url}}" alt class="w-px-40 h-auto rounded-circle" />
+                {% else %}
+                <img src="{% static 'blank-profile-picture.jpg' %}" alt class="w-px-40 h-auto rounded-circle" />
+                {% endif %}
+              </div>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end">
+              <li>
+                <a class="dropdown-item" href="#">
+                  <div class="d-flex">
+                    <div class="flex-shrink-0 me-3">
+                      <div class="avatar avatar-online">
+                        {% if profile.image %}
+                        <img src="{{profile.image.url}}" alt class="w-px-40 h-auto rounded-circle" />
+                        {% else %}
+                        <img src="{% static 'blank-profile-picture.jpg' %}" alt
+                          class="w-px-40 h-auto rounded-circle" />
+                        {% endif %}
+                      </div>
+                    </div>
+                    <div class="flex-grow-1">
+                      <span class="fw-semibold d-block">
+                        {% if profile.name %}
+                        {{profile.name}}
+                        {% else %}
+                        {{profile.user.username}}
+                        {% endif %}
+                      </span>
+                      <small class="text-muted">
+                        {% if profile.instructor == True %}
+                        {% if LANGUAGE_CODE == 'ar' %}
+                        مدرس
+                        {% else %}
+                        Instructor
+                        {% endif %}
+                        {% else %}
+                        {% if LANGUAGE_CODE == 'ar' %}
+                        طالب
+                        {% else %}
+                        Student
+                        {% endif %}
+                        {% endif %}
+                      </small>
+                    </div>
+                  </div>
+                </a>
+              </li>
+              <li>
+                <div class="dropdown-divider"></div>
+              </li>
+    
+              {% if user_profile.instructor == True %}
+              <li>
+                <a class="dropdown-item" href="{% url 'dashboard-page' %}">
+                  <i class="bx bxs-dashboard me-2 text-black"></i>
+                  <span class="align-middle">
+                    {% if LANGUAGE_CODE == 'ar' %}
+                    لوحة التحكم
+                    {% else %}
+                    Dashboard
+                    {% endif %}
+                  </span>
+                </a>
+              </li>
+              {% endif %}
+    
+              <li>
+                <a class="dropdown-item" href="{% url 'main' profile.user %}">
+                  <i class="bx bx-user me-2"></i>
+                  <span class="align-middle">
+                    {% if user_profile.instructor == True %}
+                    {% if LANGUAGE_CODE == 'ar' %}
+                    الملف الشخصي لـ {{profile.name}}
+                    {% else %}
+                    {{profile.name}} Profile
+                    {% endif %}
+                    {% else %}
+                    {% if LANGUAGE_CODE == 'ar' %}
+                    ملفي الشخصي
+                    {% else %}
+                    My Profile
+                    {% endif %}
+                    {% endif %}
+                  </span>
+                </a>
+              </li>
+    
+              <li>
+                <a class="dropdown-item" href="{% url 'account' profile.user %}">
+                  <i class="bx bx-cog me-2"></i>
+                  <span class="align-middle">
+                    {% if LANGUAGE_CODE == 'ar' %}
+                    الإعدادات
+                    {% else %}
+                    Settings
+                    {% endif %}
+                  </span>
+                </a>
+              </li>
+    
+              <li>
+                <a class="dropdown-item" href="{% url 'notifications' user %}">
+                  <span class="d-flex align-items-center align-middle">
+                    <i class="flex-shrink-0 bx bx-bell me-2"></i>
+                    <span class="flex-grow-1 align-middle">
+                      {% if LANGUAGE_CODE == 'ar' %}
+                      الإشعارات
+                      {% else %}
+                      Notifications
+                      {% endif %}
+                    </span>
+                    {% if notifications == 0 %}
+                    {% else %}
+                    <span class="flex-shrink-0 badge badge-center rounded-pill bg-danger w-px-20 h-px-20">
+                      {{notifications}}
+                    </span>
+                    {% endif %}
+                  </span>
+                </a>
+              </li>
+              <li>
+                <div class="dropdown-divider"></div>
+              </li>
+              <li>
+                <a class="dropdown-item" href="{% url 'logout' %}">
+                  <i class="bx bx-power-off me-2"></i>
+                  <span class="align-middle">
+                    {% if LANGUAGE_CODE == 'ar' %}
+                    تسجيل الخروج
+                    {% else %}
+                    Log Out
+                    {% endif %}
+                  </span>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <!--/ User -->
+        </ul>
+      </div>
+    </nav>
+    
+      <!-- / Navbar -->
+
+
+
+
+
+
+
+
+      <!-- Content wrapper -->
+      <div class="content-wrapper">
+        <!-- Content -->
+
+        <div class="container-xxl flex-grow-1 container-p-y">
+
+          <div class="row">
+
+
+            <div class="col-lg-12 mb-4 order-0">
+              <div class="card">
+                <div class="d-flex align-items-end row">
+                  <div class="col-sm-7">
+                    {% if user_profile.instructor == True %}
+                    <div class="card-body">
+                      <h3 class="card-title text-primary">
+                        {% if profile.name %}{{profile.name}}{% else%}{{profile.user.username}}{% endif%} 
+                        {% if LANGUAGE_CODE == 'ar' %}
+                        الحساب
+                        {% else %}
+                        Account
+                        {% endif %}
+                      </h3>
+            
+                      <a href="{% url 'dashboard-page' %}" class="btn btn-md btn-outline-primary">
+                        {% if LANGUAGE_CODE == 'ar' %}
+                        العودة إلى لوحة التحكم
+                        {% else %}
+                        Back To Dashboard
+                        {% endif %}
+                      </a>
+                    </div>
+                    {% else %}
+                    <div class="card-body">
+                      <h5 class="card-title text-primary">
+                        {% if LANGUAGE_CODE == 'ar' %}
+                        مرحبا بعودتك,
+                        {% else %}
+                        Welcome Back,
+                        {% endif %}
+                        {% if profile.name %}{{profile.name}}{% else%}{{profile.user.username}}{% endif%} ! 🎉
+                      </h5>
+                      <p class="mb-4">
+                        {% if LANGUAGE_CODE == 'ar' %}
+                        لديك <span class="fw-bold">{{notifications}}</span> إشعارات. تحقق من صندوق الوارد في ملفك الشخصي.
+                        {% else %}
+                        You have <span class="fw-bold">{{notifications}}</span> notifications. Check your inbox in your profile.
+                        {% endif %}
+                      </p>
+            
+                      <a href="{% url 'inbox' user %}" class="btn btn-sm btn-outline-primary">
+                        {% if LANGUAGE_CODE == 'ar' %}
+                        عرض صندوق الوارد
+                        {% else %}
+                        View Inbox
+                        {% endif %}
+                      </a>
+                    </div>
+                    {% endif %}
+                  </div>
+                  <div class="col-sm-5 text-center text-sm-left">
+                    <div class="card-body pb-0 px-0 px-md-4">
+                      <img src="{% static 'profile/assets/img/illustrations/man-with-laptop-light.png' %}" height="140"
+                        alt="View Badge User" data-app-dark-img="illustrations/man-with-laptop-dark.png"
+                        data-app-light-img="illustrations/man-with-laptop-light.png" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="col-12 order-1">
+              <div class="row">
+                <div class="col-12 col-md-6 col-lg-3 mb-4">
+                  <div class="card">
+                    <div class="card-body">
+                      <div class="card-title d-flex align-items-start justify-content-between">
+                        <div class="avatar flex-shrink-0">
+                          <div class="p-2" style="background-color: #eae9e9; border-radius: 10px;">
+                            <i class="fa-solid fa-wallet text-primary" style="font-size: 20px;"></i>
+                          </div>
+                        </div>
+                        <div class="dropdown">
+                          <button class="btn p-0" type="button" id="cardOpt6" data-bs-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">
+                            <i class="bx bx-dots-vertical-rounded"></i>
+                          </button>
+                          <div class="dropdown-menu dropdown-menu-end" aria-labelledby="cardOpt6">
+                            <a class="dropdown-item" href="javascript:void(0);">
+                              {% if LANGUAGE_CODE == 'ar' %}
+                              التفاصيل
+                              {% else %}
+                              Details
+                              {% endif %}
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+                      <span>
+                        {% if LANGUAGE_CODE == 'ar' %}
+                        المحفظة
+                        {% else %}
+                        Wallet
+                        {% endif %}
+                      </span>
+                      <h3 class="card-title text-nowrap mb-1">{{profile.money}} EGP</h3>
+                    </div>
+                  </div>
+                </div>
+            
+                <div class="col-12 col-md-6 col-lg-3 mb-4">
+                  <div class="card">
+                    <div class="card-body">
+                      <div class="card-title d-flex align-items-start justify-content-between">
+                        <div class="avatar flex-shrink-0">
+                          <div class="p-2" style="background-color: #eae9e9; border-radius: 10px;">
+                            <i class="fa-solid fa-qrcode text-primary" style="font-size: 25px;"></i>
+                          </div>
+                        </div>
+                        <div class="dropdown">
+                          <button class="btn p-0" type="button" id="cardOpt3" data-bs-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">
+                            <i class="bx bx-dots-vertical-rounded"></i>
+                          </button>
+                          <div class="dropdown-menu dropdown-menu-end" aria-labelledby="cardOpt3">
+                            <a class="dropdown-item" href="javascript:void(0);">
+                              {% if LANGUAGE_CODE == 'ar' %}
+                              التفاصيل
+                              {% else %}
+                              Details
+                              {% endif %}
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+                      <span class="fw-semibold d-block mb-1">
+                        {% if LANGUAGE_CODE == 'ar' %}
+                        كود الطالب
+                        {% else %}
+                        Student Code
+                        {% endif %}
+                      </span>
+                      <h3 class="card-title mb-2">#{{profile.code}}</h3>
+                    </div>
+                  </div>
+                </div>
+            
+                <div class="col-12 col-md-6 col-lg-3 mb-4">
+                  <div class="card">
+                    <div class="card-body">
+                      <div class="card-title d-flex align-items-start justify-content-between">
+                        <div class="avatar flex-shrink-0">
+                          <div class="p-2" style="background-color: #eae9e9; border-radius: 10px;">
+                            <i class="fa-solid fa-money-bill-transfer text-primary" style="font-size: 20px;"></i>
+                          </div>
+                        </div>
+                        <div class="dropdown">
+                          <button class="btn p-0" type="button" id="cardOpt3" data-bs-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">
+                            <i class="bx bx-dots-vertical-rounded"></i>
+                          </button>
+                          <div class="dropdown-menu dropdown-menu-end" aria-labelledby="cardOpt3">
+                            <a class="dropdown-item" href="javascript:void(0);">
+                              {% if LANGUAGE_CODE == 'ar' %}
+                              التفاصيل
+                              {% else %}
+                              Details
+                              {% endif %}
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+                      <span class="fw-semibold d-block mb-1">
+                        {% if LANGUAGE_CODE == 'ar' %}
+                        المدفوعات
+                        {% else %}
+                        Payments
+                        {% endif %}
+                      </span>
+                      <h3 class="card-title mb-2">{{payments}} EGP</h3>
+                    </div>
+                  </div>
+                </div>
+            
+                <div class="col-12 col-md-6 col-lg-3 mb-4">
+                  <div class="card">
+                    <div class="card-body">
+                      <div class="card-title d-flex align-items-start justify-content-between">
+                        <div class="avatar flex-shrink-0">
+                          <div class="p-2" style="background-color: #eae9e9; border-radius: 10px;">
+                            <i class="fa-solid fa-circle-play text-primary" style="font-size: 20px;"></i>
+                          </div>
+                        </div>
+                        <div class="dropdown">
+                          <button class="btn p-0" type="button" id="cardOpt3" data-bs-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">
+                            <i class="bx bx-dots-vertical-rounded"></i>
+                          </button>
+                          <div class="dropdown-menu dropdown-menu-end" aria-labelledby="cardOpt3">
+                            <a class="dropdown-item" href="javascript:void(0);">
+                              {% if LANGUAGE_CODE == 'ar' %}
+                              التفاصيل
+                              {% else %}
+                              Details
+                              {% endif %}
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+                      <span class="fw-semibold d-block mb-1">
+                        {% if LANGUAGE_CODE == 'ar' %}
+                        المحاضرات المشتراة
+                        {% else %}
+                        Lectures Purchased
+                        {% endif %}
+                      </span>
+                      <h3 class="card-title mb-2">{{profile.no_of_buys}}</h3>
+                    </div>
+                  </div>
+                </div>
+            
+              </div>
+            </div>
+            
+
+
+            <!-- <div class="col-12 order-3 order-md-2">
+              <div class="row">
+
+                <div class="col-12 mb-4">
+                  <div class="card">
+                    <div class="card-body">
+                      <div class="d-flex justify-content-between flex-sm-row flex-column gap-3">
+                        <div class="d-flex flex-sm-column flex-row align-items-start justify-content-between">
+                          <div class="card-title">
+                            <h5 class="text-nowrap mb-2">Profile Report</h5>
+                            <span class="badge bg-label-warning rounded-pill">Year 2021</span>
+                          </div>
+                          <div class="mt-sm-auto">
+                            <small class="text-success text-nowrap fw-semibold"><i class="bx bx-chevron-up"></i>
+                              68.2%</small>
+                            <h3 class="mb-0">$84,686k</h3>
+                          </div>
+                        </div>
+                        <div id="profileReportChart"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+
+              </div>
+            </div> -->
+
+          </div>
+
+
+
+
+
+          <div class="row">
+
+            <!-- Total Degrees  -->
+            <div class="col-md-6 col-12 mb-4">
+              <div class="card h-100">
+                <div class="card-header d-flex align-items-center justify-content-between pb-0">
+                  <div class="card-title mb-0">
+                    <h5 class="m-0 me-2">
+                      {% if LANGUAGE_CODE == 'ar' %}
+                      إحصائياتي
+                      {% else %}
+                      My Statistics
+                      {% endif %}
+                    </h5>
+                  </div>
+                  <div class="dropdown">
+                    <button class="btn p-0" type="button" id="orederStatistics" data-bs-toggle="dropdown"
+                      aria-haspopup="true" aria-expanded="false">
+                      <i class="bx bx-dots-vertical-rounded"></i>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="orederStatistics">
+                      <a class="dropdown-item" href="{% url 'statistics' profile.user.username %}">
+                        {% if LANGUAGE_CODE == 'ar' %}
+                        عرض الكل
+                        {% else %}
+                        View All
+                        {% endif %}
+                      </a>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-body"
+                  style="display: flex; justify-content: center; align-items: center; flex-direction: column;">
+            
+                  <section class="circle-chart-container">
+                    <svg class="circle-chart" viewbox="0 0 33.83098862 33.83098862" xmlns="http://www.w3.org/2000/svg">
+                      <circle stroke="#efefef" stroke-width=".5" fill="none" cx="16.91549431" cy="16.91549431"
+                        r="15.91549431" />
+                      <circle class="circle-chart-circle" stroke="#7a6ad8" stroke-width="3"
+                        stroke-dasharray="{{percentage}}" fill="none" cx="16.91549431" cy="16.91549431"
+                        r="15.91549431" />
+                    </svg>
+                    <span class="circle-chart-percentage circle-chart-one-percentage">
+                      {{percentage}}%
+                    </span>
+                  </section>
+            
+                  <section class="mt-3">
+                    <small class="text-muted">
+                      {% if LANGUAGE_CODE == 'ar' %}
+                      {{true_answers}} إجابات صحيحة من أصل {{total_answers}}
+                      {% else %}
+                      {{true_answers}} True answers out of {{total_answers}}
+                      {% endif %}
+                    </small>
+                  </section>
+            
+                </div>
+              </div>
+            </div>
+            
+            <!--/ Total Degrees  -->
+
+            {% if user_profile.instructor == False %}
+            <!-- Fast Charge -->
+            <div class="col-md-6 col-12  mb-4">
+              <div class="card h-100">
+                <div class="card-header d-flex align-items-center justify-content-between">
+                  <h5 class="card-title m-0 me-2">
+                    {% if LANGUAGE_CODE == 'ar' %}
+                    شحن سريع
+                    {% else %}
+                    Fast Charge
+                    {% endif %}
+                  </h5>
+                  <div class="dropdown">
+                    <button class="btn p-0" type="button" id="transactionID" data-bs-toggle="dropdown"
+                      aria-haspopup="true" aria-expanded="false">
+                      <i class="bx bx-dots-vertical-rounded"></i>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="transactionID">
+                      <a class="dropdown-item" href="{% url 'wallet-recharge' profile.user.username %}">
+                        {% if LANGUAGE_CODE == 'ar' %}
+                        عرض تفاصيل محفظتك
+                        {% else %}
+                        View Your Wallet Details
+                        {% endif %}
+                      </a>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-body">
+                  <form action="/wallet-recharge" method="POST">
+                    {% csrf_token %}
+                    <input type="hidden" hidden name="destination" value="profile-main-page">
+                    <input type="hidden" hidden name="student_username" value="{{profile.user.username}}">
+                    <div class="mb-3">
+                      <label class="form-label" for="code">
+                        {% if LANGUAGE_CODE == 'ar' %}
+                        الكود
+                        {% else %}
+                        Code
+                        {% endif %}
+                      </label>
+                      <div class="input-group input-group-merge">
+                        <span id="code" class="input-group-text">
+                          <i class="fa-solid fa-barcode text-primary" style="font-size: 20px;"></i>
+                        </span>
+                        <input type="text" name="code" class="form-control" id="code"
+                          placeholder="{% if LANGUAGE_CODE == 'ar' %}أدخل الكود هنا{% else %}Enter The Code Here{% endif %}" />
+                      </div>
+                    </div>
+            
+                    <button type="submit" class="btn btn-primary w-100">
+                      {% if LANGUAGE_CODE == 'ar' %}
+                      شحن
+                      {% else %}
+                      Charge
+                      {% endif %}
+                    </button>
+                  </form>
+                </div>
+              </div>
+            </div>
+            
+            <!--/ Fast Charge -->
+            {% endif %}
+
+            <!-- Notifications -->
+            <div class="col-md-6 col-12 mb-4">
+              <div class="card h-100">
+                <div class="card-header d-flex align-items-center justify-content-between">
+                  <h5 class="card-title m-0 me-2">Notifications</h5>
+                  <div class="dropdown">
+                    <button class="btn p-0" type="button" id="transactionID" data-bs-toggle="dropdown"
+                      aria-haspopup="true" aria-expanded="false">
+                      <i class="bx bx-dots-vertical-rounded"></i>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="transactionID">
+                      <a class="dropdown-item" href="{% url 'notifications' profile.user.username %}">View All</a>
+
+                    </div>
+                  </div>
+                </div>
+                <div class="card-body">
+                  <ul class="p-2 m-0" style="background-color: #f5f5f9;">
+
+
+
+                    {% if notifications_objects %}
+
+                    {% for x in notifications_objects|slice:"0:5" %}
+                    <div class="col-12 mt-2">
+                      <div class="card h-100">
+    
+                        <div class="card-body p-3">
+                          <ul class="p-0 m-0">
+    
+                            <li class="d-flex">
+                              <div class="avatar flex-shrink-0 me-3">
+                                <div class="p-2" style="background-color: #eae9e9; border-radius: 10px;">
+                                  <i class="fa-solid fa-reply text-primary" style="font-size: 20px;"></i>
+                                </div>
+                              </div>
+                              <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
+                                <div class="me-2">
+                                  <small class="text-muted d-block mb-1">{{x.created_at}}</small>
+                                  <h6 class="mb-0">
+                                    {% if LANGUAGE_CODE == 'ar' %}
+                                    {{x.user_name}} رد على سؤالك ، <a href="{% url 'inbox' profile.user.username %}">عرض
+                                      البريد الوارد</a>
+                                    {% else %}
+                                    {{x.user_name}} Replyed To Your Question , <a
+                                      href="{% url 'inbox' profile.user.username %}">View Inbox</a>
+                                    {% endif %}
+                                  </h6>
+                                </div>
+    
+                                <div class="dropdown">
+                                  <button class="btn p-0" type="button" id="transactionID" data-bs-toggle="dropdown"
+                                    aria-haspopup="true" aria-expanded="false">
+                                    <i class="bx bx-dots-vertical-rounded"></i>
+                                  </button>
+                                  <div class="dropdown-menu dropdown-menu-end">
+                                    <form action="/delete-notification" method="POST">
+                                      {% csrf_token %}
+                                      <input type="hidden" hidden name="notification-id" value="{{x.notification_id}}">
+                                      <input type="hidden" hidden name="student-username" value="{{profile.user.username}}">
+                                      <button class="dropdown-item" type="submit">
+                                        <i class="fa-solid fa-trash" style="font-size: 12px; padding-right: 10px;"></i>
+                                        {% if LANGUAGE_CODE == 'ar' %}
+                                        حذف
+                                        {% else %}
+                                        Delete
+                                        {% endif %}
+                                      </button>
+                                    </form>
+                                  </div>
+                                </div>
+                              </div>
+                            </li>
+    
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                    {% endfor %}
+    
+                    {% else %}
+
+                    <div style="display: flex; justify-content: center; align-items: center;" class="mt-3">
+                      <h4>There Isnt Any Notifications Yet.</h4>
+                    </div>
+                    {% endif %}
+
+
+
+
+
+
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <!--/ Notifications -->
+
+
+
+
+            {% if user_profile.instructor == True %}
+
+            <!-- Transactions -->
+            
+            <div class="col-12  mb-4">
+              <div class="card h-100">
+                <div class="card-header d-flex align-items-center justify-content-between">
+                  <h5 class="card-title m-0 me-2">
+                    {% if LANGUAGE_CODE == 'ar' %}
+                    المعاملات
+                    {% else %}
+                    Transactions
+                    {% endif %}
+                  </h5>
+                  <div class="dropdown">
+                    <button class="btn p-0" type="button" id="transactionID" data-bs-toggle="dropdown"
+                      aria-haspopup="true" aria-expanded="false">
+                      <i class="bx bx-dots-vertical-rounded"></i>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="transactionID">
+                      <a class="dropdown-item" href="{% url 'wallet-transactions' profile.user %}">
+                        {% if LANGUAGE_CODE == 'ar' %}
+                        عرض الكل
+                        {% else %}
+                        View All
+                        {% endif %}
+                      </a>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-body">
+                  <ul class="p-2 m-0" style="background-color: #f5f5f9;">
+                    {% if transactions %}
+                    {% for x in transactions|slice:"0:5" %}
+            
+                    {% if x.transaction_type == 'charge' %}
+                    <li class="d-flex p-4 mt-2 mb-2" style="background-color: white;">
+                      <div class="avatar flex-shrink-0 me-3">
+                        <div class="p-2" style="background-color: #eae9e9; border-radius: 10px;">
+                          <i class="fa-solid fa-circle-arrow-right text-primary" style="font-size: 25px;"></i>
+                        </div>
+                      </div>
+                      <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
+                        <div class="me-2">
+                          <small class="text-muted d-block mb-1">{{x.created_at|date:"j/n/o , g:i A"}}</small>
+                          <h6 class="mb-0">
+                            {% if LANGUAGE_CODE == 'ar' %}
+                            شحن المحفظة
+                            {% else %}
+                            Wallet Charged
+                            {% endif %}
+                          </h6>
+                        </div>
+                        <div class="user-progress d-flex align-items-center gap-1">
+                          <h6 class="mb-0">+{{x.value}}</h6>
+                          <span class="text-muted">EGP</span>
+                        </div>
+                      </div>
+                    </li>
+                    {% endif %}
+            
+                    {% if x.transaction_type == 'purchase' %}
+                    <li class="d-flex p-4 mt-2 mb-2" style="background-color: white;">
+                      <div class="avatar flex-shrink-0 me-3">
+                        <div class="p-2" style="background-color: #eae9e9; border-radius: 10px;">
+                          <i class="fa-solid fa-circle-arrow-left text-primary" style="font-size: 25px;"></i>
+                        </div>
+                      </div>
+                      <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
+                        <div class="me-2">
+                          <small class="text-muted d-block mb-1">{{x.created_at|date:"j/n/o , g:i A"}}</small>
+                          <h6 class="mb-0">
+                            {% if LANGUAGE_CODE == 'ar' %}
+                            محاضرة مشتراة: {{x.item_title}}
+                            {% else %}
+                            Lecture Purchased: {{x.item_title}}
+                            {% endif %}
+                          </h6>
+                        </div>
+                        <div class="user-progress d-flex align-items-center gap-1">
+                          <h6 class="mb-0">-{{x.value}}</h6>
+                          <span class="text-muted">EGP</span>
+                        </div>
+                      </div>
+                    </li>
+                    {% endif %}
+            
+                    {% endfor %}
+            
+                    {% else %}
+                    <div style="display: flex; justify-content: center; align-items: center;" class="mt-3">
+                      <h4>
+                        {% if LANGUAGE_CODE == 'ar' %}
+                        لا توجد معاملات بعد.
+                        {% else %}
+                        There Aren't Any Transactions Yet.
+                        {% endif %}
+                      </h4>
+                    </div>
+                    {% endif %}
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            
+            <!-- Transactions -->
+
+
+            {% else %}
+
+            <!-- Transactions -->
+            <div class="col-12 col-md-6 order-2 mb-4">
+              <div class="card h-100">
+                <div class="card-header d-flex align-items-center justify-content-between">
+                  <h5 class="card-title m-0 me-2">
+                    {% if LANGUAGE_CODE == 'ar' %}
+                    المعاملات
+                    {% else %}
+                    Transactions
+                    {% endif %}
+                  </h5>
+                  <div class="dropdown">
+                    <button class="btn p-0" type="button" id="transactionID" data-bs-toggle="dropdown"
+                      aria-haspopup="true" aria-expanded="false">
+                      <i class="bx bx-dots-vertical-rounded"></i>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="transactionID">
+                      <a class="dropdown-item" href="{% url 'wallet-transactions' profile.user %}">
+                        {% if LANGUAGE_CODE == 'ar' %}
+                        عرض الكل
+                        {% else %}
+                        View All
+                        {% endif %}
+                      </a>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-body">
+                  <ul class="p-2 m-0" style="background-color: #f5f5f9;">
+                    {% if transactions %}
+                    {% for x in transactions|slice:"0:5" %}
+            
+                    {% if x.transaction_type == 'charge' %}
+                    <li class="d-flex p-4 mt-2 mb-2" style="background-color: white;">
+                      <div class="avatar flex-shrink-0 me-3">
+                        <div class="p-2" style="background-color: #eae9e9; border-radius: 10px;">
+                          <i class="fa-solid fa-circle-arrow-right text-primary" style="font-size: 25px;"></i>
+                        </div>
+                      </div>
+                      <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
+                        <div class="me-2">
+                          <small class="text-muted d-block mb-1">{{x.created_at|date:"j/n/o , g:i A"}}</small>
+                          <h6 class="mb-0">
+                            {% if LANGUAGE_CODE == 'ar' %}
+                            شحن المحفظة
+                            {% else %}
+                            Wallet Charged
+                            {% endif %}
+                          </h6>
+                        </div>
+                        <div class="user-progress d-flex align-items-center gap-1">
+                          <h6 class="mb-0">+{{x.value}}</h6>
+                          <span class="text-muted">EGP</span>
+                        </div>
+                      </div>
+                    </li>
+                    {% endif %}
+            
+                    {% if x.transaction_type == 'purchase' %}
+                    <li class="d-flex p-4 mt-2 mb-2" style="background-color: white;">
+                      <div class="avatar flex-shrink-0 me-3">
+                        <div class="p-2" style="background-color: #eae9e9; border-radius: 10px;">
+                          <i class="fa-solid fa-circle-arrow-left text-primary" style="font-size: 25px;"></i>
+                        </div>
+                      </div>
+                      <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
+                        <div class="me-2">
+                          <small class="text-muted d-block mb-1">{{x.created_at|date:"j/n/o , g:i A"}}</small>
+                          <h6 class="mb-0">
+                            {% if LANGUAGE_CODE == 'ar' %}
+                            محاضرة مشتراة: {{x.item_title}}
+                            {% else %}
+                            Lecture Purchased: {{x.item_title}}
+                            {% endif %}
+                          </h6>
+                        </div>
+                        <div class="user-progress d-flex align-items-center gap-1">
+                          <h6 class="mb-0">-{{x.value}}</h6>
+                          <span class="text-muted">EGP</span>
+                        </div>
+                      </div>
+                    </li>
+                    {% endif %}
+            
+                    {% endfor %}
+            
+                    {% else %}
+                    <div style="display: flex; justify-content: center; align-items: center;" class="mt-3">
+                      <h4>
+                        {% if LANGUAGE_CODE == 'ar' %}
+                        لا توجد معاملات بعد.
+                        {% else %}
+                        There Aren't Any Transactions Yet.
+                        {% endif %}
+                      </h4>
+                    </div>
+                    {% endif %}
+                  </ul>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Transactions -->
+
+            {% endif %}
+
+
+
+
+          </div>
+
+
+
+        </div>
+        <!-- / Content -->
+
+
+
+        <div class="content-backdrop fade"></div>
+      </div>
+      <!-- Content wrapper -->
+    </div>
+    <!-- / Layout page -->
+  </div>
+
+  <!-- Overlay -->
+  <div class="layout-overlay layout-menu-toggle"></div>
+</div>
+<!-- / Layout wrapper -->
+{% endblock content %}

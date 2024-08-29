@@ -1,0 +1,473 @@
+{% extends "base-dark.html" %}
+{% load static %}
+
+
+{% if LANGUAGE_CODE == 'ar' %}
+{% block title_ar %}لوحة التحكم{% endblock title_ar %}
+{% else %}
+{% block title %}Dashboard{% endblock title %}
+{% endif %}
+
+
+{% block content%}
+
+<body>
+    <div class="container-fluid position-relative d-flex p-0">
+        <!-- Spinner Start -->
+        <div id="spinner"
+            class="show bg-dark position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+            <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+        <!-- Spinner End -->
+
+
+        <!-- Sidebar Start -->
+        <div class="sidebar pe-4 pb-3" style="overflow-y:hidden;">
+            <nav class="navbar bg-secondary navbar-dark">
+                <a href="/dashboard" class="navbar-brand mx-4 mb-3">
+                    <h3 class="text-primary"><i class="fa fa-user-edit me-2"></i>
+                        {% if LANGUAGE_CODE == 'ar' %}لوحة التحكم{% else %}Dashboard{% endif %}
+                    </h3>
+                </a>
+                <div class="d-flex align-items-center ms-4 mb-4">
+                    <div class="position-relative">
+                        {% if user_profile.image %}
+                        <img class="rounded-circle" src="{{user_profile.image.url}}" alt=""
+                            style="width: 40px; height: 40px;">
+                        {% else %}
+                        <img class="rounded-circle" src="{% static 'images/default-profile-image.jpg' %}" alt=""
+                            style="width: 40px; height: 40px;">
+                        {% endif %}
+
+                        <div
+                            class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1">
+                        </div>
+                    </div>
+                    <div class="ms-3">
+                        <h6 class="mb-0">{{user_profile.name}}</h6>
+                        {% if user_profile.instructor == True %}
+                        <span>{% if LANGUAGE_CODE == 'ar' %}مدرس{% else %}Instructor{% endif %}</span>
+                        {% else %}
+                        <span>{% if LANGUAGE_CODE == 'ar' %}طالب{% else %}Student{% endif %}</span>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="navbar-nav w-100">
+                    <a href="{% url 'dashboard-page' %}" class="nav-item nav-link active"><i
+                            class="fa fa-tachometer-alt me-2"></i>
+                        {% if LANGUAGE_CODE == 'ar' %}لوحة التحكم{% else %}Dashboard{% endif %}
+                    </a>
+
+                    <a href="{% url 'dashboard-sales' %}" class="nav-item nav-link "><i
+                            class="fa fa-money-bill me-2"></i>
+                        {% if LANGUAGE_CODE == 'ar' %}المبيعات{% else %}Sales{% endif %}
+                    </a>
+
+                    <a href="{% url 'dashboard-codes' %}" class="nav-item nav-link "><i class="fa fa-barcode me-2"></i>
+                        {% if LANGUAGE_CODE == 'ar' %}الاكواد{% else %}Codes{% endif %}
+                    </a>
+                    <a href="{% url 'dashboard-lectures' %}" class="nav-item nav-link"><i class="fa fa-video me-2"></i>
+                        {% if LANGUAGE_CODE == 'ar' %}المحاضرات{% else %}Lectures{% endif %}
+                    </a>
+
+                    <a href="{% url 'dashboard-upload-page' %}" class="nav-item nav-link "><i
+                            class="fa fa-upload me-2"></i>
+                        {% if LANGUAGE_CODE == 'ar' %}تحميل{% else %}Upload{% endif %}
+                    </a>
+
+                    <a href="{% url 'dashboard-groups' %}" class="nav-item nav-link"><i class="fa fa-users me-2"></i>
+                        {% if LANGUAGE_CODE == 'ar' %}المجموعات{% else %}Groups{% endif %}
+                    </a>
+
+                    <a href="{% url 'dashboard-chapters' %}" class="nav-item nav-link ">
+                        <i class="fa fa-folder me-2"></i>
+                        {% if LANGUAGE_CODE == 'ar' %}الفصول{% else %}Chapters{% endif %}
+                    </a>
+
+                    <a href="/dashboard/assignments" class="nav-item nav-link "><i class="fa fa-file me-2"></i>
+                        {% if LANGUAGE_CODE == 'ar' %}التكليفات{% else %}Assignments{% endif %}
+                    </a>
+
+
+                    <a href="{% url 'dashboard-questions' %}" class="nav-item nav-link "><i
+                            class="fa fa-question me-2"></i>
+                        {% if LANGUAGE_CODE == 'ar' %}أسئلة{% else %}Questions{% endif %}
+                    </a>
+
+
+                    <a href="{% url 'dashboard-students' %}" class="nav-item nav-link "><i class="fa fa-user me-2"></i>
+                        {% if LANGUAGE_CODE == 'ar' %}الطلاب{% else %}Students{% endif %}
+                    </a>
+
+                    <a href="{% url 'dashboard-themes' %}" class="nav-item nav-link "><i
+                            class="fa fa-paint-brush me-2"></i>
+                        {% if LANGUAGE_CODE == 'ar' %}الثيمات{% else %}Themes{% endif %}
+                    </a>
+
+                </div>
+            </nav>
+        </div>
+        <!-- Sidebar End -->
+
+
+        <!-- Content Start -->
+        <div class="content">
+
+
+
+            <!-- Navbar Start -->
+            <nav class="navbar navbar-expand bg-secondary navbar-dark sticky-top px-4 py-0">
+                <a href="#" class="sidebar-toggler flex-shrink-0 me-4">
+                    <i class="fa fa-bars"></i>
+                </a>
+                <a href="/" class="navbar-brand d-flex ">
+                    <h2 class="text-primary mb-0"><i class="fa fa-home"></i></h2>
+                </a>
+
+                <div class="navbar-nav align-items-center ms-auto">
+
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                            {% if user_profile.image %}
+                            <img class="rounded-circle me-lg-2" src="{{user_profile.image.url}}" alt=""
+                                style="width: 40px; height: 40px;">
+                            {% else %}
+                            <img class="rounded-circle me-lg-2" src="{% static 'images/default-profile-image.jpg' %}"
+                                alt="" style="width: 40px; height: 40px;">
+                            {% endif %}
+
+                            <span class="d-none d-lg-inline-flex">
+                                {% if LANGUAGE_CODE == 'ar' %}{{user_profile.name}}{% else %}{{user_profile.name}}{% endif %}
+                            </span>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-end bg-secondary border-0 rounded-0 rounded-bottom m-0">
+                            <a href="{% url 'account' user_profile.user.username %}" class="dropdown-item">
+                                {% if LANGUAGE_CODE == 'ar' %}الإعدادات{% else %}Settings{% endif %}
+                            </a>
+                            <a href="/logout" class="dropdown-item">
+                                {% if LANGUAGE_CODE == 'ar' %}تسجيل الخروج{% else %}Log Out{% endif %}
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            <!-- Navbar End -->
+
+
+            <!-- Sale & Revenue Start -->
+            <div class="container-fluid pt-4 px-4">
+                <div class="row g-4">
+
+                    <div class="col-sm-6 col-xl-3">
+                        <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
+                            <i class="fa fa-chart-bar fa-3x text-primary"></i>
+                            <div class="ms-3">
+                                <p class="mb-2">
+                                    {% if LANGUAGE_CODE == 'ar' %}إجمالي المبيعات{% else %}Sales Total{% endif %}
+                                </p>
+                                <h6 class="mb-0">{{total_sell}} EGP</h6>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6 col-xl-3">
+                        <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
+                            <i class="fa fa-chart-area fa-3x text-primary"></i>
+                            <div class="ms-3">
+                                <p class="mb-2">
+                                    {% if LANGUAGE_CODE == 'ar' %}المحاضرات المباعة{% else %}Lectures Sold{% endif %}
+                                </p>
+                                <h6 class="mb-0">{{lectures_sold}}</h6>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6 col-xl-3">
+                        <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
+                            <i class="fa fa-chart-area fa-3x text-primary"></i>
+                            <div class="ms-3">
+                                <p class="mb-2">
+                                    {% if LANGUAGE_CODE == 'ar' %}الفصول المباعة{% else %}Chapters Sold{% endif %}
+                                </p>
+                                <h6 class="mb-0">{{chapters_sold}}</h6>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6 col-xl-3">
+                        <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
+                            <i class="fa fa-user fa-3x text-primary"></i>
+                            <div class="ms-3">
+                                <p class="mb-2">
+                                    {% if LANGUAGE_CODE == 'ar' %}إجمالي الطلاب{% else %}Total Students{% endif %}
+                                </p>
+                                <h6 class="mb-0">{{students_number}}</h6>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Sale & Revenue End -->
+
+
+
+
+            <!-- Recent Sales Start -->
+            <div class="container-fluid pt-4 px-4">
+                <div class="bg-secondary text-center rounded p-4">
+                    <div class="d-flex align-items-center justify-content-between mb-4">
+                        <h6 class="mb-0">
+                            {% if LANGUAGE_CODE == 'ar' %}المبيعات الأخيرة{% else %}Recent Sales{% endif %}
+                        </h6>
+                        <a href="/dashboard/sales">
+                            {% if LANGUAGE_CODE == 'ar' %}عرض الكل{% else %}Show All{% endif %}
+                        </a>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table text-start align-middle table-bordered table-hover mb-0">
+                            <thead>
+                                <tr class="text-white">
+                                    <!-- <th scope="col"><input class="form-check-input" type="checkbox"></th> -->
+                                    <th scope="col">
+                                        {% if LANGUAGE_CODE == 'ar' %}التاريخ{% else %}Date{% endif %}
+                                    </th>
+                                    <th scope="col">
+                                        {% if LANGUAGE_CODE == 'ar' %}المحاضرة{% else %}Lecture{% endif %}
+                                    </th>
+                                    <th scope="col">
+                                        {% if LANGUAGE_CODE == 'ar' %}الطالب{% else %}Student{% endif %}
+                                    </th>
+                                    <th scope="col">
+                                        {% if LANGUAGE_CODE == 'ar' %}الطريقة{% else %}Method{% endif %}
+                                    </th>
+                                    <!-- <th scope="col">Action</th> -->
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                {% for sale in recent_sales|slice:"0:5" %}
+                                <tr>
+                                    <!-- <td><input class="form-check-input" type="checkbox"></td> -->
+                                    <td>{{sale.created_at|date:"SHORT_DATE_FORMAT"}}</td>
+                                    <td>{{sale.lecture_title}}</td>
+                                    <td><a href="/profile/{{sale.user.username}}">{{sale.user_name}}</a></td>
+                                    <td style="text-transform: capitalize;">{{sale.method}}</td>
+                                    <!-- <td><a class="btn btn-sm btn-primary" href="">Detail</a></td> -->
+                                </tr>
+                                {% endfor %}
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Sales End -->
+
+
+            <!-- Widgets Start -->
+            <div class="container-fluid pt-4 px-4">
+                <div class="row g-4">
+
+                    <div class="col-sm-12 col-md-6 col-xl-4" id="questions">
+                        <div class="h-100 bg-secondary rounded p-4">
+                            <div class="d-flex align-items-center justify-content-between mb-2">
+                                <h6 class="mb-0">
+                                    {% if LANGUAGE_CODE == 'ar' %}الأسئلة{% else %}Questions{% endif %}
+                                </h6>
+                                <a href="/dashboard/questions">
+                                    {% if LANGUAGE_CODE == 'ar' %}عرض الكل{% else %}Show All{% endif %}
+                                </a>
+                            </div>
+
+                            {% for x in questions|slice:"0:4" %}
+                            <div class="d-flex align-items-center border-bottom py-3" style="overflow: hidden;">
+                                {% if x.user_image %}
+                                <img class="rounded-circle flex-shrink-0" src="{{x.user_image.url}}" alt=""
+                                    style="width: 40px; height: 40px;">
+                                {% else %}
+                                <img class="rounded-circle flex-shrink-0"
+                                    src="{% static 'images/default-profile-image.jpg' %}" alt=""
+                                    style="width: 40px; height: 40px;">
+                                {% endif %}
+
+                                <div class="w-100 ms-3">
+                                    <div class="d-flex w-100 justify-content-between">
+                                        <h6 class="mb-0">{{x.user_name}}</h6>
+                                        <small>{{x.created_at|date:"SHORT_DATE_FORMAT"}}</small>
+                                    </div>
+                                    <span>{{x.question}}</span>
+                                </div>
+                            </div>
+                            {% endfor %}
+
+                        </div>
+                    </div>
+
+                    <div class="col-sm-12 col-md-6 col-xl-8" id="codes">
+                        <div class="h-100 bg-secondary rounded p-4">
+                            <div class="d-flex align-items-center justify-content-between mb-4">
+                                <h6 class="mb-0">
+                                    {% if LANGUAGE_CODE == 'ar' %}الأكواد{% else %}Codes{% endif %}
+                                </h6>
+                                <a href="/dashboard/codes">
+                                    {% if LANGUAGE_CODE == 'ar' %}عرض الكل{% else %}Show All{% endif %}
+                                </a>
+                            </div>
+                            <form action="/code-generator" method="POST">
+                                <div class="d-flex mb-2">
+                                    {% csrf_token %}
+                                    <input class="form-control bg-dark border-0" name="money" type="text"
+                                        placeholder="{% if LANGUAGE_CODE == 'ar' %}قيمة الكود{% else %}Code Value{% endif %}">
+                                    <button type="submit" class="btn btn-primary ms-2">
+                                        {% if LANGUAGE_CODE == 'ar' %}إنشاء{% else %}Create{% endif %}
+                                    </button>
+                                </div>
+                            </form>
+
+                            {% for code in active_codes|slice:"0:4" %}
+                            <div class="d-flex align-items-center border-bottom py-2">
+                                <div class="w-100 ms-3">
+                                    <div class="d-flex w-100 align-items-center justify-content-between">
+                                        <span>
+                                            <span class="text-primary">{{code.code_id}}</span> - {{code.money}}
+                                            {% if LANGUAGE_CODE == 'ar' %}جنيه مصري{% else %}EGP{% endif %}
+                                        </span>
+                                        <form action="/delete-code" method="POST">
+                                            {% csrf_token %}
+                                            <input type="hidden" value="{{code.code_id}}" name="code" hidden />
+                                            <button type="submit" class="btn btn-sm">
+                                                <i class="fa fa-times"></i>
+                                            </button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+
+                        </div>
+                    </div>
+
+                    <div class="col-sm-12 col-md-6 col-xl-6" id="students">
+                        <div class="h-100 bg-secondary rounded p-4">
+                            <div class="d-flex align-items-center justify-content-between mb-4">
+                                <h6 class="mb-0">
+                                    {% if LANGUAGE_CODE == 'ar' %}الطلاب{% else %}Students{% endif %}
+                                </h6>
+                                <a href="/dashboard/students">
+                                    {% if LANGUAGE_CODE == 'ar' %}عرض الكل{% else %}Show All{% endif %}
+                                </a>
+                            </div>
+                            <form action="/search" method="POST">
+                                <div class="d-flex mb-2">
+                                    {% csrf_token %}
+                                    <input class="form-control bg-dark border-0" name="username" type="text"
+                                        placeholder="{% if LANGUAGE_CODE == 'ar' %}اسم الطالب{% else %}Student Name{% endif %}">
+                                    <button type="submit" class="btn btn-primary ms-2">
+                                        {% if LANGUAGE_CODE == 'ar' %}بحث{% else %}Search{% endif %}
+                                    </button>
+                                </div>
+                            </form>
+
+                            {% for student in students|slice:"1:4" %}
+                            <div class="d-flex align-items-center border-bottom py-3" style="overflow: hidden;">
+                                {% if student.image %}
+                                <img class="rounded-circle flex-shrink-0" src="{{student.image.url}}" alt=""
+                                    style="width: 40px; height: 40px;">
+                                {% else %}
+                                <img class="rounded-circle flex-shrink-0" src="{% static 'blank-profile-picture.jpg' %}"
+                                    alt="" style="width: 40px; height: 40px;">
+                                {% endif %}
+
+                                <div class="w-100 ms-3">
+                                    <div class="d-flex w-100 justify-content-between">
+                                        <h6 class="mb-0">
+                                            <a href="/profile/{{student.username}}">
+                                                {{student.name}}
+                                            </a>
+                                        </h6>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+
+                        </div>
+                    </div>
+
+                    <div class="col-sm-12 col-md-6 col-xl-6" id="inactive-codes">
+                        <div class="h-100 bg-secondary rounded p-4">
+                            <div class="d-flex align-items-center justify-content-between mb-4">
+                                <h6 class="mb-0">
+                                    {% if LANGUAGE_CODE == 'ar' %}الأكواد غير النشطة{% else %}Inactive Codes{% endif %}
+                                </h6>
+                                <a href="/dashboard/codes">
+                                    {% if LANGUAGE_CODE == 'ar' %}عرض الكل{% else %}Show All{% endif %}
+                                </a>
+                            </div>
+
+                            {% for code in inactive_codes|slice:"0:4" %}
+                            <div class="d-flex align-items-center border-bottom py-2">
+                                <div class="w-100 ms-3">
+                                    <div class="d-flex w-100 align-items-center justify-content-between">
+                                        <span>
+                                            {{code.code_id}} - {{code.money}}
+                                            {% if LANGUAGE_CODE == 'ar' %}جنيه مصري{% else %}EGP{% endif %} -
+                                            <span class="text-primary">
+                                                <a href="/profile/{{code.student}}">
+                                                    {{code.student}}
+                                                </a>
+                                            </span>
+                                        </span>
+                                        <form action="/delete-code" method="POST">
+                                            {% csrf_token %}
+                                            <input type="hidden" value="{{code.code_id}}" name="code" hidden />
+                                            <button type="submit" class="btn btn-sm">
+                                                <i class="fa fa-times"></i>
+                                            </button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Widgets End -->
+
+
+            <!-- Footer Start -->
+            <div class="container-fluid pt-4 px-4">
+                <div class="bg-secondary rounded-top p-4">
+                    <div class="row">
+                        <div class="col-12 col-sm-6 text-center text-sm-start">
+                            All Rights Reserved &copy; .
+                        </div>
+                        <div class="col-12 col-sm-6 text-center text-sm-end">
+
+                            Developed By <a href="https://www.facebook.com/bondok.emad" style="font-size: larger;">Mena
+                                Emad</a>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Footer End -->
+
+        </div>
+        <!-- Content End -->
+
+
+        <!-- Back to Top -->
+        <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+    </div>
+</body>
+{% endblock content %}

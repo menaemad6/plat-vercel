@@ -1,0 +1,751 @@
+{% extends "main-layout.html" %}
+{% load static %}
+
+
+
+{% block head %}
+<!-- Page Title  -->
+<title>{{platform.website_title}} - Home</title>
+<!-- Page Title  -->
+{% endblock head %}
+
+
+
+
+{% block content %}
+
+
+
+
+
+
+
+
+<div class="main-banner" id="top" data-aos="zoom-in-up" data-aos-delay="200" data-aos-duration="600">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="owl-carousel owl-banner">
+          <div class="item item-1" style="position: relative; background:transparent; overflow: hidden;">
+
+            <video autoplay muted loop data-speed="slow" style="    position: absolute;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            z-index: -1; /* Behind the content */
+            transform: translate(-50%, -50%);">
+              <source src="{% static 'main/assets/images/banner-video-1.mp4' %}" type="video/mp4">
+            </video>
+
+
+            <div class="header-text">
+              <span class="category">Number 1 In Physics</span>
+              <h2>Discover Physics: Explore, Learn, Transform Today.</h2>
+              <p>
+                Unlock the wonders of physics! Explore captivating concepts, learn through engaging experiments, and
+                transform your understanding of the universe today!
+              </p>
+              <div class="buttons">
+                <div class="main-button">
+                  {% if user_profile %}
+                  {% if user_profile.instructor == True %}
+                  <a href="{% url 'dashboard-page' %}">Dashboard</a>
+                  {% else %}
+                  <a href="{% url 'main' request.user.username %}">Your Profile</a>
+                  {% endif %}
+                  {% else %}
+                  <a href="{% url 'signup'  %}">Start Now</a>
+                  {% endif %}
+                </div>
+                <div class="icon-button">
+                  <a href="{% url 'grades'  %}"><i class="fa fa-play"></i>Lectures</a>
+                </div>
+              </div>
+            </div>
+
+
+          </div>
+          <div class="item item-2" style="position: relative; background:transparent; overflow: hidden;">
+
+            <video autoplay muted loop style="    position: absolute;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            z-index: -1; /* Behind the content */
+            transform: translate(-50%, -50%);">
+              <source src="{% static 'main/assets/images/banner-video-2.mp4' %}" type="video/mp4">
+            </video>
+
+
+            <div class="header-text">
+              <span class="category">Best Result</span>
+              <h2>Physics Simplified: Understand, Apply, Innovate Now.</h2>
+              <p>
+                Unlock the mysteries of physics! Understand fundamental concepts, apply them in real-life situations,
+                and innovate for a brighter future. Explore today!
+              </p>
+              <div class="buttons">
+                <div class="main-button">
+                  {% if user_profile %}
+                  {% if user_profile.instructor == True %}
+                  <a href="{% url 'dashboard-page' %}">Dashboard</a>
+                  {% else %}
+                  <a href="{% url 'main' request.user.username %}">Your Profile</a>
+                  {% endif %}
+                  {% else %}
+                  <a href="{% url 'signup'  %}">Start Now</a>
+                  {% endif %}
+                </div>
+                <div class="icon-button">
+                  <a href="{% url 'grades'  %}"><i class="fa fa-play"></i>Lectures</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="item item-3" style="position: relative; background:transparent; overflow: hidden;">
+
+            <video autoplay muted loop style="    
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            z-index: -1; /* Behind the content */
+            transform: translate(-50%, -50%);">
+              <source src="{% static 'main/assets/images/banner-video-3.mp4' %}" type="video/mp4">
+            </video>
+
+
+            <div class="header-text">
+              <span class="category">Online Learning</span>
+              <h2>Physics Made Easy: Learn and Explore.</h2>
+              <p>
+                Learn and Explore simplifies complex concepts, making the subject accessible and engaging. Discover
+                fascinating theories through interactive lessons and real-world applications.
+              </p>
+              <div class="buttons">
+                <div class="main-button">
+                  {% if user_profile %}
+                  {% if user_profile.instructor == True %}
+                  <a href="{% url 'dashboard-page' %}">Dashboard</a>
+                  {% else %}
+                  <a href="{% url 'main' request.user.username %}">Your Profile</a>
+                  {% endif %}
+                  {% else %}
+                  <a href="{% url 'signup'  %}">Start Now</a>
+                  {% endif %}
+                </div>
+                <div class="icon-button">
+                  <a href="{% url 'grades'  %}"><i class="fa fa-play"></i>Lectures</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<div class="services section" id="services">
+  <div class="container">
+    <div class="row">
+
+      <div class="col-lg-4 col-md-6" data-aos="fade-right" data-aos-delay="400" data-aos-duration="1000">
+        <div class="service-item">
+          <div class="icon">
+            <img src="{% static 'main/assets/images/service-01.png' %}" alt="online degrees">
+          </div>
+          <div class="main-content">
+            <h4>Flexible Learning Solutions</h4>
+            <p>Flexible Learning Solutions offer adaptable educational approaches, empowering learners to personalize
+              their experiences, balance commitments, and enhance engagement through innovative methods.</p>
+            <div class="main-button">
+              <a href="#">Start Now</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="400" data-aos-duration="1000">
+        <div class="service-item">
+          <div class="icon">
+            <img src="{% static 'main/assets/images/service-02.png' %}" alt="short courses">
+          </div>
+          <div class="main-content">
+            <h4>Homework Help and Assistance</h4>
+            <p>Get expert homework help and assistance to boost your understanding and grades. Our resources provide
+              personalized support for all types of students.</p>
+            <div class="main-button">
+              <a href="#">Start Now</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-4 col-md-6" data-aos="fade-left" data-aos-delay="400" data-aos-duration="1000">
+        <div class="service-item">
+          <div class="icon">
+            <img src="{% static 'main/assets/images/service-03.png' %}" alt="web experts">
+          </div>
+          <div class="main-content">
+            <h4>Interactive Learning Activities</h4>
+            <p>Interactive learning activities engage students through experiences, fostering collaboration, critical
+              thinking, and creativity. These activities enhance understanding and retention.</p>
+            <div class="main-button">
+              <a href="#">Start Now</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+<div class="section about-us">
+  <div class="container">
+    <div class="row" data-aos="flip-up" data-aos-delay="600" data-aos-duration="1000">
+
+      <div class="col-lg-5 align-self-center">
+        <div class="section-heading">
+          <h6>Q&A</h6>
+          <h2>Frequently Asked Questions</h2>
+          <p>
+            These are some important points we face alot.
+          </p>
+          <!-- <div class="main-button">
+            <a href="#">Discover More</a>
+          </div> -->
+        </div>
+      </div>
+
+      <div class="col-lg-6 offset-lg-1">
+        <div class="accordion" id="accordionExample">
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="headingOne">
+              <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne"
+                aria-expanded="true" aria-controls="collapseOne">
+                How do I buy lecture codes?
+              </button>
+            </h2>
+            <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
+              data-bs-parent="#accordionExample">
+              <div class="accordion-body">
+                Transfer the amount of the code you want to charge to one of these numbers and send a picture of the
+                transfer and the wallet number you transferred from on WhatsApp, the same number
+
+                <br><strong>01226102013</strong><br>
+                <strong>01264957294</strong>
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="headingTwo">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                Technical support numbers
+              </button>
+            </h2>
+            <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
+              data-bs-parent="#accordionExample">
+              <div class="accordion-body">
+
+                <strong>01226102013</strong><br>
+                <strong>01265926583</strong><br>
+                <strong>01285628573</strong>
+
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+<section class="section courses" id="courses">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 text-center" data-aos="zoom-in-up" data-aos-delay="200" data-aos-duration="600">
+        <div class="section-heading">
+          <h6>Latest Courses</h6>
+          <h2>Latest Courses</h2>
+        </div>
+      </div>
+    </div>
+    <ul class="event_filter" data-aos="zoom-out-up" data-aos-delay="200" data-aos-duration="600">
+      <li>
+        <a class="is_active" href="#!" data-filter="*">All Lectures</a>
+      </li>
+      <li>
+        <a href="#!" data-filter=".first">First Secondary</a>
+      </li>
+      <li>
+        <a href="#!" data-filter=".second">Second Secondary</a>
+      </li>
+      <li>
+        <a href="#!" data-filter=".third">Third Secondary</a>
+      </li>
+    </ul>
+
+
+    <div class="row event_box">
+
+
+      {% for x in lectures %}
+      <div class="col-lg-4 col-md-6 align-self-center mb-30 event_outer col-md-6 {{x.year}}" data-aos="fade-up"
+        data-aos-delay="500" data-aos-duration="700">
+        <div class="events_item">
+          <div class="thumb">
+
+
+            {% if x.object == True %}
+            <a href="{% url 'lecture' x.lecture_id %}">
+              {% else %}
+              <a href="{% url 'lecture' x.id %}">
+                {% endif %}
+                {% if x.image %}
+                <img src="{{x.image.url}}" alt="">
+                {% else %}
+                <img src="{% static 'blank-lecture.jpeg' %}" alt="">
+                {% endif %}
+              </a>
+              {% if user_profile %}
+
+              {% if user_profile.instructor == True %}
+              <span class="category" style="background-color: #05ff87; color: white;">View</span>
+              {% else %}
+              {% if x.purchased == True%}
+              <span class="category" style="background-color: #05ff87; color: white;">Purchased</span>
+              {% else %}
+              <span class="category" style="background-color: #7a6ad8; color: white;">Purchase</span>
+              {% endif %}
+              {% endif %}
+
+
+              {% else %}
+              <span class="category" style="background-color: #7a6ad8; color: white;">Purchase</span>
+              {% endif %}
+
+              <span class="price">
+                <h6><em>$</em>{{x.price}}</h6>
+              </span>
+          </div>
+
+          <div class="down-content" style="padding-bottom: 0;">
+            <span class="author">{{x.created_at}}</span>
+            <br>
+            {% if x.object == True %}
+            <a href="{% url 'lecture' x.lecture_id %}" class="h4">{{x.title}}</a>
+            {% else %}
+            <a href="{% url 'lecture' x.id %}" class="h4">{{x.title}}</a>
+            {% endif %}
+
+          </div>
+
+          <hr style="color: #7a6ad8; margin-bottom: 0;">
+          <div class="down-content">
+
+
+            <div class="parts" style="width: 100%; display: flex; justify-content: space-between;">
+              <div class="parts-text" style="display: flex; flex-direction: row; align-items: center;">
+                <i class="fa-solid fa-video" style="color: #7a6ad8; font-size: px;"></i>
+                <div style="margin-left: 10px;">Parts</div>
+              </div>
+              <div class="parts-info">
+                {{x.parts_number}}
+              </div>
+
+            </div>
+            <div class="duration mt-2" style="width: 100%; display: flex; justify-content: space-between;">
+              <div class="duration-text" style="display: flex; flex-direction: row; align-items: center;">
+                <i class="fa-solid fa-clock" style="color: #7a6ad8; font-size: px;"></i>
+                <div style="margin-left: 10px;">Content</div>
+              </div>
+              <div class="duration-info">
+                {{x.duration}} min
+              </div>
+            </div>
+
+
+
+
+          </div>
+
+        </div>
+      </div>
+      {% endfor %}
+
+    </div>
+
+
+
+
+  </div>
+</section>
+
+<div class="section fun-facts" data-aos="fade-right" data-aos-delay="400" data-aos-duration="800">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="wrapper">
+          <div class="row">
+            <div class="col-lg-3 col-md-6">
+              <div class="counter">
+                <h2 class="timer count-title count-number" data-to="3000" data-speed="1000"></h2>
+                <p class="count-text ">Students</p>
+              </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+              <div class="counter">
+                <h2 class="timer count-title count-number" data-to="804" data-speed="1000"></h2>
+                <p class="count-text ">Course Hours</p>
+              </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+              <div class="counter">
+                <h2 class="timer count-title count-number" data-to="525" data-speed="1000"></h2>
+                <p class="count-text ">Yearly Growth</p>
+              </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+              <div class="counter end">
+                <h2 class="timer count-title count-number" data-to="7" data-speed="1000"></h2>
+                <p class="count-text ">Years Experience</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- <div class="team section" id="team">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-3 col-md-6">
+        <div class="team-member">
+          <div class="main-content">
+            <img src="{% static 'main/assets/images/member-01.jpg' %}" alt="">
+            <span class="category">UX Teacher</span>
+            <h4>Sophia Rose</h4>
+            <ul class="social-icons">
+              <li><a href="#"><i class="fab fa-facebook"></i></a></li>
+              <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+              <li><a href="#"><i class="fab fa-linkedin"></i></a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6">
+        <div class="team-member">
+          <div class="main-content">
+            <img src="{% static 'main/assets/images/member-02.jpg' %}" alt="">
+            <span class="category">Graphic Teacher</span>
+            <h4>Cindy Walker</h4>
+            <ul class="social-icons">
+              <li><a href="#"><i class="fab fa-facebook"></i></a></li>
+              <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+              <li><a href="#"><i class="fab fa-linkedin"></i></a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6">
+        <div class="team-member">
+          <div class="main-content">
+            <img src="{% static 'main/assets/images/member-03.jpg' %}" alt="">
+            <span class="category">Full Stack Master</span>
+            <h4>David Hutson</h4>
+            <ul class="social-icons">
+              <li><a href="#"><i class="fab fa-facebook"></i></a></li>
+              <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+              <li><a href="#"><i class="fab fa-linkedin"></i></a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6">
+        <div class="team-member">
+          <div class="main-content">
+            <img src="{% static 'main/assets/images/member-04.jpg' %}" alt="">
+            <span class="category">Digital Animator</span>
+            <h4>Stella Blair</h4>
+            <ul class="social-icons">
+              <li><a href="#"><i class="fab fa-facebook"></i></a></li>
+              <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+              <li><a href="#"><i class="fab fa-linkedin"></i></a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>  -->
+
+<!-- <div class="section testimonials">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-7">
+        <div class="owl-carousel owl-testimonials">
+          <div class="item">
+            <p>“Please tell your friends or collegues about TemplateMo website. Anyone can access the website to download free templates. Thank you for visiting.”</p>
+            <div class="author">
+              <img src="assets/images/testimonial-author.jpg" alt="">
+              <span class="category">Full Stack Master</span>
+              <h4>Claude David</h4>
+            </div>
+          </div>
+          <div class="item">
+            <p>“Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravid.”</p>
+            <div class="author">
+              <img src="assets/images/testimonial-author.jpg" alt="">
+              <span class="category">UI Expert</span>
+              <h4>Thomas Jefferson</h4>
+            </div>
+          </div>
+          <div class="item">
+            <p>“Scholar is free website template provided by TemplateMo for educational related websites. This CSS layout is based on Bootstrap v5.3.0 framework.”</p>
+            <div class="author">
+              <img src="assets/images/testimonial-author.jpg" alt="">
+              <span class="category">Digital Animator</span>
+              <h4>Stella Blair</h4>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-5 align-self-center">
+        <div class="section-heading">
+          <h6>TESTIMONIALS</h6>
+          <h2>What they say about us?</h2>
+          <p>You can search free CSS templates on Google using different keywords such as templatemo portfolio, templatemo gallery, templatemo blue color, etc.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> -->
+
+<!-- <div class="section events" id="events">
+  <div class="container">
+    <div class="row">
+
+
+
+
+      <div class="col-lg-12 text-center">
+        <div class="section-heading">
+          <h6>Schedule</h6>
+          <h2>Upcoming Events</h2>
+        </div>
+      </div>
+      <div class="col-lg-12 col-md-6">
+        <div class="item">
+          <div class="row">
+            <div class="col-lg-3">
+              <div class="image">
+                <img src="{% static 'main/assets/images/event-01.jpg' %}" alt="">
+              </div>
+            </div>
+            <div class="col-lg-9">
+              <ul>
+                <li>
+                  <span class="category">Web Design</span>
+                  <h4>UI Best Practices</h4>
+                </li>
+                <li>
+                  <span>Date:</span>
+                  <h6>16 Feb 2036</h6>
+                </li>
+                <li>
+                  <span>Duration:</span>
+                  <h6>22 Hours</h6>
+                </li>
+                <li>
+                  <span>Price:</span>
+                  <h6>$120</h6>
+                </li>
+              </ul>
+              <a href="#"><i class="fa fa-angle-right"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-12 col-md-6">
+        <div class="item">
+          <div class="row">
+            <div class="col-lg-3">
+              <div class="image">
+                <img src="{% static 'main/assets/images/event-02.jpg' %}" alt="">
+              </div>
+            </div>
+            <div class="col-lg-9">
+              <ul>
+                <li>
+                  <span class="category">Front End</span>
+                  <h4>New Design Trend</h4>
+                </li>
+                <li>
+                  <span>Date:</span>
+                  <h6>24 Feb 2036</h6>
+                </li>
+                <li>
+                  <span>Duration:</span>
+                  <h6>30 Hours</h6>
+                </li>
+                <li>
+                  <span>Price:</span>
+                  <h6>$320</h6>
+                </li>
+              </ul>
+              <a href="#"><i class="fa fa-angle-right"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-12 col-md-6">
+        <div class="item">
+          <div class="row">
+            <div class="col-lg-3">
+              <div class="image">
+                <img src="{% static 'main/assets/images/event-03.jpg' %}" alt="">
+              </div>
+            </div>
+            <div class="col-lg-9">
+              <ul>
+                <li>
+                  <span class="category">Full Stack</span>
+                  <h4>Web Programming</h4>
+                </li>
+                <li>
+                  <span>Date:</span>
+                  <h6>12 Mar 2036</h6>
+                </li>
+                <li>
+                  <span>Duration:</span>
+                  <h6>48 Hours</h6>
+                </li>
+                <li>
+                  <span>Price:</span>
+                  <h6>$440</h6>
+                </li>
+              </ul>
+              <a href="#"><i class="fa fa-angle-right"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+
+      
+    </div>
+  </div>
+</div> -->
+
+<!-- <div class="contact-us section" id="contact">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-6  align-self-center">
+        <div class="section-heading">
+          <h6>Contact Us</h6>
+          <h2>Feel free to contact us anytime</h2>
+          <p>Thank you for choosing our templates. We provide you best CSS templates at absolutely 100% free of charge. You may support us by sharing our website to your friends.</p>
+          <div class="special-offer">
+            <span class="offer">off<br><em>50%</em></span>
+            <h6>Valide: <em>24 April 2036</em></h6>
+            <h4>Special Offer <em>50%</em> OFF!</h4>
+            <a href="#"><i class="fa fa-angle-right"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="contact-us-content">
+          <form id="contact-form" action="" method="post">
+            <div class="row">
+              <div class="col-lg-12">
+                <fieldset>
+                  <input type="name" name="name" id="name" placeholder="Your Name..." autocomplete="on" required>
+                </fieldset>
+              </div>
+              <div class="col-lg-12">
+                <fieldset>
+                  <input type="text" name="email" id="email" pattern="[^ @]*@[^ @]*" placeholder="Your E-mail..." required="">
+                </fieldset>
+              </div>
+              <div class="col-lg-12">
+                <fieldset>
+                  <textarea name="message" id="message" placeholder="Your Message"></textarea>
+                </fieldset>
+              </div>
+              <div class="col-lg-12">
+                <fieldset>
+                  <button type="submit" id="form-submit" class="orange-button">Send Message Now</button>
+                </fieldset>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> -->
+
+
+<div class="contact-us section" id="contact" data-aos="fade-up" data-aos-delay="200" data-aos-duration="600">
+  <div class="container">
+    <div class="row">
+
+      <div class="col-lg-6  align-self-center mb-4">
+        <div class="section-heading">
+          <h6>About Me</h6>
+
+
+          <img src="{% static 'main/assets/images/teacher.png' %}" alt="">
+
+
+        </div>
+      </div>
+
+      <div class="col-lg-6">
+        <div class="contact-us-content">
+
+
+          <p class="text-light" style="font-size: 17px;">
+            As a passionate physics teacher, I am dedicated to sparking curiosity and fostering a love for science in my
+            students. I believe that learning should be an engaging adventure, so I constantly seek out creative ways to
+            present complex concepts. Whether through hands-on experiments, interactive demonstrations, or real-world
+            applications, I strive to make physics accessible and exciting. My goal is to inspire students to explore
+            the wonders of the universe and develop critical thinking skills that extend beyond the classroom. Together,
+            we embark on a journey of discovery, where questions lead to insights and every lesson becomes an
+            opportunity for exploration.
+          </p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}

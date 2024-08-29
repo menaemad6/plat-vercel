@@ -1,0 +1,442 @@
+{% extends "base-dark.html" %}
+{% load static %}
+
+
+{% if LANGUAGE_CODE == 'ar' %}
+{% block title_ar %}لوحة التحكم{% endblock title_ar %}
+{% else %}
+{% block title %}Dashboard{% endblock title %}
+{% endif %}
+
+
+{% block content%}
+
+<body>
+    <div class="container-fluid position-relative d-flex p-0">
+
+        <!-- Spinner Start -->
+        <div id="spinner"
+            class="show bg-dark position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+            <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+        <!-- Spinner End -->
+
+
+
+        <!-- Sidebar Start -->
+        <div class="sidebar pe-4 pb-3" style="overflow-y:hidden;">
+            <nav class="navbar bg-secondary navbar-dark">
+                <a href="/dashboard" class="navbar-brand mx-4 mb-3">
+                    <h3 class="text-primary"><i class="fa fa-user-edit me-2"></i>
+                        {% if LANGUAGE_CODE == 'ar' %}لوحة التحكم{% else %}Dashboard{% endif %}
+                    </h3>
+                </a>
+                <div class="d-flex align-items-center ms-4 mb-4">
+                    <div class="position-relative">
+                        {% if user_profile.image %}
+                        <img class="rounded-circle" src="{{user_profile.image.url}}" alt=""
+                            style="width: 40px; height: 40px;">
+                        {% else %}
+                        <img class="rounded-circle" src="{% static 'images/default-profile-image.jpg' %}" alt=""
+                            style="width: 40px; height: 40px;">
+                        {% endif %}
+
+                        <div
+                            class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1">
+                        </div>
+                    </div>
+                    <div class="ms-3">
+                        <h6 class="mb-0">{{user_profile.name}}</h6>
+                        {% if user_profile.instructor == True %}
+                        <span>{% if LANGUAGE_CODE == 'ar' %}مدرس{% else %}Instructor{% endif %}</span>
+                        {% else %}
+                        <span>{% if LANGUAGE_CODE == 'ar' %}طالب{% else %}Student{% endif %}</span>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="navbar-nav w-100">
+                    <a href="{% url 'dashboard-page' %}" class="nav-item nav-link "><i
+                            class="fa fa-tachometer-alt me-2"></i>
+                        {% if LANGUAGE_CODE == 'ar' %}لوحة التحكم{% else %}Dashboard{% endif %}
+                    </a>
+
+                    <a href="{% url 'dashboard-sales' %}" class="nav-item nav-link "><i
+                            class="fa fa-money-bill me-2"></i>
+                        {% if LANGUAGE_CODE == 'ar' %}المبيعات{% else %}Sales{% endif %}
+                    </a>
+
+                    <a href="{% url 'dashboard-codes' %}" class="nav-item nav-link "><i class="fa fa-barcode me-2"></i>
+                        {% if LANGUAGE_CODE == 'ar' %}الاكواد{% else %}Codes{% endif %}
+                    </a>
+                    <a href="{% url 'dashboard-lectures' %}" class="nav-item nav-link"><i class="fa fa-video me-2"></i>
+                        {% if LANGUAGE_CODE == 'ar' %}المحاضرات{% else %}Lectures{% endif %}
+                    </a>
+
+                    <a href="{% url 'dashboard-upload-page' %}" class="nav-item nav-link "><i
+                            class="fa fa-upload me-2"></i>
+                        {% if LANGUAGE_CODE == 'ar' %}تحميل{% else %}Upload{% endif %}
+                    </a>
+
+                    <a href="{% url 'dashboard-groups' %}" class="nav-item nav-link"><i class="fa fa-users me-2"></i>
+                        {% if LANGUAGE_CODE == 'ar' %}المجموعات{% else %}Groups{% endif %}
+                    </a>
+
+                    <a href="{% url 'dashboard-chapters' %}" class="nav-item nav-link ">
+                        <i class="fa fa-folder me-2"></i>
+                        {% if LANGUAGE_CODE == 'ar' %}الفصول{% else %}Chapters{% endif %}
+                    </a>
+
+                    <a href="/dashboard/assignments" class="nav-item nav-link "><i class="fa fa-file me-2"></i>
+                        {% if LANGUAGE_CODE == 'ar' %}التكليفات{% else %}Assignments{% endif %}
+                    </a>
+
+
+                    <a href="{% url 'dashboard-questions' %}" class="nav-item nav-link "><i
+                            class="fa fa-question me-2"></i>
+                        {% if LANGUAGE_CODE == 'ar' %}أسئلة{% else %}Questions{% endif %}
+                    </a>
+
+
+                    <a href="{% url 'dashboard-students' %}" class="nav-item nav-link "><i class="fa fa-user me-2"></i>
+                        {% if LANGUAGE_CODE == 'ar' %}الطلاب{% else %}Students{% endif %}
+                    </a>
+
+                    <a href="{% url 'dashboard-themes' %}" class="nav-item nav-link active"><i
+                            class="fa fa-paint-brush me-2"></i>
+                        {% if LANGUAGE_CODE == 'ar' %}الثيمات{% else %}Themes{% endif %}
+                    </a>
+
+                </div>
+            </nav>
+        </div>
+        <!-- Sidebar End -->
+
+        <!-- Content Start -->
+        <div class="content">
+
+            <!-- Navbar Start -->
+            <nav class="navbar navbar-expand bg-secondary navbar-dark sticky-top px-4 py-0">
+                <a href="#" class="sidebar-toggler flex-shrink-0 me-4">
+                    <i class="fa fa-bars"></i>
+                </a>
+                <a href="/" class="navbar-brand d-flex ">
+                    <h2 class="text-primary mb-0"><i class="fa fa-home"></i></h2>
+                </a>
+            
+                <div class="navbar-nav align-items-center ms-auto">
+            
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                            {% if user_profile.image %}
+                            <img class="rounded-circle me-lg-2" src="{{user_profile.image.url}}" alt=""
+                                style="width: 40px; height: 40px;">
+                            {% else %}
+                            <img class="rounded-circle me-lg-2" src="{% static 'images/default-profile-image.jpg' %}"
+                                alt="" style="width: 40px; height: 40px;">
+                            {% endif %}
+            
+                            <span class="d-none d-lg-inline-flex">
+                                {% if LANGUAGE_CODE == 'ar' %}{{user_profile.name}}{% else %}{{user_profile.name}}{% endif %}
+                            </span>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-end bg-secondary border-0 rounded-0 rounded-bottom m-0">
+                            <a href="{% url 'account' user_profile.user.username %}" class="dropdown-item">
+                                {% if LANGUAGE_CODE == 'ar' %}الإعدادات{% else %}Settings{% endif %}
+                            </a>
+                            <a href="/logout" class="dropdown-item">
+                                {% if LANGUAGE_CODE == 'ar' %}تسجيل الخروج{% else %}Log Out{% endif %}
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            <!-- Navbar End -->
+
+
+
+
+
+
+
+
+
+<!-- Themes Start -->
+<div class="container-fluid pt-4 px-4">
+    <div class="bg-secondary rounded p-1">
+
+        <div class="col-12">
+            <div class="bg-secondary rounded h-100 p-4">
+                <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                    <li class="nav-item" role="presentation" style="width: 50%;">
+                        <button class="nav-link active w-100" id="pills-home-tab" data-bs-toggle="pill"
+                            data-bs-target="#lecture" type="button" role="tab" aria-controls="pills-home"
+                            aria-selected="true">
+                            {% if LANGUAGE_CODE == 'ar' %}الثيمات{% else %}Themes{% endif %}
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation" style="width: 50%;">
+                        <button class="nav-link w-100" id="pills-profile-tab" data-bs-toggle="pill"
+                            data-bs-target="#assignment" type="button" role="tab"
+                            aria-controls="pills-profile" aria-selected="false">
+                            {% if LANGUAGE_CODE == 'ar' %}جديد{% else %}New{% endif %}
+                        </button>
+                    </li>
+                </ul>
+
+                <div class="tab-content" id="pills-tabContent">
+
+                    <div class="tab-pane fade show active" id="lecture" role="tabpanel"
+                        aria-labelledby="pills-home-tab">
+                        <div class="w-100 text-center pt-2">
+                            <h6 class="mb-4">
+                                {% if LANGUAGE_CODE == 'ar' %}الثيمات الموجودة{% else %}Existed Themes{% endif %}
+                            </h6>
+                        </div>
+
+                        <div class="container-fluid">
+                            <div class="row">
+
+                                {% for x in themes %}
+                                <div class="col-12 text-center mb-3" style="padding: 10px;">
+                                    <div class="lecture-card rounded"
+                                        style="padding: 15px; background-color: #000000;">
+
+                                        <div class="mb-3" style="width: 100%; font-size: 22px; font-weight: bold; display: flex; justify-content: space-between;">
+                                            <div>
+                                                {{x.name}}
+                                            </div>
+                                            <div>
+                                                <form action="/dashboard/activate-theme" method="POST">
+                                                    {% csrf_token %}
+                                                    <input type="hidden" hidden name="theme-id" value="{{x.theme_id}}">
+                                                {% if x.active == True %}
+                                                <button class="btn btn-outline-info"><i class="fa fa-check-square"
+                                                    style="font-size: 25px;"></i></button>
+                                                {% else %}
+                                                <button class="btn btn-outline-light"><i class="fa fa-check-square"
+                                                    style="font-size: 25px;"></i></button>
+                                                {% endif %}
+                                                </form>
+                                            </div>
+                                        </div>
+
+                                        <div class="dropdown">
+                                            <button class="btn btn-outline-warning w-100" type="button"
+                                                data-bs-toggle="dropdown">
+                                                {% if LANGUAGE_CODE == 'ar' %}تعديل{% else %}Edit{% endif %}
+                                                <i class="fa fa-pen-square"
+                                                    style="font-size: 18px;"></i>
+                                            </button>
+
+                                            <div class="dropdown-menu bg-secondary border-0"
+                                                style="width: 100%; padding: 10px">
+
+                                                <div class="card-title mt-3" style="display: flex; justify-content: center;">
+                                                    <h5>
+                                                        {% if LANGUAGE_CODE == 'ar' %}تفاصيل الثيم{% else %}Theme Details{% endif %}
+                                                    </h5>
+                                                </div>
+
+                                                <div class="card-info border-top pt-5"
+                                                    style="display: flex; flex-direction: column;">
+
+                                                    <div style="display: flex; justify-content: space-between; align-items: center; margin: 7px 0px;">
+                                                        <button type="button"
+                                                            class="btn btn-square btn-outline-primary"
+                                                            style="cursor:default;"><i class="fa fa-user"
+                                                                style="font-size: 18px;"></i></button>
+                                                        <span>{{x.user_name}}</span>
+                                                    </div>
+
+                                                    <div style="display: flex; justify-content: space-between; align-items: center; margin: 7px 0px;">
+                                                        <button type="button"
+                                                            class="btn btn-square btn-outline-primary"
+                                                            style="cursor:default;"><i
+                                                                class="fa fa-heading"
+                                                                style="font-size: 18px;"></i></button>
+                                                        <span>{{x.logo_title}}</span>
+                                                    </div>
+
+                                                    {% if x.logo_image %}
+                                                    <div style="display: flex; justify-content: space-between; align-items: center; margin: 7px 0px;">
+                                                        <button type="button"
+                                                            class="btn btn-square btn-outline-primary"
+                                                            style="cursor:default;"><i
+                                                                class="fa fa-image"
+                                                                style="font-size: 18px;"></i></button>
+                                                        <img src="{{x.logo_image.url}}" style="width: 50px; height: 50px;">
+                                                    </div>
+                                                    {% endif %}
+
+                                                    <div style="display: flex; justify-content: space-between; align-items: center; margin: 7px 0px;">
+                                                        <button type="button"
+                                                            class="btn btn-square btn-outline-primary"
+                                                            style="cursor:default;"><i
+                                                                class="fa fa-palette"
+                                                                style="font-size: 18px;"></i></button>
+                                                        <span style="display: flex; justify-content: center; align-items: center; width: 80px; height: 40px;color: white; background-color: {{x.primary_color}};">{{x.primary_color}}</span>
+                                                    </div>
+
+                                                    <div style="display: flex; justify-content: space-between; align-items: center; margin: 7px 0px;">
+                                                        <button type="button"
+                                                            class="btn btn-square btn-outline-primary"
+                                                            style="cursor:default;"><i
+                                                                class="fa fa-palette"
+                                                                style="font-size: 18px;"></i></button>
+                                                        <span style="display: flex; justify-content: center; align-items: center; width: 80px; height: 40px;color: white; background-color: {{x.secondary_color}};">{{x.secondary_color}}</span>
+                                                    </div>
+
+                                                    <div style="display: flex; justify-content: space-between; align-items: center; margin: 7px 0px;">
+                                                        <button type="button"
+                                                            class="btn btn-square btn-outline-primary"
+                                                            style="cursor:default;"><i class="fa fa-clock"
+                                                                style="font-size: 20px;"></i></button>
+                                                        <span>{{x.created_at|date:"j F"}}</span>
+                                                    </div>
+
+                                                </div>
+
+                                                <form action="/dashboard/delete-theme" method="POST">
+                                                    {% csrf_token %}
+                                                    <input type="hidden" value="{{x.theme_id}}"
+                                                        name="theme-id" hidden />
+                                                    <button class="btn btn-primary w-100 mt-4"
+                                                        type="submit">
+                                                        {% if LANGUAGE_CODE == 'ar' %}حذف{% else %}Delete{% endif %}
+                                                    </button>
+                                                </form>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                {% endfor %}
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="tab-pane fade" id="assignment" role="tabpanel"
+                        aria-labelledby="pills-profile-tab">
+                        <div class="w-100 text-center pt-2">
+                            <h6 class="mb-4 ">
+                                {% if LANGUAGE_CODE == 'ar' %}ثيم جديد{% else %}New Theme{% endif %}
+                            </h6>
+                        </div>
+
+                        <form action="/dashboard/create-theme" method="POST" enctype="multipart/form-data">
+                            {% csrf_token %}
+
+                            <div class="form-floating">
+                                <input type="text" name="theme-name" class="form-control" id="floatingInput"
+                                    placeholder="{% if LANGUAGE_CODE == 'ar' %}اسم الموضوع{% else %}Theme Name{% endif %}">
+                                <label for="floatingInput">
+                                    {% if LANGUAGE_CODE == 'ar' %}اسم الثيم{% else %}Theme Name{% endif %}
+                                </label>
+                            </div>
+
+                            <div class="form-floating mt-3">
+                                <select class="form-select" id="floatingSelect"
+                                    aria-label="Floating label select example" name="logo-type">
+                                    <option selected value="text">
+                                        {% if LANGUAGE_CODE == 'ar' %}نص{% else %}Text{% endif %}
+                                    </option>
+                                    <option value="image">
+                                        {% if LANGUAGE_CODE == 'ar' %}صورة{% else %}Image{% endif %}
+                                    </option>
+                                </select>
+                                <label for="floatingSelect">
+                                    {% if LANGUAGE_CODE == 'ar' %}نوع الشعار{% else %}Logo Type{% endif %}
+                                </label>
+                            </div>
+
+                            <div class="form-floating mt-3">
+                                <input type="text" name="logo-name" class="form-control" id="floatingInput"
+                                    placeholder="{% if LANGUAGE_CODE == 'ar' %}اسم الشعار{% else %}Logo Name{% endif %}">
+                                <label for="floatingInput">
+                                    {% if LANGUAGE_CODE == 'ar' %}نص الشعار{% else %}Logo Text{% endif %}
+                                </label>
+                            </div>
+
+                            <div class="mt-3">
+                                <label for="formFile" class="form-label">
+                                    {% if LANGUAGE_CODE == 'ar' %}صورة الشعار{% else %}Logo Image{% endif %}
+                                </label>
+                                <input class="form-control bg-dark" type="file" id="formFile" name="logo-image">
+                            </div>
+
+                            <div class="mt-3">
+                                <label for="primary-color-input" class="form-label">
+                                    {% if LANGUAGE_CODE == 'ar' %}اللون الأساسي{% else %}Primary Color{% endif %}
+                                </label>
+                                <input class="form-control bg-dark" type="color" id="primary-color-input" name="primary-color">
+                            </div>
+
+                            <div class="mt-3">
+                                <label for="secondary-color-input" class="form-label">
+                                    {% if LANGUAGE_CODE == 'ar' %}اللون الثانوي{% else %}Secondary Color{% endif %}
+                                </label>
+                                <input class="form-control bg-dark" type="color" id="secondary-color-input" name="secondary-color">
+                            </div>
+
+                            <button class="btn btn-outline-primary w-100 mt-4" type="submit">
+                                {% if LANGUAGE_CODE == 'ar' %}حفظ{% else %}Save{% endif %}
+                            </button>
+
+                        </form>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-- Themes End -->
+
+
+
+
+
+
+
+
+
+
+
+            <!-- Footer Start -->
+            <div class="container-fluid pt-4 px-4">
+                <div class="bg-secondary rounded-top p-4">
+                    <div class="row">
+                        <div class="col-12 col-sm-6 text-center text-sm-start">
+                            All Rights Reserved &copy; .
+                        </div>
+                        <div class="col-12 col-sm-6 text-center text-sm-end">
+
+                            Developed By <a href="https://www.facebook.com/bondok.emad" style="font-size: larger;">Mena
+                                Emad</a>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Footer End -->
+
+
+        </div>
+        <!-- Content End -->
+
+
+
+
+
+        <!-- Back to Top -->
+        <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+    </div>
+</body>
+{% endblock content %}

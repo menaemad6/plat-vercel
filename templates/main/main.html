@@ -1,0 +1,1100 @@
+{% load static %}
+{% load i18n %}
+{% get_current_language as LANGUAGE_CODE %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
+    rel="stylesheet">
+
+
+  <!-- Bootstrap core CSS -->
+  <link href="{% static 'main/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+
+
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="{% static 'profile/assets/img/favicon/favicon.ico' %}" />
+  <!-- Favicon -->
+
+  <!-- Page Title  -->
+  <title>{{platform.website_title}} - Home</title>
+  <!-- Page Title  -->
+
+
+  <!-- Additional CSS Files -->
+  <link rel="stylesheet" href="{% static 'main/assets/css/fontawesome.css' %}">
+  <link rel="stylesheet" href="{% static 'main/assets/css/templatemo-scholar.css' %}">
+  <link rel="stylesheet" href="{% static 'main/assets/css/owl.css' %}">
+  <link rel="stylesheet" href="{% static 'main/assets/css/animate.css' %}">
+  <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
+  <!-- Additional CSS Files -->
+
+  <!-- Aos Library  -->
+  <link href="{% static 'aos/dist/aos.css' %}" rel="stylesheet">
+  <!-- Aos Library  -->
+</head>
+
+<body>
+
+  <!-- ***** Preloader Start ***** -->
+  <div id="js-preloader" class="js-preloader">
+    <div class="preloader-inner">
+      <span class="dot"></span>
+      <div class="dots">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </div>
+  <!-- ***** Preloader End ***** -->
+
+
+
+
+  <!-- ***** Header Area Start ***** -->
+
+  <header class="header-area header-sticky">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <nav class="main-nav">
+            <a href="{% url 'home' %}" class="logo" style="white-space: nowrap; overflow: hidden;">
+              {% if platform.text_logo %}
+              <h1>{{ platform.text_logo }}</h1>
+              {% else %}
+              <h1>
+                {% if LANGUAGE_CODE == 'ar' %}
+                اسم المعلم
+                {% else %}
+                Teacher Name
+                {% endif %}
+              </h1>
+              {% endif %}
+            </a>
+
+            <ul class="nav">
+              <li class="scroll-to-section">
+                <a href="#top" class="active">
+                  {% if LANGUAGE_CODE == 'ar' %}
+                  الرئيسية
+                  {% else %}
+                  Home
+                  {% endif %}
+                </a>
+              </li>
+              <li class="scroll-to-section">
+                <a href="{% url 'grades' %}">
+                  {% if LANGUAGE_CODE == 'ar' %}
+                  المحاضرات
+                  {% else %}
+                  Lectures
+                  {% endif %}
+                </a>
+              </li>
+
+              {% if user_profile %}
+              {% if user_profile.instructor == True %}
+              <li class="scroll-to-section">
+                <a href="{% url 'dashboard-page' %}">
+                  {% if LANGUAGE_CODE == 'ar' %}
+                  لوحة التحكم
+                  {% else %}
+                  Dashboard
+                  {% endif %}
+                </a>
+              </li>
+              <li class="scroll-to-section">
+                <a href="{% url 'dashboard-codes' %}">
+                  {% if LANGUAGE_CODE == 'ar' %}
+                  الأكواد
+                  {% else %}
+                  Codes
+                  {% endif %}
+                </a>
+              </li>
+              {% else %}
+              <li class="scroll-to-section">
+                <a href="{% url 'main' user %}">
+                  {% if LANGUAGE_CODE == 'ar' %}
+                  الملف الشخصي
+                  {% else %}
+                  Profile
+                  {% endif %}
+                </a>
+              </li>
+              <li class="scroll-to-section">
+                <a href="{% url 'notifications' user %}">
+                  {% if LANGUAGE_CODE == 'ar' %}
+                  الإشعارات
+                  {% else %}
+                  Notifications
+                  {% endif %}
+                </a>
+              </li>
+              {% endif %}
+              <li class="scroll-to-section">
+                <a href="{% url 'logout' %}">
+                  {% if LANGUAGE_CODE == 'ar' %}
+                  تسجيل الخروج
+                  {% else %}
+                  Logout
+                  {% endif %}
+                </a>
+              </li>
+              {% else %}
+              <li class="scroll-to-section">
+                <a href="{% url 'signup' %}">
+                  {% if LANGUAGE_CODE == 'ar' %}
+                  حساب جديد
+                  {% else %}
+                  Register
+                  {% endif %}
+                </a>
+              </li>
+              <li class="scroll-to-section">
+                <a href="{% url 'login' %}">
+                  {% if LANGUAGE_CODE == 'ar' %}
+                  تسجيل الدخول
+                  {% else %}
+                  Login
+                  {% endif %}
+                </a>
+              </li>
+              {% endif %}
+
+              <li class="scroll-to-section">
+                <a>                
+                  <form action="{% url 'set_language' %}" method="post">
+                  {% csrf_token %}
+                  <input name="next" type="hidden" value="{{ request.get_full_path|slice:'3:' }}">
+
+
+
+                  {% if LANGUAGE_CODE == 'ar' %}
+                  <button type='submit' name='language' value='en'
+                    style="background-color: transparent; border: none; padding: 0; margin: 0;">
+                    <div style="position: relative;" class="nav-link" data-toggle="tooltip"
+                      data-placement="down" title="تحويل اللغة الى الانجليزية">
+                      <i class="fa fa-2x fa-globe text-dark" style="font-size: 34px;"></i>
+                      <span class="button__badge pr-bg"
+                        style="border-radius: 50%;color: black;display: flex;justify-content: center; align-items: center; width: 25px; height: 25px; font-size: 10px; position: absolute; top: 0; right: 0;">EN</span>
+                    </div>
+                  </button>
+                  {% else %}
+                  <button type='submit' name='language' value='ar'
+                    style="background-color: transparent; border: none; padding: 0; margin: 0;">
+                    <div style="position: relative;" class="nav-link" data-toggle="tooltip"
+                      data-placement="down" title="Change Language To English">
+                      <i class="fa fa-2x fa-globe text-dark" style="font-size: 34px;"></i>
+                      <span class="button__badge pr-bg"
+                        style="border-radius: 50%;color: black;display: flex;justify-content: center; align-items: center; width: 25px; height: 25px; font-size: 10px; position: absolute; top: 0; right: 0;">AR</span>
+                    </div>
+                  </button>
+                  {% endif %}
+
+
+                  
+                </form></a>
+
+              </li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+            </ul>
+
+            <a class='menu-trigger'>
+              <span>Menu</span>
+            </a>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+  <!-- ***** Header Area End ***** -->
+
+
+
+
+
+
+
+  <div class="main-banner" id="top" data-aos="zoom-in-up" data-aos-delay="200" data-aos-duration="600">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="owl-carousel owl-banner">
+
+            <div class="item item-1" style="position: relative; background: transparent; overflow: hidden;">
+              <video autoplay muted loop
+                style="position: absolute; top: 50%; left: 50%; min-width: 100%; min-height: 100%; width: auto; height: auto; z-index: -1; transform: translate(-50%, -50%);">
+                <source src="{% static 'main/assets/images/banner-video-1.mp4' %}" type="video/mp4">
+              </video>
+              <div class="header-text">
+                <span class="category">
+                  {% if LANGUAGE_CODE == 'ar' %}
+                  رقم 1 في الفيزياء
+                  {% else %}
+                  Number 1 In Physics
+                  {% endif %}
+                </span>
+                <h2>
+                  {% if LANGUAGE_CODE == 'ar' %}
+                  اكتشف الفيزياء: استكشف، تعلم، تحول اليوم.
+                  {% else %}
+                  Discover Physics: Explore, Learn, Transform Today.
+                  {% endif %}
+                </h2>
+                <p>
+                  {% if LANGUAGE_CODE == 'ar' %}
+                  اكتشف عجائب الفيزياء! استكشف المفاهيم الجذابة، تعلم من خلال التجارب المشوقة، وطور فهمك للكون اليوم!
+                  {% else %}
+                  Unlock the wonders of physics! Explore captivating concepts, learn through engaging experiments, and
+                  transform your understanding of the universe today!
+                  {% endif %}
+                </p>
+                <div class="buttons">
+                  <div class="main-button">
+                    {% if user_profile %}
+                    {% if user_profile.instructor %}
+                    <a href="{% url 'dashboard-page' %}">
+                      {% if LANGUAGE_CODE == 'ar' %}
+                      لوحة التحكم
+                      {% else %}
+                      Dashboard
+                      {% endif %}
+                    </a>
+                    {% else %}
+                    <a href="{% url 'main' request.user.username %}">
+                      {% if LANGUAGE_CODE == 'ar' %}
+                      ملفك الشخصي
+                      {% else %}
+                      Your Profile
+                      {% endif %}
+                    </a>
+                    {% endif %}
+                    {% else %}
+                    <a href="{% url 'signup' %}">
+                      {% if LANGUAGE_CODE == 'ar' %}
+                      ابدأ الآن
+                      {% else %}
+                      Start Now
+                      {% endif %}
+                    </a>
+                    {% endif %}
+                  </div>
+                  <div class="icon-button">
+                    <a href="{% url 'grades' %}">
+                      <i class="fa fa-play"></i>
+                      {% if LANGUAGE_CODE == 'ar' %}
+                      المحاضرات
+                      {% else %}
+                      Lectures
+                      {% endif %}
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="item item-2" style="position: relative; background: transparent; overflow: hidden;">
+              <video autoplay muted loop
+                style="position: absolute; top: 50%; left: 50%; min-width: 100%; min-height: 100%; width: auto; height: auto; z-index: -1; transform: translate(-50%, -50%);">
+                <source src="{% static 'main/assets/images/banner-video-2.mp4' %}" type="video/mp4">
+              </video>
+              <div class="header-text">
+                <span class="category">
+                  {% if LANGUAGE_CODE == 'ar' %}
+                  أفضل نتيجة
+                  {% else %}
+                  Best Result
+                  {% endif %}
+                </span>
+                <h2>
+                  {% if LANGUAGE_CODE == 'ar' %}
+                  تبسيط الفيزياء: فهم، تطبيق، وابتكار الآن.
+                  {% else %}
+                  Physics Simplified: Understand, Apply, Innovate Now.
+                  {% endif %}
+                </h2>
+                <p>
+                  {% if LANGUAGE_CODE == 'ar' %}
+                  اكتشف أسرار الفيزياء! فهم المفاهيم الأساسية، تطبيقها في الحالات الحقيقية، وابتكر من أجل مستقبل أكثر
+                  إشراقًا. استكشف اليوم!
+                  {% else %}
+                  Unlock the mysteries of physics! Understand fundamental concepts, apply them in real-life situations,
+                  and innovate for a brighter future. Explore today!
+                  {% endif %}
+                </p>
+                <div class="buttons">
+                  <div class="main-button">
+                    {% if user_profile %}
+                    {% if user_profile.instructor %}
+                    <a href="{% url 'dashboard-page' %}">
+                      {% if LANGUAGE_CODE == 'ar' %}
+                      لوحة التحكم
+                      {% else %}
+                      Dashboard
+                      {% endif %}
+                    </a>
+                    {% else %}
+                    <a href="{% url 'main' request.user.username %}">
+                      {% if LANGUAGE_CODE == 'ar' %}
+                      ملفك الشخصي
+                      {% else %}
+                      Your Profile
+                      {% endif %}
+                    </a>
+                    {% endif %}
+                    {% else %}
+                    <a href="{% url 'signup' %}">
+                      {% if LANGUAGE_CODE == 'ar' %}
+                      ابدأ الآن
+                      {% else %}
+                      Start Now
+                      {% endif %}
+                    </a>
+                    {% endif %}
+                  </div>
+                  <div class="icon-button">
+                    <a href="{% url 'grades' %}">
+                      <i class="fa fa-play"></i>
+                      {% if LANGUAGE_CODE == 'ar' %}
+                      المحاضرات
+                      {% else %}
+                      Lectures
+                      {% endif %}
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="item item-3" style="position: relative; background: transparent; overflow: hidden;">
+              <video autoplay muted loop
+                style="position: absolute; top: 50%; left: 50%; min-width: 100%; min-height: 100%; width: auto; height: auto; z-index: -1; transform: translate(-50%, -50%);">
+                <source src="{% static 'main/assets/images/banner-video-3.mp4' %}" type="video/mp4">
+              </video>
+              <div class="header-text">
+                <span class="category">
+                  {% if LANGUAGE_CODE == 'ar' %}
+                  التعليم عبر الإنترنت
+                  {% else %}
+                  Online Learning
+                  {% endif %}
+                </span>
+                <h2>
+                  {% if LANGUAGE_CODE == 'ar' %}
+                  الفيزياء بأسلوب سهل: تعلم واستكشف.
+                  {% else %}
+                  Physics Made Easy: Learn and Explore.
+                  {% endif %}
+                </h2>
+                <p>
+                  {% if LANGUAGE_CODE == 'ar' %}
+                  تعلم واستكشف يُبسط المفاهيم المعقدة، مما يجعل المادة متاحة وجذابة. اكتشف النظريات المثيرة من خلال
+                  الدروس التفاعلية والتطبيقات العملية.
+                  {% else %}
+                  Learn and Explore simplifies complex concepts, making the subject accessible and engaging. Discover
+                  fascinating theories through interactive lessons and real-world applications.
+                  {% endif %}
+                </p>
+                <div class="buttons">
+                  <div class="main-button">
+                    {% if user_profile %}
+                    {% if user_profile.instructor %}
+                    <a href="{% url 'dashboard-page' %}">
+                      {% if LANGUAGE_CODE == 'ar' %}
+                      لوحة التحكم
+                      {% else %}
+                      Dashboard
+                      {% endif %}
+                    </a>
+                    {% else %}
+                    <a href="{% url 'main' request.user.username %}">
+                      {% if LANGUAGE_CODE == 'ar' %}
+                      ملفك الشخصي
+                      {% else %}
+                      Your Profile
+                      {% endif %}
+                    </a>
+                    {% endif %}
+                    {% else %}
+                    <a href="{% url 'signup' %}">
+                      {% if LANGUAGE_CODE == 'ar' %}
+                      ابدأ الآن
+                      {% else %}
+                      Start Now
+                      {% endif %}
+                    </a>
+                    {% endif %}
+                  </div>
+                  <div class="icon-button">
+                    <a href="{% url 'grades' %}">
+                      <i class="fa fa-play"></i>
+                      {% if LANGUAGE_CODE == 'ar' %}
+                      المحاضرات
+                      {% else %}
+                      Lectures
+                      {% endif %}
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+  <div class="services section" id="services">
+    <div class="container">
+      <div class="row">
+
+        <div class="col-lg-4 col-md-6" data-aos="fade-right" data-aos-delay="400" data-aos-duration="1000">
+          <div class="service-item">
+            <div class="icon">
+              <img src="{% static 'main/assets/images/service-01.png' %}"
+                alt="{% if LANGUAGE_CODE == 'ar' %}درجات عبر الإنترنت{% else %}online degrees{% endif %}">
+            </div>
+            <div class="main-content">
+              <h4>
+                {% if LANGUAGE_CODE == 'ar' %}
+                حلول تعليمية مرنة
+                {% else %}
+                Flexible Learning Solutions
+                {% endif %}
+              </h4>
+              <p>
+                {% if LANGUAGE_CODE == 'ar' %}
+                توفر الحلول التعليمية المرنة أساليب تعليمية قابلة للتكيف، مما يتيح للمتعلمين تخصيص تجاربهم، وتحقيق
+                التوازن بين الالتزامات، وزيادة التفاعل من خلال طرق مبتكرة.
+                {% else %}
+                Flexible Learning Solutions offer adaptable educational approaches, empowering learners to personalize
+                their experiences, balance commitments, and enhance engagement through innovative methods.
+                {% endif %}
+              </p>
+              <div class="main-button">
+                <a href="#">
+                  {% if LANGUAGE_CODE == 'ar' %}
+                  اقرأ المزيد
+                  {% else %}
+                  Read More
+                  {% endif %}
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6" data-aos="fade-right" data-aos-delay="400" data-aos-duration="1000">
+          <div class="service-item">
+            <div class="icon">
+              <img src="{% static 'main/assets/images/service-02.png' %}"
+                alt="{% if LANGUAGE_CODE == 'ar' %}مساعدة في الواجبات المنزلية{% else %}homework help{% endif %}">
+            </div>
+            <div class="main-content">
+              <h4>
+                {% if LANGUAGE_CODE == 'ar' %}
+                مساعدة في الواجبات المنزلية
+                {% else %}
+                Homework Help and Assistance
+                {% endif %}
+              </h4>
+              <p>
+                {% if LANGUAGE_CODE == 'ar' %}
+                احصل على مساعدة خبيرة في الواجبات المنزلية لتعزيز فهمك ودرجاتك. مواردنا توفر دعماً مخصصاً لجميع أنواع
+                الطلاب.
+                {% else %}
+                Get expert homework help and assistance to boost your understanding and grades. Our resources provide
+                personalized support for all types of students.
+                {% endif %}
+              </p>
+              <div class="main-button">
+                <a href="#">
+                  {% if LANGUAGE_CODE == 'ar' %}
+                  اقرأ المزيد
+                  {% else %}
+                  Read More
+                  {% endif %}
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6" data-aos="fade-right" data-aos-delay="400" data-aos-duration="1000">
+          <div class="service-item">
+            <div class="icon">
+              <img src="{% static 'main/assets/images/service-03.png' %}"
+                alt="{% if LANGUAGE_CODE == 'ar' %}خبراء الويب{% else %}web experts{% endif %}">
+            </div>
+            <div class="main-content">
+              <h4>
+                {% if LANGUAGE_CODE == 'ar' %}
+                أنشطة تعليمية تفاعلية
+                {% else %}
+                Interactive Learning Activities
+                {% endif %}
+              </h4>
+              <p>
+                {% if LANGUAGE_CODE == 'ar' %}
+                الأنشطة التعليمية التفاعلية تشرك الطلاب من خلال التجارب، مما يعزز التعاون والتفكير النقدي والإبداع. تعزز
+                هذه الأنشطة الفهم والاحتفاظ.
+                {% else %}
+                Interactive learning activities engage students through experiences, fostering collaboration, critical
+                thinking, and creativity. These activities enhance understanding and retention.
+                {% endif %}
+              </p>
+              <div class="main-button">
+                <a href="#">
+                  {% if LANGUAGE_CODE == 'ar' %}
+                  اقرأ المزيد
+                  {% else %}
+                  Read More
+                  {% endif %}
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+
+  <div class="section frequently" id="frequently" data-aos="fade-up" data-aos-delay="600" data-aos-duration="1000">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6 offset-lg-1">
+          <div class="accordion" id="accordionExample">
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="headingOne">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne"
+                  aria-expanded="true" aria-controls="collapseOne">
+                  {% if LANGUAGE_CODE == 'ar' %}
+                  كيفية شراء أكواد المحاضرات؟
+                  {% else %}
+                  How do I buy lecture codes?
+                  {% endif %}
+                </button>
+              </h2>
+              <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
+                data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                  {% if LANGUAGE_CODE == 'ar' %}
+                  قم بتحويل مبلغ الكود الذي تريد شحنه إلى أحد هذه الأرقام وأرسل صورة للتحويل ورقم المحفظة الذي قمت
+                  بالتحويل منه عبر WhatsApp، نفس الرقم
+                  <br><strong>01226102013</strong><br>
+                  <strong>01264957294</strong>
+                  {% else %}
+                  Transfer the amount of the code you want to charge to one of these numbers and send a picture of the
+                  transfer and the wallet number you transferred from on WhatsApp, the same number
+                  <br><strong>01226102013</strong><br>
+                  <strong>01264957294</strong>
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="headingTwo">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                  data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                  {% if LANGUAGE_CODE == 'ar' %}
+                  أرقام الدعم الفني
+                  {% else %}
+                  Technical support numbers
+                  {% endif %}
+                </button>
+              </h2>
+              <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
+                data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                  {% if LANGUAGE_CODE == 'ar' %}
+                  <strong>01226102013</strong><br>
+                  <strong>01265926583</strong><br>
+                  <strong>01285628573</strong>
+                  {% else %}
+                  <strong>01226102013</strong><br>
+                  <strong>01265926583</strong><br>
+                  <strong>01285628573</strong>
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="col-lg-5 align-self-center">
+          <div class="section-heading">
+            <h6>
+              {% if LANGUAGE_CODE == 'ar' %}
+              الأسئلة الشائعة
+              {% else %}
+              Q&A
+              {% endif %}
+            </h6>
+            <h2>
+              {% if LANGUAGE_CODE == 'ar' %}
+              الأسئلة الشائعة
+              {% else %}
+              Frequently Asked Questions
+              {% endif %}
+            </h2>
+            <p>
+              {% if LANGUAGE_CODE == 'ar' %}
+              هذه بعض النقاط المهمة التي نواجهها كثيرًا.
+              {% else %}
+              These are some important points we face a lot.
+              {% endif %}
+            </p>
+            <!-- <div class="main-button">
+              <a href="#">
+                {% if LANGUAGE_CODE == 'ar' %}
+                اكتشف المزيد
+                {% else %}
+                Discover More
+                {% endif %}
+              </a>
+            </div> -->
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+  <section class="section courses" id="courses" data-aos="fade-up" data-aos-delay="600" data-aos-duration="1000">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12 text-center">
+          <div class="section-heading">
+            <h6>
+              {% if LANGUAGE_CODE == 'ar' %}
+              أحدث المحاضرات
+              {% else %}
+              Latest Lectures
+              {% endif %}
+            </h6>
+            <h2>
+              {% if LANGUAGE_CODE == 'ar' %}
+              أحدث المحاضرات
+              {% else %}
+              Latest Lectures
+              {% endif %}
+            </h2>
+          </div>
+        </div>
+      </div>
+      <ul class="event_filter">
+        <li>
+          <a class="is_active" href="#!" data-filter="*">
+            {% if LANGUAGE_CODE == 'ar' %}
+            جميع المحاضرات
+            {% else %}
+            All Lectures
+            {% endif %}
+          </a>
+        </li>
+        <li>
+          <a href="#!" data-filter=".first">
+            {% if LANGUAGE_CODE == 'ar' %}
+            أولى ثانوي
+            {% else %}
+            First Secondary
+            {% endif %}
+          </a>
+        </li>
+        <li>
+          <a href="#!" data-filter=".second">
+            {% if LANGUAGE_CODE == 'ar' %}
+            تانية ثانوي
+            {% else %}
+            Second Secondary
+            {% endif %}
+          </a>
+        </li>
+        <li>
+          <a href="#!" data-filter=".third">
+            {% if LANGUAGE_CODE == 'ar' %}
+            تالتة ثانوي
+            {% else %}
+            Third Secondary
+            {% endif %}
+
+          </a>
+        </li>
+      </ul>
+
+
+      <div class="row event_box">
+
+
+        {% for x in lectures %}
+        <div class="col-lg-4 col-md-6 align-self-center mb-30 event_outer col-md-6 {{x.year}}" data-aos="fade-up"
+          data-aos-delay="500" data-aos-duration="700">
+          <div class="events_item">
+            <div class="thumb">
+
+
+              {% if x.object == True %}
+              <a href="{% url 'lecture' x.lecture_id %}">
+                {% else %}
+                <a href="{% url 'lecture' x.id %}">
+                  {% endif %}
+                  {% if x.image %}
+                  <img src="{{x.image.url}}" alt="">
+                  {% else %}
+                  <img src="{% static 'blank-lecture.jpeg' %}" alt="">
+                  {% endif %}
+                </a>
+                {% if user_profile %}
+
+                {% if user_profile.instructor == True %}
+                <span class="category" style="background-color: #05ff87; color: white;">عرض</span>
+                {% else %}
+                {% if x.purchased == True%}
+                <span class="category" style="background-color: #05ff87; color: white;">تم الشراء</span>
+                {% else %}
+                <span class="category" style="background-color: #7a6ad8; color: white;">شراء</span>
+                {% endif %}
+                {% endif %}
+
+
+                {% else %}
+                <span class="category" style="background-color: #7a6ad8; color: white;">شراء</span>
+                {% endif %}
+
+                <span class="price">
+                  <h6><em>$</em>{{x.price}}</h6>
+                </span>
+            </div>
+
+            <div class="down-content" style="padding-bottom: 0;">
+              <span class="author">{{x.created_at}}</span>
+              <br>
+              {% if x.object == True %}
+              <a href="{% url 'lecture' x.lecture_id %}" class="h4">{{x.title}}</a>
+              {% else %}
+              <a href="{% url 'lecture' x.id %}" class="h4">{{x.title}}</a>
+              {% endif %}
+
+            </div>
+
+            <hr style="color: #7a6ad8; margin-bottom: 0;">
+            <div class="down-content">
+
+
+              <div class="parts" style="width: 100%; display: flex; justify-content: space-between;">
+                <div class="parts-text" style="display: flex; flex-direction: row; align-items: center;">
+                  <i class="fa-solid fa-video" style="color: #7a6ad8; font-size: px;"></i>
+                  <div style="margin-left: 10px;">
+                    {% if LANGUAGE_CODE == 'ar' %}
+                    الأجزاء
+                    {% else %}
+                    Parts
+                    {% endif %}
+                  </div>
+                </div>
+                <div class="parts-info">
+                  {{x.parts_number}}
+                </div>
+              </div>
+
+              <div class="duration mt-2" style="width: 100%; display: flex; justify-content: space-between;">
+                <div class="duration-text" style="display: flex; flex-direction: row; align-items: center;">
+                  <i class="fa-solid fa-clock" style="color: #7a6ad8; font-size: px;"></i>
+                  <div style="margin-left: 10px;">
+                    {% if LANGUAGE_CODE == 'ar' %}
+                    المحتوى
+                    {% else %}
+                    Content
+                    {% endif %}
+                  </div>
+                </div>
+                <div class="duration-info">
+                  {{x.duration}} {% if LANGUAGE_CODE == 'ar' %}دقيقة{% else %}min{% endif %}
+                </div>
+              </div>
+
+
+
+
+
+            </div>
+
+          </div>
+        </div>
+        {% endfor %}
+
+      </div>
+
+
+
+    </div>
+  </section>
+
+
+
+
+
+  <div class="section fun-facts" data-aos="fade-right" data-aos-delay="400" data-aos-duration="800">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="wrapper">
+            <div class="row">
+              <div class="col-lg-3 col-md-6">
+                <div class="counter">
+                  <h2 class="timer count-title count-number" data-to="3000" data-speed="1000"></h2>
+                  <p class="count-text">
+                    {% if LANGUAGE_CODE == 'ar' %}
+                    الطلاب
+                    {% else %}
+                    Students
+                    {% endif %}
+                  </p>
+                </div>
+              </div>
+              <div class="col-lg-3 col-md-6">
+                <div class="counter">
+                  <h2 class="timer count-title count-number" data-to="804" data-speed="1000"></h2>
+                  <p class="count-text">
+                    {% if LANGUAGE_CODE == 'ar' %}
+                    ساعات الدورات
+                    {% else %}
+                    Course Hours
+                    {% endif %}
+                  </p>
+                </div>
+              </div>
+              <div class="col-lg-3 col-md-6">
+                <div class="counter">
+                  <h2 class="timer count-title count-number" data-to="525" data-speed="1000"></h2>
+                  <p class="count-text">
+                    {% if LANGUAGE_CODE == 'ar' %}
+                    النمو السنوي
+                    {% else %}
+                    Yearly Growth
+                    {% endif %}
+                  </p>
+                </div>
+              </div>
+              <div class="col-lg-3 col-md-6">
+                <div class="counter end">
+                  <h2 class="timer count-title count-number" data-to="7" data-speed="1000"></h2>
+                  <p class="count-text">
+                    {% if LANGUAGE_CODE == 'ar' %}
+                    سنوات الخبرة
+                    {% else %}
+                    Years Experience
+                    {% endif %}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+  <div class="contact-us section" id="contact" data-aos="fade-up" data-aos-delay="200" data-aos-duration="600">
+    <div class="container">
+      <div class="row">
+
+        <div class="col-lg-6 align-self-center mb-4">
+          <div class="section-heading">
+            <h6>
+              {% if LANGUAGE_CODE == 'ar' %}
+              عني
+              {% else %}
+              About Me
+              {% endif %}
+            </h6>
+
+            <img src="{% static 'main/assets/images/teacher.png' %}" alt="">
+          </div>
+        </div>
+
+        <div class="col-lg-6">
+          <div class="contact-us-content">
+            <p class="text-light" style="font-size: 17px;">
+              {% if LANGUAGE_CODE == 'ar' %}
+              كمعلم متحمس في الفيزياء، أنا ملتزم بإثارة الفضول وتعزيز حب العلم في طلابي. أؤمن بأن التعلم يجب أن يكون
+              مغامرة ممتعة، لذا أبحث باستمرار عن طرق إبداعية لعرض المفاهيم المعقدة. سواء من خلال التجارب العملية أو
+              العروض التفاعلية أو التطبيقات الواقعية، أسعى لجعل الفيزياء متاحة ومثيرة. هدفي هو إلهام الطلاب لاستكشاف
+              عجائب الكون وتطوير مهارات التفكير النقدي التي تتجاوز الفصل الدراسي. معًا، نبدأ رحلة اكتشاف حيث تقود
+              الأسئلة إلى رؤى وتصبح كل درس فرصة للاستكشاف.
+              {% else %}
+              As a passionate physics teacher, I am dedicated to sparking curiosity and fostering a love for science in
+              my students. I believe that learning should be an engaging adventure, so I constantly seek out creative
+              ways to present complex concepts. Whether through hands-on experiments, interactive demonstrations, or
+              real-world applications, I strive to make physics accessible and exciting. My goal is to inspire students
+              to explore the wonders of the universe and develop critical thinking skills that extend beyond the
+              classroom. Together, we embark on a journey of discovery, where questions lead to insights and every
+              lesson becomes an opportunity for exploration.
+              {% endif %}
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+  <footer>
+    <div class="container">
+
+      <div class="col-lg-12"
+        style="padding: 0; height: 80px; display: flex; justify-content: center; align-items: center;">
+        <p class="d-flex justify-content-center align-items-center" style="line-height: normal;">
+          {% if platform.facebook %}
+          <span class="me-3">
+            <a href="{{platform.facebook}}" style="background: none; border: none;">
+              <i class="bx bxl-facebook-circle text-white" style="font-size: 40px;"></i>
+            </a>
+          </span>
+          {% endif %}
+
+          {% if platform.whatsapp %}
+          <span class="me-3">
+            <a href="https://wa.me/2{{platform.whatsapp}}" style="background: none; border: none;">
+              <i class="bx bxl-whatsapp text-white" style="font-size: 45px;"></i>
+            </a>
+          </span>
+          {% endif %}
+
+          {% if platform.instagram %}
+          <span class="me-3">
+            <a href="{{platform.instagram}}" style="background: none; border: none;">
+              <i class="bx bxl-instagram-alt text-white" style="font-size: 45px;"></i>
+            </a>
+          </span>
+          {% endif %}
+
+          {% if platform.youtube %}
+          <span class="me-3">
+            <a href="{{platform.youtube}}" style="background: none; border: none;">
+              <i class="bx bxl-youtube text-white" style="font-size: 52px;"></i>
+            </a>
+          </span>
+          {% endif %}
+
+          {% if platform.telegram %}
+          <span class="me-3">
+            <a href="{{platform.telegram}}" style="background: none; border: none;">
+              <i class="bx bxl-telegram text-white" style="font-size: 45px;"></i>
+            </a>
+          </span>
+          {% endif %}
+
+          {% if platform.tiktok %}
+          <span class="me-3">
+            <a href="{{platform.tiktok}}" style="background: none; border: none;">
+              <i class="bx bxl-tiktok text-white" style="font-size: 40px;"></i>
+            </a>
+          </span>
+          {% endif %}
+
+          {% if platform.twitter %}
+          <span class="me-3">
+            <a href="{{platform.twitter}}" style="background: none; border: none;">
+              <i class="bx bxl-twitter text-white" style="font-size: 40px;"></i>
+            </a>
+          </span>
+          {% endif %}
+        </p>
+      </div>
+
+      <div class="col-lg-12"
+        style="padding: 0; height: 50px; display: flex; justify-content: center; align-items: center;">
+        <p style="padding: 0; margin: 0; line-height: normal;">
+
+          Copyright © 2024 Organization. All rights reserved.
+
+        </p>
+      </div>
+
+      <div class="col-lg-12"
+        style="padding: 0; display: flex; justify-content: center; align-items: center; line-height: normal;">
+        <p>
+
+          Developed By
+
+          <a style="font-weight: bold; font-size: 25px; color: white;" href="https://mina-emad.netlify.app">
+
+            Mina Emad
+
+          </a>
+        </p>
+      </div>
+
+    </div>
+  </footer>
+
+
+  <!-- Scripts -->
+  <!-- Bootstrap core JavaScript -->
+  <script src="{% static 'main/vendor/jquery/jquery.min.js' %}"></script>
+  <script src="{% static 'main/vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+  <script src="{% static 'main/assets/js/isotope.min.js' %}"></script>
+  <script src="{% static 'main/assets/js/owl-carousel.js' %}"></script>
+  <script src="{% static 'main/assets/js/counter.js' %}"></script>
+  <script src="{% static 'main/assets/js/custom.js' %}"></script>
+
+
+  <!-- Aos Library  -->
+  <script src="{% static 'aos/dist/aos.js' %}"></script>
+
+  <script>
+    AOS.init();
+  </script>
+  <!-- Aos Library  -->
+
+
+</body>
+
+</html>

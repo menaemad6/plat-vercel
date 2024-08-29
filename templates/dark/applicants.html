@@ -1,0 +1,227 @@
+{% extends "base-dark.html" %}
+{% load static %}
+
+
+{% if LANGUAGE_CODE == 'ar' %}
+{% block title_ar %}لوحة التحكم{% endblock title_ar %}
+{% else %}
+{% block title %}Dashboard{% endblock title %}
+{% endif %}
+
+
+{% block content%}
+
+<body>
+    <div class="container-fluid position-relative d-flex p-0">
+
+        <!-- Spinner Start -->
+        <div id="spinner"
+            class="show bg-dark position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+            <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+        <!-- Spinner End -->
+
+
+        <!-- Sidebar Start -->
+        <div class="sidebar pe-4 pb-3">
+            <nav class="navbar bg-secondary navbar-dark">
+
+                <a href="/dashboard" class="navbar-brand mx-4 mb-3">
+                    <h3 class="text-primary"><i class="fa fa-user-edit me-2"></i>Dashboard</h3>
+                </a>
+                <div class="d-flex align-items-center ms-4 mb-4">
+                    <div class="position-relative">
+                        {% if user_profile.image %}
+                        <img class="rounded-circle" src="{{user_profile.image.url}}" alt=""
+                            style="width: 40px; height: 40px;">
+                        {% else %}
+                        <img class="rounded-circle" src="{% static 'images/default-profile-image.jpg' %}" alt=""
+                            style="width: 40px; height: 40px;">
+                        {% endif %}
+
+                        <div
+                            class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1">
+                        </div>
+                    </div>
+                    <div class="ms-3">
+                        <h6 class="mb-0">{{user_profile.name}}</h6>
+                        <span>Admin</span>
+                    </div>
+                </div>
+
+                <div class="navbar-nav w-100">
+
+                    <a href="/dashboard" class="nav-item nav-link "><i
+                            class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
+                            <a href="/dashboard/upload" class="nav-item nav-link "><i
+                                class="fa fa-upload me-2"></i>Upload</a>
+                    <a href="/dashboard/lectures" class="nav-item nav-link"><i class="fa fa-video me-2"></i>Lectures</a>
+                    <a href="{% url 'dashboard-groups' %}" class="nav-item nav-link"><i class="fa fa-users me-2"></i>Groups</a>
+                    <a href="/dashboard/chapters" class="nav-item nav-link"><i
+                            class="fa fa-folder me-2"></i>Chapters</a>
+                    <a href="/dashboard/assignments" class="nav-item nav-link active"><i
+                            class="fa fa-file me-2"></i>Assignments</a>
+                    <a href="/dashboard/codes" class="nav-item nav-link"><i class="fa fa-barcode me-2"></i>Codes</a>
+                    <a href="/dashboard/questions" class="nav-item nav-link "><i
+                            class="fa fa-question me-2"></i>Questions</a>
+                            <a href="/dashboard/sales" class="nav-item nav-link "><i
+                                class="fa fa-money-bill me-2"></i>Sales</a>
+                                <a href="/dashboard/students" class="nav-item nav-link "><i
+                                    class="fa fa-user me-2"></i>Students</a>
+                                    
+
+                </div>
+            </nav>
+        </div>
+        <!-- Sidebar End -->
+
+
+        <!-- Content Start -->
+        <div class="content">
+
+            <!-- Navbar Start -->
+            <nav class="navbar navbar-expand bg-secondary navbar-dark sticky-top px-4 py-0">
+                <a href="#" class="sidebar-toggler flex-shrink-0 me-4">
+                    <i class="fa fa-bars"></i>
+                </a>
+                <a href="/" class="navbar-brand d-flex ">
+                    <h2 class="text-primary mb-0"><i class="fa fa-home"></i></h2>
+                </a>
+
+
+                <div class="navbar-nav align-items-center ms-auto">
+
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                            {% if user_profile.image %}
+                            <img class="rounded-circle me-lg-2" src="{{user_profile.image.url}}" alt=""
+                                style="width: 40px; height: 40px;">
+                            {% else %}
+                            <img class="rounded-circle me-lg-2" src="{% static 'images/default-profile-image.jpg' %}"
+                                alt="" style="width: 40px; height: 40px;">
+                            {% endif %}
+
+
+                            <span class="d-none d-lg-inline-flex">{{user_profile.name}}</span>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-end bg-secondary border-0 rounded-0 rounded-bottom m-0">
+                            <a href="/profile/{{user.username}}" class="dropdown-item">My Profile</a>
+                            <a href="/settings-teacher" class="dropdown-item">Settings</a>
+                            <a href="/logout" class="dropdown-item">Log Out</a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            <!-- Navbar End -->
+
+
+
+
+            {% if applicants|length == 0 %}
+
+            <!-- Blank Start -->
+            <div class="container-fluid pt-4 px-4">
+                <div class="row vh-100 bg-secondary rounded align-items-center justify-content-center mx-0">
+                    <div class="col-md-6 text-center">
+                        <h3>The arent any applicants for this assignment ({{assignment.assignment_name}})</h3>
+                    </div>
+                </div>
+            </div>
+            <!-- Blank End -->
+
+            {% else %}
+
+            <!-- Applicants Start -->
+            <div class="container-fluid pt-4 px-4">
+                <div class="bg-secondary text-center rounded p-4">
+                    <div class="d-flex align-items-center justify-content-between mb-4">
+                        <h6 class="mb-0">Assignment Applicants - ({{assignment.assignment_name}})</h6>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table text-start align-middle table-bordered table-hover mb-0">
+                            <thead>
+                                <tr class="text-white">
+                                    <!-- <th scope="col"><input class="form-check-input" type="checkbox"></th> -->
+                                    <th scope="col">Student</th>
+                                    <th scope="col">Result</th>
+                                    <th scope="col">Date</th>
+
+                                    <th scope="col"></th>
+                                    <!-- <th scope="col">Action</th> -->
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                {% for x in applicants|slice:"0:5" %}
+                                <tr>
+                                    <!-- <td><input class="form-check-input" type="checkbox"></td> -->
+                                    <td>
+                                        <a href="/profile/{{x.username}}">{{x.username}}</a>
+                                    </td>
+                                    <td >{{x.true_answers}}</td>
+                                    <td>{{x.created_at|date:"SHORT_DATE_FORMAT"}}</td>
+
+                                    <td>
+                                        <a href="/dashboard/assignment/answers/{{assignment.assignment_id}}?student={{x.username}}"
+                                            class="btn btn-warning w-100 mb-2">View Answers</a>
+                                    </td>
+
+                                </tr>
+                                {% endfor %}
+
+
+
+
+
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <!-- Applicants End -->
+            {% endif %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <!-- Footer Start -->
+            <div class="container-fluid pt-4 px-4">
+                <div class="bg-secondary rounded-top p-4">
+                    <div class="row">
+                        <div class="col-12 col-sm-6 text-center text-sm-start">
+                            &copy; <a href="/">Mr Mena Emad Platform</a>, All Rights Reserved.
+                        </div>
+                        <div class="col-12 col-sm-6 text-center text-sm-end">
+                           
+                        Developed By <a href="https://www.facebook.com/bondok.emad">Mena Emad</a>
+                          
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Footer End -->
+        </div>
+        
+        <!-- Content End -->
+
+
+
+
+
+        <!-- Back to Top -->
+        <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+    </div>
+</body>
+{% endblock content %}

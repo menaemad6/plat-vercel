@@ -1,0 +1,1249 @@
+{% extends "base-dark.html" %}
+{% load static %}
+
+
+{% if LANGUAGE_CODE == 'ar' %}
+{% block title_ar %}لوحة التحكم{% endblock title_ar %}
+{% else %}
+{% block title %}Dashboard{% endblock title %}
+{% endif %}
+
+
+{% block content%}
+
+<body>
+    <div class="container-fluid position-relative d-flex p-0">
+
+        <!-- Spinner Start -->
+        <div id="spinner"
+            class="show bg-dark position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+            <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+        <!-- Spinner End -->
+
+
+        <!-- Sidebar Start -->
+        <div class="sidebar pe-4 pb-3" style="overflow-y:hidden;">
+            <nav class="navbar bg-secondary navbar-dark">
+                <a href="/dashboard" class="navbar-brand mx-4 mb-3">
+                    <h3 class="text-primary"><i class="fa fa-user-edit me-2"></i>
+                        {% if LANGUAGE_CODE == 'ar' %}لوحة التحكم{% else %}Dashboard{% endif %}
+                    </h3>
+                </a>
+                <div class="d-flex align-items-center ms-4 mb-4">
+                    <div class="position-relative">
+                        {% if user_profile.image %}
+                        <img class="rounded-circle" src="{{user_profile.image.url}}" alt=""
+                            style="width: 40px; height: 40px;">
+                        {% else %}
+                        <img class="rounded-circle" src="{% static 'images/default-profile-image.jpg' %}" alt=""
+                            style="width: 40px; height: 40px;">
+                        {% endif %}
+
+                        <div
+                            class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1">
+                        </div>
+                    </div>
+                    <div class="ms-3">
+                        <h6 class="mb-0">{{user_profile.name}}</h6>
+                        {% if user_profile.instructor == True %}
+                        <span>{% if LANGUAGE_CODE == 'ar' %}مدرس{% else %}Instructor{% endif %}</span>
+                        {% else %}
+                        <span>{% if LANGUAGE_CODE == 'ar' %}طالب{% else %}Student{% endif %}</span>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="navbar-nav w-100">
+                    <a href="{% url 'dashboard-page' %}" class="nav-item nav-link "><i
+                            class="fa fa-tachometer-alt me-2"></i>
+                        {% if LANGUAGE_CODE == 'ar' %}لوحة التحكم{% else %}Dashboard{% endif %}
+                    </a>
+
+                    <a href="{% url 'dashboard-sales' %}" class="nav-item nav-link "><i
+                            class="fa fa-money-bill me-2"></i>
+                        {% if LANGUAGE_CODE == 'ar' %}المبيعات{% else %}Sales{% endif %}
+                    </a>
+
+                    <a href="{% url 'dashboard-codes' %}" class="nav-item nav-link "><i class="fa fa-barcode me-2"></i>
+                        {% if LANGUAGE_CODE == 'ar' %}الاكواد{% else %}Codes{% endif %}
+                    </a>
+                    <a href="{% url 'dashboard-lectures' %}" class="nav-item nav-link"><i class="fa fa-video me-2"></i>
+                        {% if LANGUAGE_CODE == 'ar' %}المحاضرات{% else %}Lectures{% endif %}
+                    </a>
+
+                    <a href="{% url 'dashboard-upload-page' %}" class="nav-item nav-link "><i
+                            class="fa fa-upload me-2"></i>
+                        {% if LANGUAGE_CODE == 'ar' %}تحميل{% else %}Upload{% endif %}
+                    </a>
+
+                    <a href="{% url 'dashboard-groups' %}" class="nav-item nav-link"><i class="fa fa-users me-2"></i>
+                        {% if LANGUAGE_CODE == 'ar' %}المجموعات{% else %}Groups{% endif %}
+                    </a>
+
+                    <a href="{% url 'dashboard-chapters' %}" class="nav-item nav-link ">
+                        <i class="fa fa-folder me-2"></i>
+                        {% if LANGUAGE_CODE == 'ar' %}الفصول{% else %}Chapters{% endif %}
+                    </a>
+
+                    <a href="/dashboard/assignments" class="nav-item nav-link "><i class="fa fa-file me-2"></i>
+                        {% if LANGUAGE_CODE == 'ar' %}التكليفات{% else %}Assignments{% endif %}
+                    </a>
+
+
+                    <a href="{% url 'dashboard-questions' %}" class="nav-item nav-link "><i
+                            class="fa fa-question me-2"></i>
+                        {% if LANGUAGE_CODE == 'ar' %}أسئلة{% else %}Questions{% endif %}
+                    </a>
+
+
+                    <a href="{% url 'dashboard-students' %}" class="nav-item nav-link "><i class="fa fa-user me-2"></i>
+                        {% if LANGUAGE_CODE == 'ar' %}الطلاب{% else %}Students{% endif %}
+                    </a>
+
+                    <a href="{% url 'dashboard-themes' %}" class="nav-item nav-link "><i
+                            class="fa fa-paint-brush me-2"></i>
+                        {% if LANGUAGE_CODE == 'ar' %}الثيمات{% else %}Themes{% endif %}
+                    </a>
+
+                </div>
+            </nav>
+        </div>
+        <!-- Sidebar End -->
+
+
+        <!-- Content Start -->
+        <div class="content">
+
+            <!-- Navbar Start -->
+            <nav class="navbar navbar-expand bg-secondary navbar-dark sticky-top px-4 py-0">
+                <a href="#" class="sidebar-toggler flex-shrink-0 me-4">
+                    <i class="fa fa-bars"></i>
+                </a>
+                <a href="/" class="navbar-brand d-flex ">
+                    <h2 class="text-primary mb-0"><i class="fa fa-home"></i></h2>
+                </a>
+
+                <div class="navbar-nav align-items-center ms-auto">
+
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                            {% if user_profile.image %}
+                            <img class="rounded-circle me-lg-2" src="{{user_profile.image.url}}" alt=""
+                                style="width: 40px; height: 40px;">
+                            {% else %}
+                            <img class="rounded-circle me-lg-2" src="{% static 'images/default-profile-image.jpg' %}"
+                                alt="" style="width: 40px; height: 40px;">
+                            {% endif %}
+
+                            <span class="d-none d-lg-inline-flex">
+                                {% if LANGUAGE_CODE == 'ar' %}{{user_profile.name}}{% else %}{{user_profile.name}}{% endif %}
+                            </span>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-end bg-secondary border-0 rounded-0 rounded-bottom m-0">
+                            <a href="{% url 'account' user_profile.user.username %}" class="dropdown-item">
+                                {% if LANGUAGE_CODE == 'ar' %}الإعدادات{% else %}Settings{% endif %}
+                            </a>
+                            <a href="/logout" class="dropdown-item">
+                                {% if LANGUAGE_CODE == 'ar' %}تسجيل الخروج{% else %}Log Out{% endif %}
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            <!-- Navbar End -->
+
+
+
+
+
+
+
+
+
+            <!-- Groups  Start -->
+            <div class="container-fluid pt-4 px-4">
+                <div class="bg-secondary rounded p-1">
+                    <div class="col-12">
+                        <div class="bg-secondary rounded h-100 p-4">
+
+                            <div
+                                style="display: flex; justify-content: center; align-items: center; flex-direction: column;">
+
+                                <div class="d-none d-md-block"
+                                    style="border: #eb1616 6px solid; padding: 20px 20px; border-radius: 60%; display: flex; justify-content: center; align-items: center;">
+                                    <i class="fa fa-users" style="color: #eb1616; font-size: 40px;"></i>
+                                </div>
+                                <div class="d-block d-md-none"
+                                    style="border: #eb1616 6px solid; padding: 18px 18px; border-radius: 60%; display: flex; justify-content: center; align-items: center;">
+                                    <i class="fa fa-users" style="color: #eb1616; font-size: 30px;"></i>
+                                </div>
+
+                                <div class="mt-2 d-none d-md-block"
+                                    style="display: flex; align-items: center; color: #eb1616; font-size: 30px; font-weight: 1000;">
+                                    {{ group.title }}
+                                </div>
+                                <div class="mt-2 d-block d-md-none"
+                                    style="display: flex; align-items: center; color: #eb1616; font-size: 20px; font-weight: 1000;">
+                                    {{ group.title }}
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="container-fluid pt-4 px-4">
+                <div class="bg-secondary rounded p-1">
+
+                    <div class="col-12" style="overflow: hidden;">
+                        <div class="bg-secondary rounded h-100 p-2 p-md-4">
+
+                            <ul class="nav nav-pills mb-4" id="pills-tab" role="tablist">
+                                <li class="nav-item p-2" role="presentation" style="width: 50%;">
+                                    <button class="nav-link w-100 active" id="pills-home-tab" data-bs-toggle="pill"
+                                        data-bs-target="#group" type="button" role="tab" aria-controls="pills-home"
+                                        aria-selected="true">
+                                        {% if LANGUAGE_CODE == 'ar' %}
+                                        المجموعة
+                                        {% else %}
+                                        Group
+                                        {% endif %}
+                                    </button>
+                                </li>
+                                <li class="nav-item p-2" role="presentation" style="width: 50%;">
+                                    <button class="nav-link w-100 " id="pills-profile-tab" data-bs-toggle="pill"
+                                        data-bs-target="#settings" type="button" role="tab"
+                                        aria-controls="pills-profile" aria-selected="false">
+                                        {% if LANGUAGE_CODE == 'ar' %}
+                                        الإعدادات
+                                        {% else %}
+                                        Settings
+                                        {% endif %}
+                                    </button>
+                                </li>
+                            </ul>
+
+
+
+
+                            <div class="tab-content" id="pills-tabContent">
+
+                                <div class="tab-pane fade show active" id="group" role="tabpanel"
+                                    aria-labelledby="pills-home-tab">
+
+                                    <div class="bg-dark p-2" style="width: 100%; height: 100%;">
+
+                                        <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                                            <li class="nav-item p-2" role="presentation" style="width: 50%;">
+                                                <button class="nav-link w-100 active" id="pills-home-tab"
+                                                    data-bs-toggle="pill" data-bs-target="#lectures" type="button"
+                                                    role="tab" aria-controls="pills-home" aria-selected="true">
+                                                    {% if LANGUAGE_CODE == 'ar' %}
+                                                    المحاضرات
+                                                    {% else %}
+                                                    Lectures
+                                                    {% endif %}
+                                                </button>
+                                            </li>
+                                            <li class="nav-item p-2" role="presentation" style="width: 50%;">
+                                                <button class="nav-link w-100" id="pills-profile-tab"
+                                                    data-bs-toggle="pill" data-bs-target="#messages" type="button"
+                                                    role="tab" aria-controls="pills-profile" aria-selected="false">
+                                                    {% if LANGUAGE_CODE == 'ar' %}
+                                                    الرسائل
+                                                    {% else %}
+                                                    Messages
+                                                    {% endif %}
+                                                </button>
+                                            </li>
+                                        </ul>
+
+                                        <div class="tab-content" id="pills-tabContent">
+                                            <div class="tab-pane fade show active" id="lectures" role="tabpanel"
+                                                aria-labelledby="pills-home-tab">
+
+                                                <div class="container-fluid" style="padding: 0; margin: 0;">
+                                                    <div class="row">
+
+                                                        {% if group_lectures %}
+                                                        {% for lecture in group_lectures %}
+                                                        <div class="col-12 col-md-6 col-lg-4 text-center"
+                                                            style="padding: 10px;">
+                                                            <div class="lecture-card bg-secondary"
+                                                                style="padding: 15px;">
+
+                                                                <div class="card-image">
+                                                                    {% if lecture.image %}
+                                                                    <a href="{% url 'lecture' lecture.lecture_id %}">
+                                                                        <img class="img-fluid rounded"
+                                                                            src="{{lecture.image.url}}"
+                                                                            style="width: 100%; height: fit-content;">
+                                                                    </a>
+                                                                    {% else %}
+                                                                    <a href="{% url 'lecture' lecture.lecture_id %}">
+                                                                        <img class="img-fluid rounded"
+                                                                            src="/media/blank-lecture.jpeg"
+                                                                            style="width: 100%; height: 230px;">
+                                                                    </a>
+                                                                    {% endif %}
+                                                                </div>
+
+                                                                <div class="card-title mt-3" style="display: flex; justify-content: center;
+                                flex-direction: column;">
+                                                                    <a href="{% url 'lecture' lecture.lecture_id %}"
+                                                                        class="h4 text-primary">{{lecture.title}}</a>
+                                                                </div>
+
+                                                                <div class="card-info border-top pt-3"
+                                                                    style="display: flex; flex-direction: column;">
+                                                                    <div
+                                                                        style="display: flex; justify-content: space-between; align-items: center; margin: 7px 0px;">
+                                                                        <button type="button"
+                                                                            class="btn btn-square btn-outline-primary"
+                                                                            style="cursor:default;">
+                                                                            <i class="fa fa-clock"
+                                                                                style="font-size: 20px;"></i>
+                                                                        </button>
+                                                                        <span>{{lecture.created_at|date:"j F"}}</span>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="dropdown">
+                                                                    <button class="btn btn-outline-primary w-100 m-2"
+                                                                        type="button" data-bs-toggle="dropdown">
+                                                                        {% if LANGUAGE_CODE == 'ar' %}
+                                                                        حذف
+                                                                        {% else %}
+                                                                        Delete
+                                                                        {% endif %}
+                                                                        <i class="fa fa-trash"
+                                                                            style="font-size: 18px; margin-left: 10px;"></i>
+                                                                    </button>
+
+                                                                    <div class="dropdown-menu bg-secondary border-0"
+                                                                        style="width: 100%; padding: 10px">
+                                                                        <span>
+                                                                            {% if LANGUAGE_CODE == 'ar' %}
+                                                                            هل أنت متأكد أنك تريد حذف هذه المحاضرة؟
+                                                                            {% else %}
+                                                                            Are You Sure You Want To Delete This
+                                                                            Lecture?
+                                                                            {% endif %}
+                                                                        </span>
+
+                                                                        <form action="/dashboard/group-functions"
+                                                                            method="POST">
+                                                                            {% csrf_token %}
+                                                                            <input type="hidden" hidden name="type"
+                                                                                value="remove-lecture">
+                                                                            <input type="hidden" hidden name="group-id"
+                                                                                value="{{group.id}}">
+                                                                            <input type="hidden" hidden
+                                                                                name="lecture-id"
+                                                                                value="{{lecture.lecture_id}}">
+                                                                            <button class="btn btn-primary w-100 mt-4"
+                                                                                type="submit">
+                                                                                {% if LANGUAGE_CODE == 'ar' %}
+                                                                                تأكيد
+                                                                                {% else %}
+                                                                                Confirm
+                                                                                {% endif %}
+                                                                            </button>
+                                                                        </form>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        {% endfor %}
+
+                                                        {% else %}
+                                                        <div class="mt-3"
+                                                            style="display: flex; justify-content: center;">
+                                                            <div class="p-2"
+                                                                style="width: 100%; display: flex; align-items: center; justify-content: center;">
+                                                                <div
+                                                                    style="height: 100%; display: flex;  align-items: center; justify-content: center; padding: 50px 0px;">
+                                                                    <h6 class="mb-0">
+                                                                        {% if LANGUAGE_CODE == 'ar' %}
+                                                                        لا توجد محاضرات في هذه المجموعة بعد.
+                                                                        {% else %}
+                                                                        There isn't any lectures in this group yet.
+                                                                        {% endif %}
+                                                                    </h6>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        {% endif %}
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                            <div class="tab-pane fade" id="messages" role="tabpanel"
+                                                aria-labelledby="pills-profile-tab">
+
+                                                {% if messages %}
+                                                {% for x in messages %}
+                                                <div class="bg-secondary message-item mt-3"
+                                                    style="display: flex; flex-direction: column;">
+
+                                                    <div class="p-2"
+                                                        style="display: flex; justify-content: space-between;">
+                                                        <div
+                                                            style="display: flex; align-items: center; flex-direction: row;">
+                                                            <div class="me-3">
+                                                                {% if x.image %}
+                                                                <img class="rounded-circle flex-shrink-0"
+                                                                    src="{{x.image.url}}" alt=""
+                                                                    style="width: 40px; height: 40px;">
+                                                                {% else %}
+                                                                <img class="rounded-circle flex-shrink-0"
+                                                                    src="{% static 'blank-profile-picture.jpg' %}"
+                                                                    alt="" style="width: 40px; height: 40px;">
+                                                                {% endif %}
+                                                            </div>
+
+                                                            <div class="mt-1"
+                                                                style="height: 100%; display: flex; flex-direction: column; ">
+                                                                <h6 class="mb-0"><a href="/profile/{{x.user.username}}">
+                                                                        {{x.user_name}}</a>
+                                                                </h6>
+                                                                <h8 class="mb-0">
+                                                                    {{x.created_at|date:"j F"}}
+                                                                </h8>
+                                                            </div>
+                                                        </div>
+                                                        <div class="p-2">
+                                                            <form action="/dashboard/group-functions" method="POST">
+                                                                {% csrf_token %}
+                                                                <input type="hidden" hidden name="type"
+                                                                    value="delete-message">
+                                                                <input type="hidden" hidden name="group-id"
+                                                                    value="{{group.id}}">
+                                                                <input type="hidden" hidden name="message-id"
+                                                                    value="{{x.message_id}}">
+                                                                <button class="btn btn-outline-primary" type="submit">
+                                                                    <i class="fa fa-trash" style="font-size: 17px;"></i>
+                                                                </button>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="p-2" style="width: 100%;">
+                                                        {{x.message}}
+                                                    </div>
+
+                                                    {% if x.message_image %}
+                                                    <div
+                                                        style="margin: 15px 0px; width: 100%; display: flex; justify-content: center; align-items: center;">
+                                                        <img src="{{x.message_image.url}}" alt=""
+                                                            class="d-none d-md-block"
+                                                            style="max-width: 90%; width: fit-content; height: fit-content;">
+                                                        <img src="{{x.message_image.url}}" alt=""
+                                                            class="d-block d-md-none"
+                                                            style="width: 80%; height: fit-content;">
+                                                    </div>
+                                                    {% endif %}
+
+                                                </div>
+                                                {% endfor %}
+                                                {% else %}
+                                                <div class="mt-3" style="display: flex; justify-content: center;">
+                                                    <div class="p-2"
+                                                        style="width: 100%; display: flex; align-items: center; justify-content: center;">
+                                                        <div
+                                                            style="height: 100%; display: flex;  align-items: center; justify-content: center; padding: 50px 0px;">
+                                                            <h6 class="mb-0">
+                                                                {% if LANGUAGE_CODE == 'ar' %}
+                                                                لا توجد رسائل في هذه المجموعة بعد.
+                                                                {% else %}
+                                                                There isn't any messages in this group yet.
+                                                                {% endif %}
+                                                            </h6>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                {% endif %}
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+
+                                <div class="tab-pane fade show" id="settings" role="tabpanel"
+                                    aria-labelledby="pills-home-tab">
+
+                                    <div class="bg-dark p-2" style="width: 100%; height: 100%;">
+
+                                        <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                                            <li class="nav-item p-2" role="presentation" style="width: 100%;">
+                                                <button class="nav-link w-100 active" id="pills-home-tab"
+                                                    data-bs-toggle="pill" data-bs-target="#group-settings" type="button"
+                                                    role="tab" aria-controls="pills-home" aria-selected="true">
+                                                    {% if LANGUAGE_CODE == 'ar' %}
+                                                    الاعدادات
+                                                    {% else %}
+                                                    Settings
+                                                    {% endif %}
+                                                </button>
+                                            </li>
+                                            <li class="nav-item p-2" role="presentation" style="width: 50%;">
+                                                <button class="nav-link w-100" id="pills-profile-tab"
+                                                    data-bs-toggle="pill" data-bs-target="#group-add-lecture"
+                                                    type="button" role="tab" aria-controls="pills-profile"
+                                                    aria-selected="false">
+                                                    {% if LANGUAGE_CODE == 'ar' %}
+                                                    إضافة محاضرة
+                                                    {% else %}
+                                                    Add Lecture
+                                                    {% endif %}
+                                                </button>
+                                            </li>
+                                            <li class="nav-item p-2" role="presentation" style="width: 50%;">
+                                                <button class="nav-link w-100" id="pills-profile-tab"
+                                                    data-bs-toggle="pill" data-bs-target="#group-add-message"
+                                                    type="button" role="tab" aria-controls="pills-profile"
+                                                    aria-selected="false">
+                                                    {% if LANGUAGE_CODE == 'ar' %}
+                                                    رسالة جديدة
+                                                    {% else %}
+                                                    New Message
+                                                    {% endif %}
+                                                </button>
+                                            </li>
+                                            <li class="nav-item p-2" role="presentation" style="width: 50%;">
+                                                <button class="nav-link w-100" id="pills-profile-tab"
+                                                    data-bs-toggle="pill" data-bs-target="#group-add-student"
+                                                    type="button" role="tab" aria-controls="pills-profile"
+                                                    aria-selected="false">
+                                                    {% if LANGUAGE_CODE == 'ar' %}
+                                                    إضافة طالب
+                                                    {% else %}
+                                                    Add Student
+                                                    {% endif %}
+                                                </button>
+                                            </li>
+
+                                            <li class="nav-item p-2" role="presentation" style="width: 50%;">
+                                                <button class="nav-link w-100" id="pills-profile-tab"
+                                                    data-bs-toggle="pill" data-bs-target="#group-students" type="button"
+                                                    role="tab" aria-controls="pills-profile" aria-selected="false">
+                                                    {% if LANGUAGE_CODE == 'ar' %}
+                                                    طلاب المجموعة
+                                                    {% else %}
+                                                    Group Students
+                                                    {% endif %}
+                                                </button>
+                                            </li>
+
+                                            <li class="nav-item p-2" role="presentation" style="width: 50%;">
+                                                <button class="nav-link w-100" id="pills-profile-tab"
+                                                    data-bs-toggle="pill" data-bs-target="#group-requests" type="button"
+                                                    role="tab" aria-controls="pills-profile" aria-selected="false">
+                                                    {% if LANGUAGE_CODE == 'ar' %}
+                                                    طلبات المجموعة
+                                                    {% else %}
+                                                    Group Requests
+                                                    {% endif %}
+                                                </button>
+                                            </li>
+
+                                            <li class="nav-item p-2" role="presentation" style="width: 50%;">
+                                                <button class="nav-link w-100" id="pills-profile-tab"
+                                                    data-bs-toggle="pill" data-bs-target="#group-link" type="button"
+                                                    role="tab" aria-controls="pills-profile" aria-selected="false">
+                                                    {% if LANGUAGE_CODE == 'ar' %}
+                                                    روابط المجموعة
+                                                    {% else %}
+                                                    Group Links
+                                                    {% endif %}
+                                                </button>
+                                            </li>
+                                        </ul>
+
+
+                                        <div class="tab-content" id="pills-tabContent">
+
+
+                                            <div class="tab-pane fade show active" id="group-settings" role="tabpanel"
+                                                aria-labelledby="pills-profile-tab">
+
+                                                <div class="bg-secondary message-item mt-3 p-3"
+                                                    style="display: flex; flex-direction: column;">
+
+                                                    <form action="/dashboard/group-functions" method="POST">
+                                                        {% csrf_token %}
+                                                        <input type="hidden" hidden name="type" value="settings">
+                                                        <input type="hidden" hidden name="group-id"
+                                                            value="{{group.id}}">
+
+                                                        <div class="form-floating">
+                                                            <input type="text" name="group-name" class="form-control"
+                                                                id="floatingInput"
+                                                                placeholder="{% if LANGUAGE_CODE == 'ar' %}اسم المجموعة{% else %}Group Name{% endif %}"
+                                                                value="{{group.title}}">
+                                                            <label for="floatingInput">{% if LANGUAGE_CODE == 'ar' %}اسم
+                                                                المجموعة{% else %}Group Name{% endif %}</label>
+                                                        </div>
+
+                                                        <div class="form-floating mt-3">
+                                                            <select class="form-select" id="floatingSelect"
+                                                                aria-label="{% if LANGUAGE_CODE == 'ar' %}اختيار السنة الدراسية{% else %}Floating label select example{% endif %}"
+                                                                name="group-year">
+                                                                <option selected value="{{group.year}}"
+                                                                    style="text-transform: capitalize;">
+                                                                    {% if LANGUAGE_CODE == 'ar' %}
+                                                                    {{group.year}} الثانوية
+                                                                    {% else %}
+                                                                    {{group.year}} Secondary
+                                                                    {% endif %}
+                                                                </option>
+                                                                <option value="first">
+                                                                    {% if LANGUAGE_CODE == 'ar' %}الأولى{% else %}First{% endif %}
+                                                                    {% if LANGUAGE_CODE == 'ar' %}ثانوية{% else %}Secondary{% endif %}
+                                                                </option>
+                                                                <option value="second">
+                                                                    {% if LANGUAGE_CODE == 'ar' %}الثانية{% else %}Second{% endif %}
+                                                                    {% if LANGUAGE_CODE == 'ar' %}ثانوية{% else %}Secondary{% endif %}
+                                                                </option>
+                                                                <option value="third">
+                                                                    {% if LANGUAGE_CODE == 'ar' %}الثالثة{% else %}Third{% endif %}
+                                                                    {% if LANGUAGE_CODE == 'ar' %}ثانوية{% else %}Secondary{% endif %}
+                                                                </option>
+                                                            </select>
+                                                            <label
+                                                                for="floatingSelect">{% if LANGUAGE_CODE == 'ar' %}السنة
+                                                                الدراسية{% else %}School Year{% endif %}</label>
+                                                        </div>
+
+                                                        <button class="btn btn-outline-success w-100 mt-4"
+                                                            type="submit">{% if LANGUAGE_CODE == 'ar' %}حفظ
+                                                            التغييرات{% else %}Save Changes{% endif %}</button>
+                                                    </form>
+
+                                                    <div class="dropdown mt-5" style="width: 100%;">
+                                                        <button class="btn btn-outline-primary w-100" type="button"
+                                                            data-bs-toggle="dropdown">
+                                                            {% if LANGUAGE_CODE == 'ar' %}حذف المجموعة{% else %}Delete
+                                                            Group{% endif %}
+                                                            <i class="fa fa-trash"
+                                                                style="font-size: 18px; margin-left: 10px;"></i>
+                                                        </button>
+
+                                                        <div class="dropdown-menu bg-secondary border-0"
+                                                            style="width: 100%; padding: 10px">
+                                                            <span>{% if LANGUAGE_CODE == 'ar' %}هل أنت متأكد أنك تريد
+                                                                حذف هذه المجموعة؟{% else %}Are You Sure You Want To
+                                                                Delete This Group?{% endif %}</span>
+
+                                                            <form action="/dashboard/group-functions" method="POST">
+                                                                {% csrf_token %}
+                                                                <input type="hidden" hidden name="type" value="delete">
+                                                                <input type="hidden" hidden name="group-id"
+                                                                    value="{{group.id}}">
+                                                                <button class="btn btn-warning w-100 mt-4"
+                                                                    type="submit">{% if LANGUAGE_CODE == 'ar' %}تأكيد{% else %}Confirm{% endif %}</button>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+
+
+                                            <div class="tab-pane fade" id="group-add-lecture" role="tabpanel"
+                                                aria-labelledby="pills-home-tab">
+
+                                                <div class="container-fluid" style="padding: 0; margin: 0;">
+                                                    <div class="row">
+
+                                                        {% if lectures_that_isnt_in_the_group %}
+                                                        {% for x in lectures_that_isnt_in_the_group %}
+                                                        <div class="col-12 col-md-6 col-lg-4 text-center"
+                                                            style="padding: 10px;">
+                                                            <div class="lecture-card bg-secondary"
+                                                                style="padding: 15px;">
+
+                                                                <div class="card-image">
+                                                                    {% if x.image %}
+                                                                    <a href="{% url 'lecture' x.id %}">
+                                                                        <img class="img-fluid rounded"
+                                                                            src="{{x.image.url}}"
+                                                                            style="width: 100%; height: fit-content;">
+                                                                    </a>
+                                                                    {% else %}
+                                                                    <a href="{% url 'lecture' x.id %}">
+                                                                        <img class="img-fluid rounded"
+                                                                            src="/media/blank-lecture.jpeg"
+                                                                            style="width: 100%; height: 230px;">
+                                                                    </a>
+                                                                    {% endif %}
+                                                                </div>
+
+                                                                <div class="card-title mt-3"
+                                                                    style="display: flex; justify-content: center; flex-direction: column;">
+                                                                    <a href="{% url 'lecture' x.id %}"
+                                                                        class="h4 text-primary">{{x.title}}</a>
+                                                                </div>
+
+                                                                <div class="card-info border-top pt-3"
+                                                                    style="display: flex;">
+                                                                    <div class="dropdown" style="width: 100%;">
+                                                                        <button class="btn btn-outline-primary w-100"
+                                                                            type="button" data-bs-toggle="dropdown">
+                                                                            {% if LANGUAGE_CODE == 'ar' %}أضف{% else %}Add{% endif %}
+                                                                            <i class="fa fa-plus"
+                                                                                style="font-size: 18px; margin-left: 10px;"></i>
+                                                                        </button>
+
+                                                                        <div class="dropdown-menu bg-secondary border-0"
+                                                                            style="width: 100%; padding: 10px">
+                                                                            <span>
+                                                                                {% if LANGUAGE_CODE == 'ar' %}هل أنت
+                                                                                متأكد أنك تريد إضافة هذه
+                                                                                المحاضرة؟{% else %}Are You Sure You Want
+                                                                                To Add This Lecture?{% endif %}
+                                                                            </span>
+
+                                                                            <form action="/dashboard/group-functions"
+                                                                                method="POST">
+                                                                                {% csrf_token %}
+
+                                                                                <input type="hidden" hidden name="type"
+                                                                                    value="add-lecture">
+                                                                                <input type="hidden" hidden
+                                                                                    name="group-id"
+                                                                                    value="{{group.id}}">
+                                                                                <input type="hidden" hidden
+                                                                                    name="lecture-id" value="{{x.id}}">
+
+                                                                                <button
+                                                                                    class="btn btn-primary w-100 mt-4"
+                                                                                    type="submit">
+                                                                                    {% if LANGUAGE_CODE == 'ar' %}تأكيد{% else %}Confirm{% endif %}
+                                                                                </button>
+                                                                            </form>
+                                                                        </div>
+                                                                    </div>
+
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                        {% endfor %}
+                                                        {% else %}
+                                                        <div class="mt-3"
+                                                            style="display: flex; justify-content: center;">
+                                                            <div class="p-2"
+                                                                style="width: 100%; display: flex; align-items: center; justify-content: center;">
+                                                                <div
+                                                                    style="height: 100%; display: flex; align-items: center; justify-content: center; padding: 50px 0px;">
+                                                                    <h6 class="mb-0">
+                                                                        {% if LANGUAGE_CODE == 'ar' %}لا توجد محاضرات
+                                                                        لإضافتها{% else %}There are no lectures to
+                                                                        add{% endif %}
+                                                                    </h6>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        {% endif %}
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+
+                                            <div class="tab-pane fade" id="group-add-message" role="tabpanel"
+                                                aria-labelledby="pills-profile-tab">
+
+                                                <div class="bg-secondary message-item mt-3 p-3"
+                                                    style="display: flex; flex-direction: column;">
+
+                                                    <form action="/dashboard/group-functions" method="POST"
+                                                        enctype="multipart/form-data">
+                                                        {% csrf_token %}
+                                                        <input type="hidden" hidden name="type" value="create-message">
+                                                        <input type="hidden" hidden name="group-id"
+                                                            value="{{group.id}}">
+
+                                                        <div class="form-floating mb-3">
+                                                            <textarea class="form-control"
+                                                                placeholder="{% if LANGUAGE_CODE == 'ar' %}رسالة{% else %}Message{% endif %}"
+                                                                id="floatingTextarea" style="height: 200px;"
+                                                                name="message"></textarea>
+                                                            <label
+                                                                for="floatingTextarea">{% if LANGUAGE_CODE == 'ar' %}رسالة{% else %}Message{% endif %}</label>
+                                                        </div>
+
+                                                        <div class="mb-2">
+                                                            <label for="formFile" class="form-label">
+                                                                {% if LANGUAGE_CODE == 'ar' %}صورة{% else %}Image{% endif %}
+                                                            </label>
+                                                            <input class="form-control bg-dark" type="file"
+                                                                id="formFile" name="message-image">
+                                                        </div>
+
+                                                        <button class="btn btn-outline-primary w-100 mt-4"
+                                                            type="submit">
+                                                            {% if LANGUAGE_CODE == 'ar' %}إرسال{% else %}Send{% endif %}
+                                                        </button>
+
+                                                    </form>
+
+                                                </div>
+                                            </div>
+
+
+
+                                            <div class="tab-pane fade " id="group-add-student" role="tabpanel"
+                                                aria-labelledby="pills-profile-tab">
+
+                                                {% if students_that_isnt_in_the_group %}
+                                                {% for x in students_that_isnt_in_the_group%}
+                                                <div class="bg-secondary student-item mt-3"
+                                                    style="display: flex; flex-direction: row; justify-content: space-between;">
+
+                                                    <div class="p-2"
+                                                        style="width: 100%; display: flex; align-items: center; flex-direction: row;">
+                                                        <div class="me-3">
+                                                            {% if x.image %}
+                                                            <img class="rounded-circle flex-shrink-0"
+                                                                src="{{x.image.url}}" alt=""
+                                                                style="width: 40px; height: 40px;">
+                                                            {% else %}
+                                                            <img class="rounded-circle flex-shrink-0"
+                                                                src="{% static 'blank-profile-picture.jpg' %}" alt=""
+                                                                style="width: 40px; height: 40px;">
+                                                            {% endif %}
+                                                        </div>
+
+
+                                                        <div style="height: 100%; display: flex;  align-items: center;">
+                                                            <h6 class="mb-0"><a
+                                                                    href="/profile/{{x.user.username}}">{{x.name}}</a>
+                                                            </h6>
+                                                        </div>
+                                                    </div>
+                                                    <div class="p-2">
+                                                        <form action="/dashboard/group-functions" method="POST">
+                                                            {% csrf_token %}
+                                                            <input type="hidden" hidden name="type" value="add-member">
+                                                            <input type="hidden" hidden name="group-id"
+                                                                value="{{group.id}}">
+                                                            <input type="hidden" hidden name="member"
+                                                                value="{{x.user.username}}">
+                                                            <button class="btn btn-outline-primary" type="submit">
+                                                                <i class="fa fa-plus" style="font-size: 17px;"></i>
+                                                            </button>
+
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                                {% endfor %}
+                                                {% else %}
+                                                {% endif %}
+
+
+                                            </div>
+
+                                            <div class="tab-pane fade " id="group-students" role="tabpanel"
+                                                aria-labelledby="pills-profile-tab">
+
+                                                {% if group_students %}
+                                                {% for x in group_students %}
+                                                <div class="bg-secondary student-item mt-3"
+                                                    style="display: flex; flex-direction: row; justify-content: space-between;">
+
+                                                    <div class="p-2"
+                                                        style="width: 100%; display: flex; align-items: center; flex-direction: row;">
+                                                        <div class="me-3">
+                                                            {% if x.image %}
+                                                            <img class="rounded-circle flex-shrink-0"
+                                                                src="{{x.image.url}}" alt=""
+                                                                style="width: 40px; height: 40px;">
+                                                            {% else %}
+                                                            <img class="rounded-circle flex-shrink-0"
+                                                                src="{% static 'blank-profile-picture.jpg' %}" alt=""
+                                                                style="width: 40px; height: 40px;">
+                                                            {% endif %}
+                                                        </div>
+
+
+                                                        <div style="height: 100%; display: flex;  align-items: center;">
+                                                            <h6 class="mb-0"><a
+                                                                    href="/profile/{{x.user.username}}">{{x.member_name}}</a>
+                                                            </h6>
+                                                        </div>
+                                                    </div>
+                                                    <div class="p-2">
+                                                        <form action="/dashboard/group-functions" method="POST">
+                                                            {% csrf_token %}
+                                                            <input type="hidden" hidden name="type"
+                                                                value="remove-member">
+                                                            <input type="hidden" hidden name="group-id"
+                                                                value="{{group.id}}">
+                                                            <input type="hidden" hidden name="member"
+                                                                value="{{x.user.username}}">
+                                                            <button class="btn btn-outline-primary" type="submit">
+                                                                <i class="fa fa-minus" style="font-size: 17px;"></i>
+                                                            </button>
+
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                                {% endfor %}
+                                                {% else %}
+                                                <div class="bg-secondary mt-3"
+                                                    style="display: flex; justify-content: center;">
+
+                                                    <div class="p-2"
+                                                        style="width: 100%; display: flex; align-items: center; justify-content: center;">
+                                                        <div
+                                                            style="height: 100%; display: flex;  align-items: center; justify-content: center; padding: 50px 0px;">
+                                                            <h6 class="mb-0">
+                                                                There isnt any students in this group yet.
+                                                            </h6>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                                {% endif %}
+
+                                            </div>
+
+
+                                            <div class="tab-pane fade " id="group-requests" role="tabpanel"
+                                                aria-labelledby="pills-profile-tab">
+
+                                                {% if new_requests %}
+                                                <hr class="dropdown-divider">
+                                                <div style="display: flex; justify-content: center; width: 100%;">
+                                                    <div>New Requests <span
+                                                            class="badge rounded-pill badge-center h-px-20 w-px-20 bg-danger"
+                                                            style="margin-left: 7px;">{{new_requests|length}}</span>
+                                                    </div>
+                                                </div>
+                                                {% for x in new_requests %}
+                                                <div class="bg-secondary student-item mt-3"
+                                                    style="display: flex; flex-direction: row; justify-content: space-between;">
+
+                                                    <div class="p-2"
+                                                        style="width: 100%; display: flex; align-items: center; flex-direction: row;">
+                                                        <div class="me-3">
+                                                            {% if x.image %}
+                                                            <img class="rounded-circle flex-shrink-0"
+                                                                src="{{x.image.url}}" alt=""
+                                                                style="width: 40px; height: 40px;">
+                                                            {% else %}
+                                                            <img class="rounded-circle flex-shrink-0"
+                                                                src="{% static 'blank-profile-picture.jpg' %}" alt=""
+                                                                style="width: 40px; height: 40px;">
+                                                            {% endif %}
+                                                        </div>
+
+
+                                                        <div style="height: 100%; display: flex;  align-items: center;">
+                                                            <h6 class="mb-0"><a
+                                                                    href="/profile/{{x.user.username}}">{{x.user_name}}
+                                                                </a>
+                                                            </h6>
+                                                        </div>
+                                                    </div>
+                                                    <div class="p-2" style="display: flex; flex-direction: row;">
+                                                        <form action="/dashboard/group-functions" method="POST"
+                                                            style="margin-right: 10px;">
+                                                            {% csrf_token %}
+                                                            <input type="hidden" hidden name="type"
+                                                                value="request-reply">
+                                                            <input type="hidden" hidden name="reply" value="accept">
+                                                            <input type="hidden" hidden name="group-id"
+                                                                value="{{group.id}}">
+                                                            <input type="hidden" hidden name="member"
+                                                                value="{{x.user.username}}">
+                                                            <button class="btn btn-outline-success" type="submit">
+                                                                <i class="fa fa-check" style="font-size: 17px;"></i>
+                                                            </button>
+
+                                                        </form>
+                                                        <form action="/dashboard/group-functions" method="POST">
+                                                            {% csrf_token %}
+                                                            <input type="hidden" hidden name="type"
+                                                                value="request-reply">
+                                                            <input type="hidden" hidden name="reply" value="decline">
+                                                            <input type="hidden" hidden name="group-id"
+                                                                value="{{group.id}}">
+                                                            <input type="hidden" hidden name="member"
+                                                                value="{{x.user.username}}">
+                                                            <button class="btn btn-outline-primary" type="submit">
+                                                                <i class="fa fa-trash" style="font-size: 17px;"></i>
+                                                            </button>
+
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                                {% endfor %}
+                                                {% endif %}
+
+                                                {% if old_requests %}
+                                                <hr class="dropdown-divider mt-4">
+                                                <div style="display: flex; justify-content: center; width: 100%;">
+                                                    <div>All Requests <span
+                                                            class="badge rounded-pill badge-center h-px-20 w-px-20 bg-danger"
+                                                            style="margin-left: 7px;">{{old_requests|length}}</span>
+                                                    </div>
+                                                </div>
+                                                {% for x in old_requests %}
+                                                <div class="bg-secondary student-item mt-3"
+                                                    style="display: flex; flex-direction: row; justify-content: space-between;">
+
+                                                    <div class="p-2"
+                                                        style="width: 100%; display: flex; align-items: center; flex-direction: row;">
+                                                        <div class="me-3">
+                                                            {% if x.image %}
+                                                            <img class="rounded-circle flex-shrink-0"
+                                                                src="{{x.image.url}}" alt=""
+                                                                style="width: 40px; height: 40px;">
+                                                            {% else %}
+                                                            <img class="rounded-circle flex-shrink-0"
+                                                                src="{% static 'blank-profile-picture.jpg' %}" alt=""
+                                                                style="width: 40px; height: 40px;">
+                                                            {% endif %}
+                                                        </div>
+
+
+                                                        <div style="height: 100%; display: flex;  align-items: center;">
+                                                            <h6 class="mb-0"><a
+                                                                    href="/profile/{{x.user.username}}">{{x.user_name}}
+                                                                </a>
+                                                            </h6>
+                                                        </div>
+                                                    </div>
+                                                    <div class="p-2" style="display: flex; flex-direction: row;">
+                                                        {% if x.reply == True %}
+                                                        <button class="btn btn-outline-success">
+                                                            Accepted
+                                                        </button>
+                                                        {% endif %}
+                                                        {% if x.reply == False %}
+                                                        <button class="btn btn-outline-danger">
+                                                            Declined
+                                                        </button>
+                                                        {% endif %}
+                                                    </div>
+                                                </div>
+                                                {% endfor %}
+                                                {% endif %}
+
+
+                                            </div>
+
+
+                                            <div class="tab-pane fade " id="group-link" role="tabpanel"
+                                                aria-labelledby="pills-profile-tab">
+
+
+
+                                                <div class="bg-secondary mt-3"
+                                                    style="display: flex; flex-direction: column; justify-content: center;">
+
+                                                    <div
+                                                        style="padding: 20px 0px; width: 100%; display: flex; align-items: center; justify-content: center; flex-direction: column;">
+                                                        <div class="mb-2"
+                                                            style="width: 100%;display: flex; justify-content: center;">
+                                                            {% if group.qr_code %}
+                                                            <img src="{{ group.qr_code.url}}" alt=""
+                                                                class="d-block d-md-none"
+                                                                style="width: 80%; height: fit-content;">
+                                                            <img src="{{ group.qr_code.url}}" alt=""
+                                                                class="d-none d-md-block"
+                                                                style="width: 350px; height: fit-content;">
+                                                            {% else %}
+                                                            <img src="{% static 'blank-lecture.jpeg' %}" alt=""
+                                                                class="d-block d-md-none"
+                                                                style="width: 80%; height: fit-content;">
+                                                            <img src="{% static 'blank-lecture.jpeg' %}" alt=""
+                                                                class="d-none d-md-block"
+                                                                style="width: 350px; height: fit-content;">
+                                                            {% endif %}
+                                                        </div>
+                                                        <div class="mb-3">
+                                                            <h3>
+                                                                {{group.code}}
+                                                            </h3>
+                                                        </div>
+                                                        <div
+                                                            style="width: 100% ; height: 50px; display: flex; justify-content: center; padding: 0px 5px;">
+                                                            <p
+                                                                style="word-break: break-all; white-space: normal; color: white; font-size: 20px;">
+                                                                http://127.0.0.1:8000/ar/group/join/{{group.link}}?method=link&page=view
+                                                            </p>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+
+
+
+
+
+
+
+                                        </div>
+
+
+
+
+                                    </div>
+
+                                </div>
+
+
+
+
+                            </div>
+
+
+                        </div>
+                    </div>
+
+
+
+                </div>
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <!-- <div class="container-fluid pt-4 px-4">
+                <div class="bg-secondary rounded p-1">
+                    <div class="col-12">
+                        <div class="bg-secondary rounded h-100 p-4">
+                            <ul class="nav nav-pills" id="pills-tab" role="tablist">
+
+                                <li class="nav-item" role="presentation" style="width: 50%;">
+                                    <button class="nav-link active w-100" id="pills-home-tab" data-bs-toggle="pill"
+                                        data-bs-target="#lecture" type="button" role="tab" aria-controls="pills-home"
+                                        aria-selected="true">Groups</button>
+                                </li>
+                                <li class="nav-item" role="presentation" style="width: 50%;">
+                                    <button class="nav-link w-100" id="pills-profile-tab" data-bs-toggle="pill"
+                                        data-bs-target="#assignment" type="button" role="tab"
+                                        aria-controls="pills-profile" aria-selected="false">New</button>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content" id="pills-tabContent">
+
+
+                                <div class="tab-pane fade show active" id="lecture" role="tabpanel"
+                                    aria-labelledby="pills-home-tab">
+                                </div>
+
+
+                                <div class="tab-pane fade" id="assignment" role="tabpanel"
+                                    aria-labelledby="pills-profile-tab">
+                                    <div class="w-100 text-center pt-2 mt-4">
+                                        <h6 class="mb-4 ">Create New Group</h6>
+                                    </div>
+
+                                    <form action="" method="POST" enctype="multipart/form-data">
+                                        {% csrf_token %}
+
+                                        <div class="form-floating">
+                                            <input type="text" name="group-name" class="form-control" id="floatingInput"
+                                                placeholder="Group Name">
+                                            <label for="floatingInput">Group Name</label>
+                                        </div>
+
+
+                                        <div class="form-floating mt-3">
+                                            <select class="form-select" id="floatingSelect"
+                                                aria-label="Floating label select example" name="group-year">
+                                                <option selected value="first">First Secondary</option>
+                                                <option value="second">Second Secondary</option>
+                                                <option value="third">Third Secondary</option>
+                                            </select>
+                                            <label for="floatingSelect">School Year</label>
+                                        </div>
+
+
+                                        <button class="btn btn-outline-primary w-100 mt-4" type="submit">Save</button>
+
+                                    </form>
+
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+
+
+            <!-- Groups End -->
+
+
+
+
+
+
+
+
+
+
+            <!-- Footer Start -->
+            <div class="container-fluid pt-4 px-4">
+                <div class="bg-secondary rounded-top p-4">
+                    <div class="row">
+                        <div class="col-12 col-sm-6 text-center text-sm-start">
+                            All Rights Reserved &copy; .
+                        </div>
+                        <div class="col-12 col-sm-6 text-center text-sm-end">
+
+                            Developed By <a href="https://www.facebook.com/bondok.emad" style="font-size: larger;">Mena
+                                Emad</a>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Footer End -->
+
+
+        </div>
+        <!-- Content End -->
+
+
+
+
+
+        <!-- Back to Top -->
+        <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+    </div>
+</body>
+{% endblock content %}

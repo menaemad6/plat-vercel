@@ -1,0 +1,344 @@
+{% extends "base-dark.html" %}
+{% load static %}
+
+
+{% if LANGUAGE_CODE == 'ar' %}
+{% block title_ar %}لوحة التحكم{% endblock title_ar %}
+{% else %}
+{% block title %}Dashboard{% endblock title %}
+{% endif %}
+
+
+{% block content%}
+
+<body>
+    <div class="container-fluid position-relative d-flex p-0">
+
+        <!-- Spinner Start -->
+        <div id="spinner"
+            class="show bg-dark position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+            <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+        <!-- Spinner End -->
+
+
+        <!-- Sidebar Start -->
+        <div class="sidebar pe-4 pb-3" style="overflow-y:hidden;">
+            <nav class="navbar bg-secondary navbar-dark">
+                <a href="/dashboard" class="navbar-brand mx-4 mb-3">
+                    <h3 class="text-primary"><i class="fa fa-user-edit me-2"></i>
+                        {% if LANGUAGE_CODE == 'ar' %}لوحة التحكم{% else %}Dashboard{% endif %}
+                    </h3>
+                </a>
+                <div class="d-flex align-items-center ms-4 mb-4">
+                    <div class="position-relative">
+                        {% if user_profile.image %}
+                        <img class="rounded-circle" src="{{user_profile.image.url}}" alt=""
+                            style="width: 40px; height: 40px;">
+                        {% else %}
+                        <img class="rounded-circle" src="{% static 'images/default-profile-image.jpg' %}" alt=""
+                            style="width: 40px; height: 40px;">
+                        {% endif %}
+
+                        <div
+                            class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1">
+                        </div>
+                    </div>
+                    <div class="ms-3">
+                        <h6 class="mb-0">{{user_profile.name}}</h6>
+                        {% if user_profile.instructor == True %}
+                        <span>{% if LANGUAGE_CODE == 'ar' %}مدرس{% else %}Instructor{% endif %}</span>
+                        {% else %}
+                        <span>{% if LANGUAGE_CODE == 'ar' %}طالب{% else %}Student{% endif %}</span>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="navbar-nav w-100">
+                    <a href="{% url 'dashboard-page' %}" class="nav-item nav-link"><i
+                            class="fa fa-tachometer-alt me-2"></i>
+                        {% if LANGUAGE_CODE == 'ar' %}لوحة التحكم{% else %}Dashboard{% endif %}
+                    </a>
+
+                    <a href="{% url 'dashboard-sales' %}" class="nav-item nav-link "><i
+                            class="fa fa-money-bill me-2"></i>
+                        {% if LANGUAGE_CODE == 'ar' %}المبيعات{% else %}Sales{% endif %}
+                    </a>
+
+                    <a href="{% url 'dashboard-codes' %}" class="nav-item nav-link "><i class="fa fa-barcode me-2"></i>
+                        {% if LANGUAGE_CODE == 'ar' %}الاكواد{% else %}Codes{% endif %}
+                    </a>
+                    <a href="{% url 'dashboard-lectures' %}" class="nav-item nav-link"><i class="fa fa-video me-2"></i>
+                        {% if LANGUAGE_CODE == 'ar' %}المحاضرات{% else %}Lectures{% endif %}
+                    </a>
+
+                    <a href="{% url 'dashboard-upload-page' %}" class="nav-item nav-link "><i
+                            class="fa fa-upload me-2"></i>
+                        {% if LANGUAGE_CODE == 'ar' %}تحميل{% else %}Upload{% endif %}
+                    </a>
+
+                    <a href="{% url 'dashboard-groups' %}" class="nav-item nav-link"><i class="fa fa-users me-2"></i>
+                        {% if LANGUAGE_CODE == 'ar' %}المجموعات{% else %}Groups{% endif %}
+                    </a>
+
+                    <a href="{% url 'dashboard-chapters' %}" class="nav-item nav-link ">
+                        <i class="fa fa-folder me-2"></i>
+                        {% if LANGUAGE_CODE == 'ar' %}الفصول{% else %}Chapters{% endif %}
+                    </a>
+
+                    <a href="/dashboard/assignments" class="nav-item nav-link "><i class="fa fa-file me-2"></i>
+                        {% if LANGUAGE_CODE == 'ar' %}التكليفات{% else %}Assignments{% endif %}
+                    </a>
+
+
+                    <a href="{% url 'dashboard-questions' %}" class="nav-item nav-link active"><i
+                            class="fa fa-question me-2"></i>
+                        {% if LANGUAGE_CODE == 'ar' %}أسئلة{% else %}Questions{% endif %}
+                    </a>
+
+
+                    <a href="{% url 'dashboard-students' %}" class="nav-item nav-link "><i class="fa fa-user me-2"></i>
+                        {% if LANGUAGE_CODE == 'ar' %}الطلاب{% else %}Students{% endif %}
+                    </a>
+
+                    <a href="{% url 'dashboard-themes' %}" class="nav-item nav-link "><i
+                            class="fa fa-paint-brush me-2"></i>
+                        {% if LANGUAGE_CODE == 'ar' %}الثيمات{% else %}Themes{% endif %}
+                    </a>
+
+                </div>
+            </nav>
+        </div>
+        <!-- Sidebar End -->
+
+
+
+        <!-- Content Start -->
+        <div class="content">
+
+
+            <!-- Navbar Start -->
+            <nav class="navbar navbar-expand bg-secondary navbar-dark sticky-top px-4 py-0">
+                <a href="#" class="sidebar-toggler flex-shrink-0 me-4">
+                    <i class="fa fa-bars"></i>
+                </a>
+                <a href="/" class="navbar-brand d-flex ">
+                    <h2 class="text-primary mb-0"><i class="fa fa-home"></i></h2>
+                </a>
+
+                <div class="navbar-nav align-items-center ms-auto">
+
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                            {% if user_profile.image %}
+                            <img class="rounded-circle me-lg-2" src="{{user_profile.image.url}}" alt=""
+                                style="width: 40px; height: 40px;">
+                            {% else %}
+                            <img class="rounded-circle me-lg-2" src="{% static 'images/default-profile-image.jpg' %}"
+                                alt="" style="width: 40px; height: 40px;">
+                            {% endif %}
+
+                            <span class="d-none d-lg-inline-flex">
+                                {% if LANGUAGE_CODE == 'ar' %}{{user_profile.name}}{% else %}{{user_profile.name}}{% endif %}
+                            </span>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-end bg-secondary border-0 rounded-0 rounded-bottom m-0">
+                            <a href="{% url 'account' user_profile.user.username %}" class="dropdown-item">
+                                {% if LANGUAGE_CODE == 'ar' %}الإعدادات{% else %}Settings{% endif %}
+                            </a>
+                            <a href="/logout" class="dropdown-item">
+                                {% if LANGUAGE_CODE == 'ar' %}تسجيل الخروج{% else %}Log Out{% endif %}
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            <!-- Navbar End -->
+
+
+
+            <!-- Questions Start -->
+            <div class="container-fluid pt-2 px-2">
+                <div class="row rounded mx-0">
+
+                    <div class="col-12" id="questions">
+                        <div class="h-100 bg-secondary rounded p-4">
+                            <div class="d-flex align-items-center justify-content-between mb-2">
+                                <h6 class="mb-0">{% if LANGUAGE_CODE == 'ar' %}الأسئلة{% else %}Questions{% endif %}
+                                </h6>
+                            </div>
+
+                            {% if new_questions %}
+                            <div class="border-bottom mt-4 mb-4 pb-2"
+                                style="width: 100%; justify-content: center; display: flex;">
+                                <h4>{% if LANGUAGE_CODE == 'ar' %}أسئلة جديدة{% else %}New Questions{% endif %}</h4>
+                            </div>
+                            {% endif %}
+
+                            {% if new_questions %}
+                            {% for x in new_questions %}
+                            <div class="d-flex align-items-center border-bottom py-3" style="overflow: hidden;"
+                                id="question">
+                                {% if x.user_image %}
+                                <img class="rounded-circle flex-shrink-0" src="{{x.user_image.url}}" alt=""
+                                    style="width: 40px; height: 40px;">
+                                {% else %}
+                                <img class="rounded-circle flex-shrink-0" src="{% static 'blank-profile-picture.jpg' %}"
+                                    alt="" style="width: 40px; height: 40px;">
+                                {% endif %}
+
+                                <div class="w-100 ms-3">
+                                    <div class="d-flex w-100 justify-content-between">
+                                        <a href="{% url 'main' x.user.username %}"
+                                            style="display: flex; flex-direction: row;">
+                                            <h6 class="mb-0">{{x.user_name}}</h6>
+                                            <span class="ms-2">
+                                                {% if x.replyed %}
+                                                <i class="fa-solid fa-circle-check fa-beat-fade text-success"
+                                                    style="font-size: 20px;"></i>
+                                                {% else %}
+                                                <i class="fa-solid fa-circle-xmark fa-beat-fade"
+                                                    style="font-size: 20px;"></i>
+                                                {% endif %}
+                                            </span>
+                                        </a>
+                                        <small>{{x.created_at|date:"SHORT_DATE_FORMAT"}}</small>
+                                    </div>
+                                    <div class="d-flex w-100 justify-content-between">
+                                        <span class="mt-2 mb-2">{{x.question}}</span>
+                                        <form action="/questions-functions" method="POST">
+                                            {% csrf_token %}
+                                            <input type="hidden" value="delete-question" name="function-type" hidden />
+                                            <input type="hidden" value="{{x.question_id}}" name="question-id" hidden />
+                                            <button type="submit" class="btn btn-sm">
+                                                <i class="fa fa-times"></i>
+                                            </button>
+                                        </form>
+                                    </div>
+                                    <form action="/questions-functions" method="POST" class="w-100"
+                                        enctype="multipart/form-data">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="function-type" value="send-reply" hidden />
+                                        <input type="hidden" name="question-id" value="{{x.question_id}}" hidden />
+                                        <div class="form-floating">
+                                            <textarea class="form-control" name="reply"
+                                                placeholder="{% if LANGUAGE_CODE == 'ar' %}اترك تعليقاً هنا{% else %}Leave a comment here{% endif %}"
+                                                id="floatingTextarea" style="height: 90px;"></textarea>
+                                            <label
+                                                for="floatingTextarea">{% if LANGUAGE_CODE == 'ar' %}رد{% else %}Reply{% endif %}</label>
+                                            <button class="btn btn-primary w-100"
+                                                type="submit">{% if LANGUAGE_CODE == 'ar' %}رد{% else %}Reply{% endif %}</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            {% endfor %}
+                            {% endif %}
+
+                            {% if old_questions %}
+                            <div class="border-bottom mt-5 mb-3 pb-2"
+                                style="width: 100%; justify-content: center; display: flex;">
+                                <h4>{% if LANGUAGE_CODE == 'ar' %}جميع الأسئلة{% else %}All Questions{% endif %}</h4>
+                            </div>
+                            {% endif %}
+
+                            {% for x in old_questions %}
+                            <div class="d-flex align-items-center border-bottom py-3" style="overflow: hidden;"
+                                id="question">
+                                {% if x.user_image %}
+                                <img class="rounded-circle flex-shrink-0" src="{{x.user_image.url}}" alt=""
+                                    style="width: 40px; height: 40px;">
+                                {% else %}
+                                <img class="rounded-circle flex-shrink-0" src="{% static 'blank-profile-picture.jpg' %}"
+                                    alt="" style="width: 40px; height: 40px;">
+                                {% endif %}
+
+                                <div class="w-100 ms-3">
+                                    <div class="d-flex w-100 justify-content-between">
+                                        <a href="{% url 'main' x.user.username %}"
+                                            style="display: flex; flex-direction: row;">
+                                            <h6 class="mb-0">{{x.user_name}}</h6>
+                                            <span class="ms-2">
+                                                {% if x.replyed %}
+                                                <i class="fa-solid fa-circle-check fa-beat-fade text-success"
+                                                    style="font-size: 20px;"></i>
+                                                {% else %}
+                                                <i class="fa-solid fa-circle-xmark fa-beat-fade"
+                                                    style="font-size: 20px;"></i>
+                                                {% endif %}
+                                            </span>
+                                        </a>
+                                        <small>{{x.created_at|date:"SHORT_DATE_FORMAT"}}</small>
+                                    </div>
+                                    <div class="d-flex w-100 justify-content-between">
+                                        <span class="mt-2 mb-2">{{x.question}}</span>
+                                        <form action="/questions-functions" method="POST">
+                                            {% csrf_token %}
+                                            <input type="hidden" value="delete-question" name="function-type" hidden />
+                                            <input type="hidden" value="{{x.question_id}}" name="question-id" hidden />
+                                            <button type="submit" class="btn btn-sm">
+                                                <i class="fa fa-times"></i>
+                                            </button>
+                                        </form>
+                                    </div>
+                                    <form action="/questions-functions" method="POST" class="w-100"
+                                        enctype="multipart/form-data">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="function-type" value="send-reply" hidden />
+                                        <input type="hidden" name="question-id" value="{{x.question_id}}" hidden />
+                                        <div class="form-floating">
+                                            <textarea class="form-control" name="reply"
+                                                placeholder="{% if LANGUAGE_CODE == 'ar' %}اترك تعليقاً هنا{% else %}Leave a comment here{% endif %}"
+                                                id="floatingTextarea" style="height: 90px;"></textarea>
+                                            <label
+                                                for="floatingTextarea">{% if LANGUAGE_CODE == 'ar' %}رد{% else %}Reply{% endif %}</label>
+                                            <button class="btn btn-primary w-100"
+                                                type="submit">{% if LANGUAGE_CODE == 'ar' %}رد{% else %}Reply{% endif %}</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            {% endfor %}
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <!-- Questions End -->
+
+
+            <!-- Footer Start -->
+            <div class="container-fluid pt-4 px-4">
+                <div class="bg-secondary rounded-top p-4">
+                    <div class="row">
+                        <div class="col-12 col-sm-6 text-center text-sm-start">
+                            All Rights Reserved &copy; .
+                        </div>
+                        <div class="col-12 col-sm-6 text-center text-sm-end">
+
+                            Developed By <a href="https://www.facebook.com/bondok.emad" style="font-size: larger;">Mena
+                                Emad</a>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Footer End -->
+
+        </div>
+        <!-- Content End -->
+
+
+
+
+
+        <!-- Back to Top -->
+        <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+    </div>
+
+
+</body>
+{% endblock content %}

@@ -1,0 +1,14 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+
+
+.login{
+background-image: url('/assets/images/app/stacked.svg');
+background-size: cover;
+background-repeat: no-repeat;
+width: 100%;
+height: 100%;
+}

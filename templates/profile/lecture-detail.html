@@ -1,0 +1,2231 @@
+
+{% extends "profile-layout.html" %}
+{% load static %}
+
+
+{% block head %}
+<style>
+  .bullet-active {
+    background-color: blue;
+    padding: 10px;
+    border-radius: 10px;
+    color: white;
+    font-size: 10px;
+  }
+</style>
+{% endblock head %}
+
+
+{% block content %}
+
+  <!-- Navbar Container  -->
+  <div class="container">
+    <div class="row">
+
+
+      <div class="col-12">
+        <!-- ***** Navbar ***** -->
+        <div class="background-header" style="z-index: 999; padding: 0; margin: 0;">
+          <header class="header-area header-sticky">
+            <div class="container">
+              <div class="row">
+                <div class="col-12">
+                  <nav class="main-nav" style="overflow: visible;">
+                    <!-- ***** Logo Start ***** -->
+                    <a href="index.html" class="logo">
+                      <h1>Scholar</h1>
+                    </a>
+                    <!-- ***** Logo End ***** -->
+
+
+
+                    <!-- ***** Serach Start ***** -->
+                    <!-- <div class="search-input">
+                    <form id="search" action="#">
+                      <input type="text" placeholder="Type Something" id='searchText' name="searchKeyword"
+                        onkeypress="handle" />
+                      <i class="fa fa-search"></i>
+                    </form>
+                  </div> -->
+                    <!-- ***** Serach End ***** -->
+
+
+
+                    <!-- ***** Menu Start ***** -->
+                    <ul class="nav" style="overflow: visible;">
+                      <li class="scroll-to-section"><a href="/index.html" class="active">Home</a></li>
+                      <li class="scroll-to-section"><a href="#courses">Lectures</a></li>
+                      <li class="scroll-to-section"><a href="#courses">Questions </a></li>
+
+                      <!-- if user is authenticatied  -->
+                      <li class="scroll-to-section"
+                        style=" padding: 0; margin: 0; display: flex; justify-content: center; overflow: visible;">
+
+                        <div style="width: 100%; height: fit-content;">
+                          <div class="navbar-nav flex-row align-items-center justify-content-center">
+                            <!-- User -->
+                            <div class="nav-item navbar-dropdown dropdown-user dropdown" style="width: 100%;">
+
+                              <a class="nav-link dropdown-toggle hide-arrow" style="padding: 0; width: 100%;"
+                                href="javascript:void(0);" data-bs-toggle="dropdown">
+
+                                <!-- show online dot when screen is large  -->
+                                <div class="avatar avatar-online d-none d-md-block" style=" width: 100%;">
+                                  <img src="../assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle" />
+                                </div>
+                                <!-- hide online dot when screen is small  -->
+                                <div class="avatar avatar d-md-none" style=" width: 100%;">
+                                  <img src="../assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle" />
+                                </div>
+
+                              </a>
+
+
+                              <div class="dropdown-menu dropdown-menu-end rounded"
+                                style="background-color: #f1f0fe; padding: 0;">
+                                <div>
+                                  <a class="dropdown-item" href="#"
+                                    style="border-radius: 0; padding: 10px; height: fit-content;">
+                                    <div class="d-flex">
+                                      <div class="flex-shrink-0 me-3">
+                                        <div class="avatar avatar-online">
+                                          <img src="../assets/img/avatars/1.png" alt
+                                            class="w-px-40 h-auto rounded-circle" />
+                                        </div>
+                                      </div>
+                                      <div class="flex-grow-1">
+                                        <span class="fw-semibold d-block text-black">Mena Emad</span>
+                                        <!-- <small class="text-muted">Student</small> -->
+                                      </div>
+                                    </div>
+                                  </a>
+                                </div>
+                                <div style="margin: 0; padding: 0;">
+                                  <div class="dropdown-divider" style="padding: 0; margin: 0;"></div>
+                                </div>
+                                <div style="padding: 0px; margin: 0;">
+                                  <a class="dropdown-item" style="padding: 0 10px; border-radius: 0;"
+                                    href="/html/pages-account-settings-account.html">
+                                    <i class="bx bx-user me-2 text-black"></i>
+                                    <span class="align-middle text-black">My Profile</span>
+                                  </a>
+                                </div>
+                                <div style="padding: 0px; margin: 0;">
+                                  <a class="dropdown-item" style="padding: 0 10px; border-radius: 0;" href="#">
+                                    <i class="bx bx-cog me-2 text-black"></i>
+                                    <span class="align-middle text-black">Settings</span>
+                                  </a>
+                                </div>
+                                <div style="padding: 0px; margin: 0;">
+                                  <a class="dropdown-item" style="padding: 0 10px; border-radius: 0;" href="#">
+                                    <span class="d-flex align-items-center align-middle">
+                                      <i class="flex-shrink-0 bx bx-notification me-2 text-black"></i>
+                                      <span class="flex-grow-1 align-middle text-black">Notifications</span>
+                                      <span
+                                        class="flex-shrink-0 badge badge-center rounded-pill bg-danger w-px-20 h-px-20">4</span>
+                                    </span>
+                                  </a>
+                                </div>
+                                <div style="margin: 0; padding: 0;">
+                                  <div class="dropdown-divider" style="padding: 0; margin: 0;"></div>
+                                </div>
+                                <div style="padding: 0px; margin: 0; border-radius: 0;">
+                                  <a class="dropdown-item" style="padding: 0 10px; border-radius: 0;"
+                                    href="auth-login-basic.html">
+                                    <i class="bx bx-power-off me-2 text-black"></i>
+                                    <span class="align-middle text-black">Log Out</span>
+                                  </a>
+                                </div>
+                              </div>
+                            </div>
+                            <!--/ User -->
+                          </div>
+                        </div>
+                      </li>
+                      <!-- if user is authenticatied  -->
+
+                      <!-- If user is not authenticatied  -->
+                      <li class="scroll-to-section d-block d-md-none"><a href="/register.html">Register</a></li>
+                      <div class="sec-button d-none d-md-block">
+                        <a href="/register.html">Register</a>
+                      </div>
+                      <!-- If user is not authenticatied  -->
+
+
+                    </ul>
+
+
+
+                    <a class='menu-trigger'>
+                      <span>Menu</span>
+                    </a>
+                    <!-- ***** Menu End ***** -->
+                  </nav>
+                </div>
+              </div>
+            </div>
+          </header>
+        </div>
+        <!-- ***** Navbar ***** -->
+      </div>
+
+    </div>
+  </div>
+  <!-- Navbar Container  -->
+
+
+  <!-- Layout wrapper -->
+  <div class="layout-wrapper layout-content-navbar" style="margin-top: 100px;">
+
+
+    <!-- Content wrapper -->
+    <div class="content-wrapper">
+      <!-- Content -->
+
+      <div class="container-xxl flex-grow-1 container-p-y">
+
+
+        <div class="row">
+          <div class="col-lg-12 mb-4 order-0">
+            <div class="card">
+              <div class="d-flex align-items-end row">
+
+                <div class="col-12">
+                  <div class="lecture-page-header rounded">
+                    <div class="rounded lecture-page-header-card"
+                      style=" width: 100%; height: 100%;  backdrop-filter: blur(8px);">
+                      <div class="card-body" style="padding-top: 40px;">
+                        <div class="lecture-stats">
+                          <div class="lecture-stat">
+                            <div class="lecture-diffrent">
+                              15+
+                              <i class="fa-solid fa-video" style="font-size: 18px; padding-left: 5px;"></i>
+                            </div>
+                            <div class="lecture-same">Videos</div>
+                          </div>
+
+                          <div class="lecture-stat">
+                            <div class="lecture-diffrent">
+                              4+
+                              <i class="fa-solid fa-file" style="font-size: 18px; padding-left: 5px;"></i>
+                            </div>
+                            <div class="lecture-same">Tests</div>
+                          </div>
+
+                          <div class="lecture-stat">
+                            <div class="lecture-diffrent">
+                              10+
+                              <i class="fa-solid fa-folder-closed" style="font-size: 18px; padding-left: 5px;"></i>
+                            </div>
+                            <div class="lecture-same">Attachments</div>
+                          </div>
+                        </div>
+
+                        <div class="lecture-details">
+                          <div class="lecture-title">
+                            First Lecture
+                          </div>
+                          <div class="lecture-description">
+                            Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+                            <br> Facere magnam nulla error reiciendis accusamus non ratione saepe vel.
+                            <br> Ut nam sunt accusamus deserunt harum nihil odit vero, quas id. Aspernatur!
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                            <br>Voluptas sequi recusandae hic explicabo quaerat quos provident repellendus.
+                            <br>Sed, itaque corporis?
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                            <br> Ducimus animi dolore non, cupiditate cum illo iure nostrum!
+                            <br> Modi officiis deleniti quos autem at placeat. Quibusdam
+                            <br>reprehenderit fuga soluta omnis possimus ad expedita totam
+                            <br>non at ipsam quis, mollitia odio ipsum harum laboriosam, placeat
+                            <br> voluptatibus animi ab maiores adipisci rerum recusandae.
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, rem corporis.
+                            <br>Dolores assumenda officia corrupti incidunt expedita nisi ut accusamus.
+                          </div>
+                        </div>
+
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="row purchase-card-margin" style="position: relative;">
+          <!-- Purchase Section -->
+          <div class="col-md-5 col-12  mb-4 purchase-card">
+            <div class="purchase-card-padding">
+              <div class="card" style="  backdrop-filter: blur(10px) saturate(180%);
+              -webkit-backdrop-filter: blur(10px) saturate(180%);
+              background-color: rgba(255, 255, 255, 0.575);
+              border: 1px solid rgba(209, 213, 219, 0.3);">
+                <div class="card-header d-flex align-items-center justify-content-between" style="padding: 15px;">
+                  <div class="lecture-img">
+                    <img src="/assets/img/lectures/1.jpg" class="rounded">
+                  </div>
+                </div>
+                <div class="card-body" style="padding: 15px;">
+
+                  <div class="">
+                    <form action="">
+                      <button type="button" data-bs-toggle="modal" data-bs-target="#modalToggle"
+                        class="btn btn-primary w-100">Charge</button>
+                    </form>
+                  </div>
+
+                  <div class="mt-5 p-2">
+                    <div class="d-flex justify-content-between">
+                      <div class="d-flex align-items-center">
+                        <i class="fa-solid fa-clock text-primary" style="font-size: 20px;"></i>
+                        <div style="margin-left: 10px;">Content</div>
+                      </div>
+                      <div class="d-flex align-items-center">
+                        <div>15+ Hour</div>
+                      </div>
+                    </div>
+                    <hr>
+                    <div class="d-flex justify-content-between">
+                      <div class="d-flex align-items-center">
+                        <i class="fa-solid fa-question text-primary" style="font-size: 20px;"></i>
+                        <div style="margin-left: 10px;">Total Questions</div>
+                      </div>
+                      <div class="d-flex align-items-center">
+                        <div>387+ Question</div>
+                      </div>
+                    </div>
+                  </div>
+
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--/ Purchase Section -->
+
+          <!-- Video Section -->
+          <div class="col-md-7 col-12  mb-4">
+            <div class="card">
+              <div class="card-body" style="height: fit-content;">
+                <iframe style="border-radius: 10px;" width="100%" height="500"
+                  src="https://www.youtube.com/embed/Gz2NtR-pLe8?si=sNRACLL1df9h7mT1" title="YouTube video player"
+                  frameborder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowfullscreen></iframe>
+              </div>
+              <div class="card-header d-flex align-items-center justify-content-center"
+                style="padding: 0; padding-bottom: 10px;">
+                <h4 class="card-title" style=" color: black; font-weight: bold;">First Video</h4>
+              </div>
+            </div>
+          </div>
+          <!--/ Video Section -->
+        </div>
+
+        <!-- Purchase Modal  -->
+        <div class="row">
+          <div class="col-lg-4 col-md-6">
+            <div class="mt-3">
+
+              <!-- Modal 1-->
+              <div class="modal fade" id="modalToggle" aria-labelledby="modalToggleLabel" tabindex="-1"
+                style="display: none" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="modalToggleLabel">Purchase First Lecture</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      <button type="button" data-bs-toggle="modal" data-bs-target="#modalwallet"
+                        class="btn btn-primary w-100">Pay From Wallet</button>
+                      <button type="button" data-bs-toggle="modal" data-bs-target="#modalcode"
+                        class="btn btn-primary w-100 mt-2">Pay With Code</button>
+                    </div>
+                    <div class="modal-footer">
+                      <button class="btn btn-outline-danger" data-bs-dismiss="modal" aria-label="Close">
+                        Cancel
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- Modal Wallet-->
+              <div class="modal fade" id="modalwallet" aria-hidden="true" aria-labelledby="modalwallet" tabindex="-1">
+                <div class="modal-dialog modal-dialog-centered">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="modalwallet">Purchase Lecture From Wallet</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      <div class="d-flex justify-content-center">
+                        Are you sure you want to buy (First Lecture) for 50 EGP ?
+                      </div>
+                      <div class="d-flex justify-content-center mt-2">
+                        <small>Your Wallet Credit: 5950 EGP</small>
+                      </div>
+
+                    </div>
+                    <div class="modal-footer">
+                      <button class="btn btn-outline-secondary " data-bs-target="#modalToggle" data-bs-toggle="modal"
+                        data-bs-dismiss="modal">
+                        Back
+                      </button>
+                      <form action="">
+                        <button type="submit" class="btn btn-primary"
+                          style="padding-left: 25px; padding-right: 25px;">Confrim</button>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- Modal Code-->
+              <div class="modal fade" id="modalcode" aria-hidden="true" aria-labelledby="modalcode" tabindex="-1">
+                <div class="modal-dialog modal-dialog-centered">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="modalcode">Purchase Lecture By Code</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      <form action="">
+                        <div class="mb-3">
+                          <label class="form-label" for="code">Code</label>
+                          <div class="input-group input-group-merge">
+                            <span id="code" class="input-group-text">
+                              <i class="fa-solid fa-barcode text-primary" style="font-size: 20px;"></i>
+                            </span>
+                            <input type="text" class="form-control" id="code" placeholder="Enter The Code Here" />
+                          </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary w-100">Charge</button>
+                      </form>
+                    </div>
+                    <div class="modal-footer">
+                      <button class="btn btn-outline-secondary" data-bs-target="#modalToggle" data-bs-toggle="modal"
+                        data-bs-dismiss="modal">
+                        Back
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+        <!-- Purchase Modal  -->
+
+
+        <div class="form">
+
+
+
+
+          <!-- <form id="myForm" method="get"> -->
+
+
+
+          <!-- Questions  -->
+
+
+
+          <!-- <div id="question-container">
+              <div class="question 1">
+                <input type="text" placeholder="1" name="1">
+                <button type="button" class="prev" onclick="showCard(0)">Previous</button>
+                <button type="button" class="next" onclick="showCard(1)">Next</button>
+              </div>
+
+
+              <div class="question 2" style="display: none;">
+                <input type="text" placeholder="2" name="2">
+                <button type="button" class="prev" onclick="showCard(0)">Previous</button>
+                <button type="button" class="next" onclick="showCard(2)">Next</button>
+              </div>
+              <div class="question 3" style="display: none;">
+                <input type="text" placeholder="3" name="3">
+                <button type="button" class="prev" onclick="showCard(1)">Previous</button>
+                <button type="button" class="next" onclick="showCard(3)">Next</button>
+              </div>
+              <div class="question 4" style="display: none;">
+                <input type="text" placeholder="4" name="4">
+                <button type="button" class="prev" onclick="showCard(2)">Previous</button>
+                <button type="button" class="next" onclick="showCard(3)">Next</button>
+              </div>
+            </div> -->
+
+
+          <!-- Questions  -->
+
+
+
+
+          <!-- </form> -->
+
+
+        </div>
+
+
+
+
+        <!-- Test  -->
+        <div class="row">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-body" style="padding: 15px; display: flex; flex-direction: column;">
+
+                <form id="test" method="get">
+
+                  <div class="d-flex justify-content-center">
+                    <div class="rounded" style="background-color: #f5f5f9; padding: 15px;">
+                      <p style="padding: 0; margin: 0;">Time remaining: <span id="timeLabel">02:00</span></p>
+                    </div>
+
+                  </div>
+
+                  <div class="d-flex justify-content-center mt-2">
+                    <button type="submit" class="btn btn-primary" style="width: 290px;" value="Submit">Submit</button>
+                  </div>
+
+                  <!-- <div class="d-flex justify-content-center flex-column">
+                    <div class="d-flex flex-row justify-content-center flex-wrap">
+                      <button type="submit" value="" class="btn btn-outline-primary"
+                        style="width: 140px; margin: 5px;">Previous</button>
+                      <button type="submit" value="" class="btn btn-outline-primary"
+                        style="width: 140px; margin: 5px;">Next</button>
+                    </div>
+                  </div> -->
+
+
+
+
+
+
+                  <div class="question mt-3" style="display: block;">
+                    <div class="d-flex justify-content-center flex-column">
+                      <div class="d-flex flex-row justify-content-center flex-wrap">
+                        <button type="button" class="btn btn-outline-primary" style="width: 140px; margin: 5px;"
+                          onclick="showCard(0)">Previous</button>
+                        <button type="button" class="btn btn-outline-primary" style="width: 140px; margin: 5px;"
+                          onclick="showCard(1)">Next</button>
+                      </div>
+                    </div>
+
+
+                    <div class="rounded mt-2"
+                      style="display: flex; flex-direction: column; flex-direction: column; background-color: #f5f5f9;">
+
+                      <div class=" d-flex justify-content-center mt-2 mb-2" style="color: black; font-size: 22px;">
+                        1 - Messi Or Ronaldo
+                      </div>
+                      <div class="chooses d-flex justify-content-center">
+                        <div class="container-fluid" style="padding: 20px;">
+
+                          <div class="row">
+
+                            <div class="col-12 col-md-6 col-lg-3 text-center mb-2">
+                              <div class="w-100">
+                                <input type="radio" class="btn-check mr-2" name="answer-{{question.number}}" checked
+                                  id="{{question.answer1}}" value="{{question.answer1}}" autocomplete="off" />
+                                <label class="btn btn-outline-secondary" for="{{question.answer1}}"
+                                  style="width: calc(100% - 40px)">{{question.answer1}}</label>
+                              </div>
+                            </div>
+
+                            <div class="col-12 col-md-6 col-lg-3 text-center mb-2">
+                              <input type="radio" class="btn-check mr-2" name="answer-{{question.number}}"
+                                id="{{question.answer2}}" value="{{question.answer2}}" autocomplete="off" />
+                              <label class="btn btn-outline-secondary" style="width: calc(100% - 40px)"
+                                for="{{question.answer2}}">{{question.answer2}}</label>
+                            </div>
+
+                            <div class="col-12 col-md-6 col-lg-3 text-center mb-2">
+                              <input type="radio" class="btn-check mr-2" name="answer-{{question.number}}"
+                                id="{{question.answer3}}" value="{{question.answer3}}" autocomplete="off" />
+                              <label class="btn btn-outline-secondary" style="width: calc(100% - 40px)"
+                                for="{{question.answer3}}">{{question.answer3}}</label>
+                            </div>
+
+                            <div class="col-12 col-md-6 col-lg-3 text-center mb-2">
+                              <input type="radio" class="btn-check mr-2" name="answer-{{question.number}}"
+                                id="{{question.answer4}}" value="{{question.answer4}}" autocomplete="off" />
+                              <label class="btn btn-outline-secondary" style="width: calc(100% - 40px)"
+                                for="{{question.answer4}}">{{question.answer4}}</label>
+                            </div>
+
+
+
+
+
+
+                          </div>
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+
+                  <div class="question mt-3" style="display: none;">
+                    <div class="d-flex justify-content-center flex-column">
+                      <div class="d-flex flex-row justify-content-center flex-wrap">
+                        <button type="button" class="btn btn-outline-primary" style="width: 140px; margin: 5px;"
+                          onclick="showCard(0)">Previous</button>
+                        <button type="button" class="btn btn-outline-primary" style="width: 140px; margin: 5px;"
+                          onclick="showCard(2)">Next</button>
+                      </div>
+                    </div>
+
+
+                    <div class="rounded mt-2"
+                      style="display: flex; flex-direction: column; flex-direction: column; background-color: #f5f5f9;">
+
+                      <div class=" d-flex justify-content-center mt-2 mb-2" style="color: black; font-size: 22px;">
+                        2 - Pizza Or Koshary?
+                      </div>
+                      <div class="chooses d-flex justify-content-center">
+                        <div class="container-fluid" style="padding: 20px;">
+
+                          <div class="row">
+
+                            <div class="col-12 col-md-6 col-lg-3 text-center mb-2">
+                              <div class="w-100">
+                                <input type="radio" class="btn-check mr-2" name="answer-{{question.number}}" checked
+                                  id="{{question.answer1}}" value="{{question.answer1}}" autocomplete="off" />
+                                <label class="btn btn-outline-secondary" for="{{question.answer1}}"
+                                  style="width: calc(100% - 40px)">{{question.answer1}}</label>
+                              </div>
+                            </div>
+
+                            <div class="col-12 col-md-6 col-lg-3 text-center mb-2">
+                              <input type="radio" class="btn-check mr-2" name="answer-{{question.number}}"
+                                id="{{question.answer2}}" value="{{question.answer2}}" autocomplete="off" />
+                              <label class="btn btn-outline-secondary" style="width: calc(100% - 40px)"
+                                for="{{question.answer2}}">{{question.answer2}}</label>
+                            </div>
+
+                            <div class="col-12 col-md-6 col-lg-3 text-center mb-2">
+                              <input type="radio" class="btn-check mr-2" name="answer-{{question.number}}"
+                                id="{{question.answer3}}" value="{{question.answer3}}" autocomplete="off" />
+                              <label class="btn btn-outline-secondary" style="width: calc(100% - 40px)"
+                                for="{{question.answer3}}">{{question.answer3}}</label>
+                            </div>
+
+                            <div class="col-12 col-md-6 col-lg-3 text-center mb-2">
+                              <input type="radio" class="btn-check mr-2" name="answer-{{question.number}}"
+                                id="{{question.answer4}}" value="{{question.answer4}}" autocomplete="off" />
+                              <label class="btn btn-outline-secondary" style="width: calc(100% - 40px)"
+                                for="{{question.answer4}}">{{question.answer4}}</label>
+                            </div>
+
+
+
+
+
+
+                          </div>
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+
+                  <div class="question mt-3" style="display: none;">
+                    <div class="d-flex justify-content-center flex-column">
+                      <div class="d-flex flex-row justify-content-center flex-wrap">
+                        <button type="button" class="btn btn-outline-primary" style="width: 140px; margin: 5px;"
+                          onclick="showCard(1)">Previous</button>
+                        <button type="button" class="btn btn-outline-primary" style="width: 140px; margin: 5px;"
+                          onclick="showCard(3)">Next</button>
+                      </div>
+                    </div>
+
+
+                    <div class="rounded mt-2"
+                      style="display: flex; flex-direction: column; flex-direction: column; background-color: #f5f5f9;">
+
+                      <div class=" d-flex justify-content-center mt-2 mb-2" style="color: black; font-size: 22px;">
+                        3 - Maradona Or Pele?
+                      </div>
+                      <div class="chooses d-flex justify-content-center">
+                        <div class="container-fluid" style="padding: 20px;">
+
+                          <div class="row">
+
+                            <div class="col-12 col-md-6 col-lg-3 text-center mb-2">
+                              <div class="w-100">
+                                <input type="radio" class="btn-check mr-2" name="answer-{{question.number}}" checked
+                                  id="{{question.answer1}}" value="{{question.answer1}}" autocomplete="off" />
+                                <label class="btn btn-outline-secondary" for="{{question.answer1}}"
+                                  style="width: calc(100% - 40px)">{{question.answer1}}</label>
+                              </div>
+                            </div>
+
+                            <div class="col-12 col-md-6 col-lg-3 text-center mb-2">
+                              <input type="radio" class="btn-check mr-2" name="answer-{{question.number}}"
+                                id="{{question.answer2}}" value="{{question.answer2}}" autocomplete="off" />
+                              <label class="btn btn-outline-secondary" style="width: calc(100% - 40px)"
+                                for="{{question.answer2}}">{{question.answer2}}</label>
+                            </div>
+
+                            <div class="col-12 col-md-6 col-lg-3 text-center mb-2">
+                              <input type="radio" class="btn-check mr-2" name="answer-{{question.number}}"
+                                id="{{question.answer3}}" value="{{question.answer3}}" autocomplete="off" />
+                              <label class="btn btn-outline-secondary" style="width: calc(100% - 40px)"
+                                for="{{question.answer3}}">{{question.answer3}}</label>
+                            </div>
+
+                            <div class="col-12 col-md-6 col-lg-3 text-center mb-2">
+                              <input type="radio" class="btn-check mr-2" name="answer-{{question.number}}"
+                                id="{{question.answer4}}" value="{{question.answer4}}" autocomplete="off" />
+                              <label class="btn btn-outline-secondary" style="width: calc(100% - 40px)"
+                                for="{{question.answer4}}">{{question.answer4}}</label>
+                            </div>
+
+
+
+
+
+
+                          </div>
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+
+                  <div class="question mt-3" style="display: none;">
+                    <div class="d-flex justify-content-center flex-column">
+                      <div class="d-flex flex-row justify-content-center flex-wrap">
+                        <button type="button" class="btn btn-outline-primary" style="width: 140px; margin: 5px;"
+                          onclick="showCard(2)">Previous</button>
+                        <button type="button" class="btn btn-outline-primary" style="width: 140px; margin: 5px;"
+                          onclick="showCard(3)">Next</button>
+                      </div>
+                    </div>
+
+
+                    <div class="rounded mt-2"
+                      style="display: flex; flex-direction: column; flex-direction: column; background-color: #f5f5f9;">
+
+                      <div class=" d-flex justify-content-center mt-2 mb-2" style="color: black; font-size: 22px;">
+                        4 - Mama Or Baba?
+                      </div>
+                      <div class="chooses d-flex justify-content-center">
+                        <div class="container-fluid" style="padding: 20px;">
+
+                          <div class="row">
+
+                            <div class="col-12 col-md-6 col-lg-3 text-center mb-2">
+                              <div class="w-100">
+                                <input type="radio" class="btn-check mr-2" name="answer-{{question.number}}" checked
+                                  id="{{question.answer1}}" value="{{question.answer1}}" autocomplete="off" />
+                                <label class="btn btn-outline-secondary" for="{{question.answer1}}"
+                                  style="width: calc(100% - 40px)">{{question.answer1}}</label>
+                              </div>
+                            </div>
+
+                            <div class="col-12 col-md-6 col-lg-3 text-center mb-2">
+                              <input type="radio" class="btn-check mr-2" name="answer-{{question.number}}"
+                                id="{{question.answer2}}" value="{{question.answer2}}" autocomplete="off" />
+                              <label class="btn btn-outline-secondary" style="width: calc(100% - 40px)"
+                                for="{{question.answer2}}">{{question.answer2}}</label>
+                            </div>
+
+                            <div class="col-12 col-md-6 col-lg-3 text-center mb-2">
+                              <input type="radio" class="btn-check mr-2" name="answer-{{question.number}}"
+                                id="{{question.answer3}}" value="{{question.answer3}}" autocomplete="off" />
+                              <label class="btn btn-outline-secondary" style="width: calc(100% - 40px)"
+                                for="{{question.answer3}}">{{question.answer3}}</label>
+                            </div>
+
+                            <div class="col-12 col-md-6 col-lg-3 text-center mb-2">
+                              <input type="radio" class="btn-check mr-2" name="answer-{{question.number}}"
+                                id="{{question.answer4}}" value="{{question.answer4}}" autocomplete="off" />
+                              <label class="btn btn-outline-secondary" style="width: calc(100% - 40px)"
+                                for="{{question.answer4}}">{{question.answer4}}</label>
+                            </div>
+
+
+
+
+
+
+                          </div>
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+
+
+
+                  <div id="bullet-buttons">
+                    <button type="button" class="bullet bullet-active" onclick="showCard(0)">1</button>
+                    <button type="button" class="bullet" onclick="showCard(1)">2</button>
+                    <button type="button" class="bullet" onclick="showCard(2)">3</button>
+                    <button type="button" class="bullet" onclick="showCard(3)">4</button>
+                  </div>
+
+
+
+
+
+
+                </form>
+
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Test  -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <!-- Test  -->
+        <div class="row mt-5">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-body" style="padding: 15px; display: flex; flex-direction: column;">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                <form action="" method="get">
+                  <div class="d-flex justify-content-center ">
+                    <button type="submit" class="btn btn-primary" style="width: 290px;">Submit</button>
+                  </div>
+
+                  <div class="d-flex justify-content-center flex-column">
+                    <div class="d-flex flex-row justify-content-center flex-wrap">
+                      <button type="submit" value="" class="btn btn-outline-primary"
+                        style="width: 140px; margin: 5px;">Previous</button>
+                      <button type="submit" value="" class="btn btn-outline-primary"
+                        style="width: 140px; margin: 5px;">Next</button>
+                    </div>
+                  </div>
+
+                  <div class="d-flex flex-column mt-3 rounded" style="background-color: #f5f5f9;">
+                    <div class="question d-flex justify-content-center mt-2 mb-2"
+                      style="color: black; font-size: 22px;">
+                      1 - Who is better?
+                    </div>
+                    <div class="chooses d-flex justify-content-center">
+                      <div class="container-fluid" style="padding: 20px;">
+
+                        <div class="row">
+
+                          <div class="col-12 col-md-6 col-lg-3 text-center mb-2">
+                            <div class="w-100">
+                              <input type="radio" class="btn-check mr-2" name="answer-{{question.number}}" checked
+                                id="{{question.answer1}}" value="{{question.answer1}}" autocomplete="off" />
+                              <label class="btn btn-outline-secondary" for="{{question.answer1}}"
+                                style="width: calc(100% - 40px)">{{question.answer1}}</label>
+                            </div>
+                          </div>
+
+                          <div class="col-12 col-md-6 col-lg-3 text-center mb-2">
+                            <input type="radio" class="btn-check mr-2" name="answer-{{question.number}}"
+                              id="{{question.answer2}}" value="{{question.answer2}}" autocomplete="off" />
+                            <label class="btn btn-outline-secondary" style="width: calc(100% - 40px)"
+                              for="{{question.answer2}}">{{question.answer2}}</label>
+                          </div>
+
+                          <div class="col-12 col-md-6 col-lg-3 text-center mb-2">
+                            <input type="radio" class="btn-check mr-2" name="answer-{{question.number}}"
+                              id="{{question.answer3}}" value="{{question.answer3}}" autocomplete="off" />
+                            <label class="btn btn-outline-secondary" style="width: calc(100% - 40px)"
+                              for="{{question.answer3}}">{{question.answer3}}</label>
+                          </div>
+
+                          <div class="col-12 col-md-6 col-lg-3 text-center mb-2">
+                            <input type="radio" class="btn-check mr-2" name="answer-{{question.number}}"
+                              id="{{question.answer4}}" value="{{question.answer4}}" autocomplete="off" />
+                            <label class="btn btn-outline-secondary" style="width: calc(100% - 40px)"
+                              for="{{question.answer4}}">{{question.answer4}}</label>
+                          </div>
+
+
+
+
+
+
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Test  -->
+
+
+        <!-- Settings For Instructor  -->
+        <!-- Settings -->
+        <div class="row mt-5">
+          <div class="col-12">
+            <div class="card h-100">
+              <div class="card-header d-flex align-items-center justify-content-between">
+                <h5 class="card-title m-0 me-2">Group Settings</h5>
+              </div>
+              <div class="card-body">
+                <ul class="p-0 m-0">
+
+
+                  <li class="d-flex pb-1">
+                    <button type="button" data-bs-toggle="offcanvas" data-bs-target="#settingsOffcanvas"
+                      aria-controls="offcanvasStart"
+                      style="display: flex; flex-direction: row; align-items: center; width: 100%; background-color: transparent; border: none; padding: 0;">
+                      <div class="avatar flex-shrink-0 me-3">
+                        <div class="p-2" style="background-color: #eae9e9; border-radius: 10px;">
+                          <i class="fa-solid fa-gear text-primary" style="font-size: 20px;"></i>
+                        </div>
+                      </div>
+                      <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
+                        <div class="me-2">
+                          <h6 class="mb-0">Settings</h6>
+                        </div>
+                      </div>
+                    </button>
+                  </li>
+
+
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+        <!-- Settings Offcanvas  -->
+        <div class="offcanvas offcanvas-start" tabindex="-1" id="settingsOffcanvas"
+          aria-labelledby="offcanvasStartLabel">
+          <div class="offcanvas-header">
+            <h5 id="offcanvasStartLabel" class="offcanvas-title">First Lecture Settings</h5>
+            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body  mx-0 flex-grow-0">
+
+
+
+
+
+            <ul class="p-0 m-0">
+
+
+              <!-- Settings  -->
+              <li class="d-flex mb-4 pb-1">
+                <button data-bs-target="#settings" type="button" data-bs-toggle="modal"
+                  style="display: flex; flex-direction: row; align-items: center; width: 100%; background-color: transparent; border: none; padding: 0;">
+                  <div class="avatar flex-shrink-0 me-3">
+                    <div class="p-2" style="background-color: #eae9e9; border-radius: 10px;">
+                      <i class="fa-solid fa-gear text-primary" style="font-size: 20px;"></i>
+                    </div>
+                  </div>
+                  <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
+                    <div class="me-2">
+                      <h6 class="mb-0">Settings</h6>
+                    </div>
+                  </div>
+                </button>
+              </li>
+
+              <div class="modal fade" id="settings" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="modalCenterTitle">Lecture Settings</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      <div class="row">
+                        <div class="col-12 mb-2">
+                          <img src="/assets//img//lectures/1.jpg" id="uploaded-image" class="group-image w-100 rounded"
+                            alt="">
+                        </div>
+                        <div class="col-12 mb-3">
+                          <label for="image-upload" class="form-label">Lecture Image (Thumbnail)</label>
+                          <input type="file" id="image-upload" accept="image/*" onchange="displayImage(event)"
+                            class="form-control group-image-input">
+                        </div>
+                        <div class="col-12 mb-3">
+                          <label for="name" class="form-label">Lecture Name (Title)</label>
+                          <input type="text" id="name" class="form-control" placeholder="Enter Name" />
+                        </div>
+                        <div class="col-12 mb-3">
+                          <select class="form-select" id="exampleFormControlSelect1"
+                            aria-label="Default select example">
+                            <option selected>Selected</option>
+                            <option value="1">First Secondary</option>
+                            <option value="2">Second Secondary</option>
+                            <option value="3">Third Secondary</option>
+                          </select>
+                        </div>
+
+                      </div>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                        Close
+                      </button>
+                      <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- Settings  -->
+
+              <script>
+                function displayImage(event) {
+                  var image = document.getElementById('uploaded-image');
+                  image.src = URL.createObjectURL(event.target.files[0]);
+                  image.style.display = 'block';
+                }
+              </script>
+
+
+
+
+              <!-- Group Students  -->
+              <li class="d-flex mb-4 pb-1">
+                <button data-bs-target="#students" type="button" data-bs-toggle="modal"
+                  style="display: flex; flex-direction: row; align-items: center; width: 100%; background-color: transparent; border: none; padding: 0;">
+                  <div class="avatar flex-shrink-0 me-3">
+                    <div class="p-2" style="background-color: #eae9e9; border-radius: 10px;">
+                      <i class="fa-solid fa-gear text-primary" style="font-size: 20px;"></i>
+                    </div>
+                  </div>
+                  <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
+                    <div class="me-2">
+                      <h6 class="mb-0">Subscribed Students</h6>
+                    </div>
+                  </div>
+                </button>
+              </li>
+
+
+              <div class="modal fade" id="students" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="modalCenterTitle">First Lecture Subscribed Students</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      <div class="row">
+
+
+                        <div class="col-12">
+                          <!-- Search -->
+                          <div class="d-flex align-items-center" style=" width: 100%;">
+                            <i class="bx bx-search fs-4 lh-0"></i>
+                            <input type="text" class="form-control border-0 shadow-none"
+                              id="group-students-filter-input" placeholder="Search..." style="width: 100%;"
+                              oninput="groupStudentsFilterText()" />
+                          </div>
+                          <!-- /Search -->
+                        </div>
+
+                        <hr class="mb-4">
+
+
+                        <div class="filter-blocks-container">
+                          <div class="filter-block mt-2" style="display: flex;">
+                            <div class="avatar flex-shrink-0 me-3">
+                              <div class="">
+                                <img src="/assets//img/avatars/1.png" class="w-100 rounded-circle">
+                              </div>
+                            </div>
+                            <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
+                              <div class="me-2">
+                                <h6 class="mb-0">Shady Bassem</h6>
+                              </div>
+                              <div class="dropdown">
+                                <button class="btn p-0" type="button" id="transactionID" data-bs-toggle="dropdown"
+                                  aria-haspopup="true" aria-expanded="false">
+                                  <i class="bx bx-exit" style="font-size: 25px;"></i>
+                                </button>
+                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="transactionID">
+                                  <a class="dropdown-item" href="javascript:void(0);"><i class="fa-solid fa-trash"
+                                      style="font-size: 12px; padding-right: 10px;"></i> Delete</a>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div class="filter-block mt-2" style="display: flex;">
+                            <div class="avatar flex-shrink-0 me-3">
+                              <div class="">
+                                <img src="/assets//img/avatars/1.png" class="w-100 rounded-circle">
+                              </div>
+                            </div>
+                            <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
+                              <div class="me-2">
+                                <h6 class="mb-0">David Emad</h6>
+                              </div>
+                              <div class="dropdown">
+                                <button class="btn p-0" type="button" id="transactionID" data-bs-toggle="dropdown"
+                                  aria-haspopup="true" aria-expanded="false">
+                                  <i class="bx bx-exit" style="font-size: 25px;"></i>
+                                </button>
+                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="transactionID">
+                                  <a class="dropdown-item" href="javascript:void(0);"><i class="fa-solid fa-trash"
+                                      style="font-size: 12px; padding-right: 10px;"></i> Delete</a>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div class="filter-block mt-2" style="display: flex;">
+                            <div class="avatar flex-shrink-0 me-3">
+                              <div class="">
+                                <img src="/assets//img/avatars/1.png" class="w-100 rounded-circle">
+                              </div>
+                            </div>
+                            <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
+                              <div class="me-2">
+                                <h6 class="mb-0">Mohamed Salah</h6>
+                              </div>
+                              <div class="dropdown">
+                                <button class="btn p-0" type="button" id="transactionID" data-bs-toggle="dropdown"
+                                  aria-haspopup="true" aria-expanded="false">
+                                  <i class="bx bx-exit" style="font-size: 25px;"></i>
+                                </button>
+                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="transactionID">
+                                  <a class="dropdown-item" href="javascript:void(0);"><i class="fa-solid fa-trash"
+                                      style="font-size: 12px; padding-right: 10px;"></i> Delete</a>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+
+
+
+
+                      </div>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                        Close
+                      </button>
+
+                      <button type="button" class="btn btn-outline-primary" data-bs-target="#student" type="button"
+                        data-bs-toggle="modal">
+                        Add New Student
+                      </button>
+
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- Group Students  -->
+
+
+
+
+              <!-- Add Student  -->
+              <li class="d-flex mb-4 pb-1">
+                <button data-bs-target="#student" type="button" data-bs-toggle="modal"
+                  style="display: flex; flex-direction: row; align-items: center; width: 100%; background-color: transparent; border: none; padding: 0;">
+                  <div class="avatar flex-shrink-0 me-3">
+                    <div class="p-2" style="background-color: #eae9e9; border-radius: 10px;">
+                      <i class="fa-solid fa-gear text-primary" style="font-size: 20px;"></i>
+                    </div>
+                  </div>
+                  <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
+                    <div class="me-2">
+                      <h6 class="mb-0">Add Student</h6>
+                    </div>
+                  </div>
+                </button>
+              </li>
+
+
+              <div class="modal fade" id="student" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="modalCenterTitle">Add Student To First Lecture</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      <div class="row">
+
+                        <div class="col-12">
+                          <!-- Search -->
+                          <div class="d-flex align-items-center" style=" width: 100%;">
+                            <i class="bx bx-search fs-4 lh-0"></i>
+                            <input type="text" class="form-control border-0 shadow-none" id="add-student-filter-input"
+                              placeholder="Search..." style="width: 100%;" oninput="addStudentFilterText()" />
+                          </div>
+                          <!-- /Search -->
+                        </div>
+
+                        <hr class="mb-4">
+
+
+                        <div class="filter-blocks-container">
+                          <div class="filter-block mt-2" style="display: flex;">
+                            <div class="avatar flex-shrink-0 me-3">
+                              <div class="">
+                                <img src="/assets//img/avatars/1.png" class="w-100 rounded-circle">
+                              </div>
+                            </div>
+                            <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
+                              <div class="me-2">
+                                <h6 class="mb-0 name" id="name">Mohamed Salah</h6>
+                              </div>
+                              <div class="dropdown">
+                                <button class="btn p-0" type="button" id="transactionID" data-bs-toggle="dropdown"
+                                  aria-haspopup="true" aria-expanded="false">
+                                  <i class="bx bx-plus" style="font-size: 25px;"></i>
+                                </button>
+                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="transactionID">
+                                  <a class="dropdown-item" href="javascript:void(0);"><i class="fa-solid fa-trash"
+                                      style="font-size: 12px; padding-right: 10px;"></i> Delete</a>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div class="filter-block mt-2" style="display: flex;">
+
+                            <div class="avatar flex-shrink-0 me-3">
+                              <div class="">
+                                <img src="/assets//img/avatars/7.png" class="w-100 rounded-circle">
+                              </div>
+                            </div>
+                            <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
+                              <div class="me-2">
+                                <h6 class="mb-0 name" id="name">Mena Emad</h6>
+                              </div>
+                              <div class="dropdown">
+                                <button class="btn p-0" type="button" id="transactionID" data-bs-toggle="dropdown"
+                                  aria-haspopup="true" aria-expanded="false">
+                                  <i class="bx bx-plus" style="font-size: 25px;"></i>
+                                </button>
+                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="transactionID">
+                                  <a class="dropdown-item" href="javascript:void(0);"><i class="fa-solid fa-trash"
+                                      style="font-size: 12px; padding-right: 10px;"></i> Delete</a>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div class="filter-block mt-2" style="display: flex;">
+                            <div class="avatar flex-shrink-0 me-3">
+                              <div class="">
+                                <img src="/assets//img/avatars/7.png" class="w-100 rounded-circle">
+                              </div>
+                            </div>
+                            <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
+                              <div class="me-2">
+                                <h6 class="mb-0 name" id="name">Lionel Messi</h6>
+                              </div>
+                              <div class="dropdown">
+                                <button class="btn p-0" type="button" id="transactionID" data-bs-toggle="dropdown"
+                                  aria-haspopup="true" aria-expanded="false">
+                                  <i class="bx bx-plus" style="font-size: 25px;"></i>
+                                </button>
+                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="transactionID">
+                                  <a class="dropdown-item" href="javascript:void(0);"><i class="fa-solid fa-trash"
+                                      style="font-size: 12px; padding-right: 10px;"></i> Delete</a>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+
+
+                      </div>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                        Close
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- Add Student  -->
+
+
+
+
+
+
+              <!-- Add Lecture  -->
+              <li class="d-flex mb-4 pb-1">
+                <button data-bs-target="#lecture" type="button" data-bs-toggle="modal"
+                  style="display: flex; flex-direction: row; align-items: center; width: 100%; background-color: transparent; border: none; padding: 0;">
+                  <div class="avatar flex-shrink-0 me-3">
+                    <div class="p-2" style="background-color: #eae9e9; border-radius: 10px;">
+                      <i class="fa-solid fa-gear text-primary" style="font-size: 20px;"></i>
+                    </div>
+                  </div>
+                  <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
+                    <div class="me-2">
+                      <h6 class="mb-0">Add Lecture</h6>
+                    </div>
+                  </div>
+                </button>
+              </li>
+
+              <div class="modal fade" id="lecture" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="modalCenterTitle">Add Lecture To Fri 9</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      <div class="row">
+
+
+
+
+                        <div class="col-12">
+                          <!-- Search -->
+                          <div class="d-flex align-items-center" style=" width: 100%;">
+                            <i class="bx bx-search fs-4 lh-0"></i>
+                            <input type="text" class="form-control border-0 shadow-none" id="add-lecture-filter-input"
+                              placeholder="Search..." style="width: 100%;" oninput="addLectureFilterText()" />
+                          </div>
+                          <!-- /Search -->
+                        </div>
+
+                        <hr class="mb-4">
+
+
+                        <div class="filter-blocks-container">
+
+                          <div class="filter-block mt-3" style="display: flex;">
+                            <div class="">
+                              <div style="width: 80px; height: fit-content; background-color: red;">
+                                <img src="/assets//img/backgrounds/18.jpg" style="width: 100%;">
+                              </div>
+                            </div>
+                            <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
+                              <div class="me-2">
+                                <h6 class="mb-0 ms-2">First Lecture</h6>
+                              </div>
+                              <div class="dropdown">
+                                <button class="btn p-0" type="button" id="transactionID" data-bs-toggle="dropdown"
+                                  aria-haspopup="true" aria-expanded="false">
+                                  <i class="bx bx-plus" style="font-size: 25px;"></i>
+                                </button>
+                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="transactionID">
+                                  <a class="dropdown-item" href="javascript:void(0);"><i class="fa-solid fa-trash"
+                                      style="font-size: 12px; padding-right: 10px;"></i> Delete</a>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+
+
+                          <div class="filter-block mt-3" style="display: flex;">
+                            <div class="">
+                              <div style="width: 80px; height: fit-content; background-color: red;">
+                                <img src="/assets//img/backgrounds/18.jpg" style="width: 100%;">
+                              </div>
+                            </div>
+                            <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
+                              <div class="me-2">
+                                <h6 class="mb-0 ms-2">Second Lecture</h6>
+                              </div>
+                              <div class="dropdown">
+                                <button class="btn p-0" type="button" id="transactionID" data-bs-toggle="dropdown"
+                                  aria-haspopup="true" aria-expanded="false">
+                                  <i class="bx bx-plus" style="font-size: 25px;"></i>
+                                </button>
+                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="transactionID">
+                                  <a class="dropdown-item" href="javascript:void(0);"><i class="fa-solid fa-trash"
+                                      style="font-size: 12px; padding-right: 10px;"></i> Delete</a>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+
+
+                          <div class="filter-block mt-3" style="display: flex;">
+                            <div class="">
+                              <div style="width: 80px; height: fit-content; background-color: red;">
+                                <img src="/assets//img/backgrounds/18.jpg" style="width: 100%;">
+                              </div>
+                            </div>
+                            <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
+                              <div class="me-2">
+                                <h6 class="mb-0 ms-2">Third Lecture</h6>
+                              </div>
+                              <div class="dropdown">
+                                <button class="btn p-0" type="button" id="transactionID" data-bs-toggle="dropdown"
+                                  aria-haspopup="true" aria-expanded="false">
+                                  <i class="bx bx-plus" style="font-size: 25px;"></i>
+                                </button>
+                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="transactionID">
+                                  <a class="dropdown-item" href="javascript:void(0);"><i class="fa-solid fa-trash"
+                                      style="font-size: 12px; padding-right: 10px;"></i> Delete</a>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+
+
+
+
+                        </div>
+
+
+
+
+                      </div>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                        Close
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- Add Lecture  -->
+
+
+
+
+              <!-- Lecture Statistics  -->
+              <li class="d-flex mb-4 pb-1">
+                <button data-bs-target="#stats" type="button" data-bs-toggle="modal"
+                  style="display: flex; flex-direction: row; align-items: center; width: 100%; background-color: transparent; border: none; padding: 0;">
+                  <div class="avatar flex-shrink-0 me-3">
+                    <div class="p-2" style="background-color: #eae9e9; border-radius: 10px;">
+                      <i class="fa-solid fa-gear text-primary" style="font-size: 20px;"></i>
+                    </div>
+                  </div>
+                  <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
+                    <div class="me-2">
+                      <h6 class="mb-0">Lecture Statistics</h6>
+                    </div>
+                  </div>
+                </button>
+              </li>
+
+
+              <div class="modal fade" id="stats" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="modalCenterTitle">First Lecture Statistics</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      <div class="row">
+
+
+                        <!-- Statistics Start -->
+
+
+                        <!-- Total Students Subscribed  -->
+                        <div class="col-md-6 col-12  mb-4 ">
+                          <div class="card h-100 shadow">
+                            <div class="card-header d-flex align-items-center justify-content-between">
+                              <h5 class="card-title m-0 me-2">Total Students Subscribed</h5>
+                            </div>
+                            <div class="card-body"
+                              style="display: flex; justify-content: center; align-items: center; flex-direction: column;">
+
+                              <section class="circle-chart-container">
+                                <svg class="circle-chart" viewbox="0 0 33.83098862 33.83098862"
+                                  xmlns="http://www.w3.org/2000/svg">
+                                  <circle stroke="#efefef" stroke-width=".5" fill="none" cx="16.91549431"
+                                    cy="16.91549431" r="15.91549431" />
+                                  <circle class="circle-chart-circle" stroke="#7a6ad8" stroke-width="3"
+                                    stroke-dasharray="25" fill="none" cx="16.91549431" cy="16.91549431"
+                                    r="15.91549431" />
+                                </svg>
+                                <span class="circle-chart-percentage circle-chart-one-percentage">
+                                  25%
+                                </span>
+                              </section>
+
+                              <section class="mt-4">
+                                <h5 style="color: black;">35 Student From 150</h5>
+                              </section>
+
+
+                            </div>
+                          </div>
+                        </div>
+                        <!-- Total Students Subscribed  -->
+
+
+                        <div class="col-md-6 col-12  mb-4 ">
+                          <div class="card h-100 shadow">
+                            <div class="card-header d-flex align-items-center justify-content-between">
+                              <h5 class="card-title m-0 me-2">Total Homwork Degrees</h5>
+                            </div>
+                            <div class="card-body"
+                              style="display: flex; justify-content: center; align-items: center; flex-direction: column;">
+
+
+
+
+
+                            </div>
+                          </div>
+                        </div>
+                        <!--/ Statistics End  -->
+
+
+                        <script>
+                          document.addEventListener("DOMContentLoaded", function () {
+                            var percentageInput = document.getElementById("percentageInput");
+                            var colorInput = document.getElementById("colorInput");
+                            var progressBar = document.getElementById("progressBar");
+                            var progress = progressBar.querySelector(":before");
+
+                            var percentage = parseInt(percentageInput.value);
+                            var color = colorInput.value;
+
+                            if (percentage < 0 || percentage > 100) {
+                              alert("Please enter a valid percentage between 0 and 100.");
+                              return;
+                            }
+
+                            progress.style.transform = `rotate(${percentage * 3.6}deg)`;
+                            progress.style.backgroundColor = color;
+                            progressBar.setAttribute("data-percentage", percentage);
+                          });
+                        </script>
+
+
+
+
+
+                        <hr class="mt-4 mb-4">
+
+                        <div class="table-responsive text-nowrap">
+                          <table class="table">
+
+
+
+                            <thead>
+                              <tr class="text-nowrap">
+                                <!-- <th>#</th> -->
+                                <th class="t-name">Student Name</th>
+                                <th class="t-active">Last Viewed</th>
+                                <th class="t-profile"></th>
+
+                                <!-- <th>Table heading</th> -->
+                              </tr>
+                            </thead>
+
+
+
+
+                            <tbody>
+
+
+                              <tr>
+                                <td class="t-name">Mohamed Salah</td>
+                                <td class="t-active">19/8/2023 , 12:39 PM</td>
+                                <td class="t-profile">
+                                  <a href="index.html" class="btn btn-primary btn-sm">View Profile</a>
+                                </td>
+                              </tr>
+
+                              <tr>
+                                <td class="t-name">Mohamed Salah</td>
+                                <td class="t-active">19/8/2023 , 12:39 PM</td>
+                                <td class="t-profile">
+                                  <a href="index.html" class="btn btn-primary btn-sm">View Profile</a>
+                                </td>
+                              </tr>
+
+                              <tr>
+                                <td class="t-name">Mohamed Salah</td>
+                                <td class="t-active">19/8/2023 , 12:39 PM</td>
+                                <td class="t-profile">
+                                  <a href="index.html" class="btn btn-primary btn-sm">View Profile</a>
+                                </td>
+                              </tr>
+
+
+
+                            </tbody>
+
+                          </table>
+                        </div>
+
+
+
+
+
+                      </div>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                        Close
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- Lecture Statistics  -->
+
+
+
+              <!-- Lecture Invitation Link  -->
+              <li class="d-flex mb-4 pb-1">
+                <button data-bs-target="#invite" type="button" data-bs-toggle="modal"
+                  style="display: flex; flex-direction: row; align-items: center; width: 100%; background-color: transparent; border: none; padding: 0;">
+                  <div class="avatar flex-shrink-0 me-3">
+                    <div class="p-2" style="background-color: #eae9e9; border-radius: 10px;">
+                      <i class="fa-solid fa-gear text-primary" style="font-size: 20px;"></i>
+                    </div>
+                  </div>
+                  <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
+                    <div class="me-2">
+                      <h6 class="mb-0">Lecture Subscription Link</h6>
+                    </div>
+                  </div>
+                </button>
+              </li>
+
+              <div class="modal fade" id="invite" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="modalCenterTitle">Lecture Subscription Link</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      <div class="row">
+
+
+                        <label for="students_number" class="form-label">Generate a New Lecture Subscription Link</label>
+                        <div class="input-group">
+                          <input id="students_number" name="students_number" type="text" class="form-control"
+                            placeholder="Students Number" aria-label="Recipient's username"
+                            aria-describedby="button-addon2" />
+                          <button class="btn btn-primary" type="button" id="button-addon2">Generate</button>
+                        </div>
+
+                        <hr class="mt-3 mb-4">
+
+
+                        <div class="table-responsive text-nowrap">
+                          <table class="table">
+
+
+
+                            <thead>
+                              <tr class="text-nowrap">
+                                <th class="t-link">Link</th>
+                                <th class="t-students-left">Students Left</th>
+                                <th class="t-students-number">Students Number</th>
+                                <th class="t-creation-date">Creation Date</th>
+                                <th class="t-view-students"></th>
+                                <th class="t-copy"></th>
+                                <th class="t-delete"></th>
+                              </tr>
+                            </thead>
+
+
+
+
+                            <tbody>
+
+
+                              <tr>
+                                <td class="t-link">Miemg4</td>
+                                <td class="t-students-left">40</td>
+                                <td class="t-students-number">50</td>
+                                <td class="t-creation-date">19/8/2023 , 12:39 PM</td>
+                                <td class="t-view-students">
+                                  <button class="btn btn-outline-primary" data-bs-target="#link-students" type="button"
+                                    data-bs-toggle="modal">
+                                    View Students
+                                  </button>
+                                </td>
+                                <td class="t-copy">
+                                  <input type="text"
+                                    value="http://127.0.0.1:8000/ar/lecture/subscribe?link={{x.link}}&mode=view"
+                                    id="link-1" hidden>
+                                  <button type="button" class="btn btn-primary" onclick="copyValue('link-1')">
+                                    Copy
+                                  </button>
+                                </td>
+                                <td class="t-delete">
+                                  <form action="">
+                                    <button class="btn btn-danger" type="submit">
+                                      Delete
+                                    </button>
+                                  </form>
+                                </td>
+                              </tr>
+
+                              <tr>
+                                <td class="t-link">grg48r4 <span class="bg-primary text-white p-1"
+                                    style="font-size: 10px;">Valid</span></td>
+                                <td class="t-students-left">40</td>
+                                <td class="t-students-number">50</td>
+                                <td class="t-creation-date">19/8/2023 , 12:39 PM</td>
+                                <td class="t-view-students">
+                                  <button class="btn btn-outline-primary" data-bs-target="#link-students" type="button"
+                                    data-bs-toggle="modal">
+                                    View Students
+                                  </button>
+                                </td>
+                                <td class="t-copy">
+                                  <input type="text" value="grg48r4" id="link-2" hidden>
+                                  <button type="button" class="btn btn-primary" onclick="copyValue('link-2')">
+                                    Copy
+                                  </button>
+                                </td>
+                                <td class="t-delete">
+                                  <form action="">
+                                    <button class="btn btn-danger" type="submit">
+                                      Delete
+                                    </button>
+                                  </form>
+                                </td>
+                              </tr>
+
+                              <tr>
+                                <td class="t-link">rg25e1 <span class="bg-primary text-white p-1"
+                                    style="font-size: 10px;">Valid</span></td>
+                                <td class="t-students-left">40</td>
+                                <td class="t-students-number">50</td>
+                                <td class="t-creation-date">19/8/2023 , 12:39 PM</td>
+                                <td class="t-view-students">
+                                  <button class="btn btn-outline-primary" data-bs-target="#link-students" type="button"
+                                    data-bs-toggle="modal">
+                                    View Students
+                                  </button>
+                                </td>
+                                <td class="t-copy">
+                                  <input type="text" value="rg25e1" id="link-3" hidden>
+                                  <button type="button" class="btn btn-primary" onclick="copyValue('link-3')">
+                                    Copy
+                                  </button>
+                                </td>
+                                <td class="t-delete">
+                                  <form action="">
+                                    <button class="btn btn-danger" type="submit">
+                                      Delete
+                                    </button>
+                                  </form>
+                                </td>
+                              </tr>
+
+                              <tr>
+                                <td class="t-link">e51g51 <span class="bg-danger text-white p-1"
+                                    style="font-size: 10px;">Expired</span></td>
+                                <td class="t-students-left">40</td>
+                                <td class="t-students-number">50</td>
+                                <td class="t-creation-date">19/8/2023 , 12:39 PM</td>
+                                <td class="t-view-students">
+                                  <button class="btn btn-outline-primary" data-bs-target="#link-students" type="button"
+                                    data-bs-toggle="modal">
+                                    View Students
+                                  </button>
+                                </td>
+                                <td class="t-copy">
+                                  <input type="text" value="e51g51" id="link-4" hidden>
+                                  <button type="button" class="btn btn-primary" onclick="copyValue('link-4')">
+                                    Copy
+                                  </button>
+                                </td>
+                                <td class="t-delete">
+                                  <form action="">
+                                    <button class="btn btn-danger" type="submit">
+                                      Delete
+                                    </button>
+                                  </form>
+                                </td>
+                              </tr>
+
+
+
+
+
+
+
+
+                            </tbody>
+
+                          </table>
+                        </div>
+
+
+
+
+
+
+
+
+
+
+
+                      </div>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                        Close
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+              <!-- Link Students  -->
+              <div class="modal fade" id="link-students" tabindex="999" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="modalCenterTitle">First Lecture Subscribed Students</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      <div class="row">
+
+
+                        <div class="col-12">
+                          <!-- Search -->
+                          <div class="d-flex align-items-center" style=" width: 100%;">
+                            <i class="bx bx-search fs-4 lh-0"></i>
+                            <input type="text" class="form-control border-0 shadow-none"
+                              id="group-students-filter-input" placeholder="Search..." style="width: 100%;"
+                              oninput="groupStudentsFilterText()" />
+                          </div>
+                          <!-- /Search -->
+                        </div>
+
+                        <hr class="mb-4">
+
+
+                        <div class="filter-blocks-container">
+                          <div class="filter-block mt-2" style="display: flex;">
+                            <div class="avatar flex-shrink-0 me-3">
+                              <div class="">
+                                <img src="/assets//img/avatars/1.png" class="w-100 rounded-circle">
+                              </div>
+                            </div>
+                            <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
+                              <div class="me-2">
+                                <h6 class="mb-0">Shady Bassem</h6>
+                              </div>
+                              <div class="dropdown">
+                                <button class="btn p-0" type="button" id="transactionID" data-bs-toggle="dropdown"
+                                  aria-haspopup="true" aria-expanded="false">
+                                  <i class="bx bx-exit" style="font-size: 25px;"></i>
+                                </button>
+                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="transactionID">
+                                  <a class="dropdown-item" href="javascript:void(0);"><i class="fa-solid fa-trash"
+                                      style="font-size: 12px; padding-right: 10px;"></i> Delete</a>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div class="filter-block mt-2" style="display: flex;">
+                            <div class="avatar flex-shrink-0 me-3">
+                              <div class="">
+                                <img src="/assets//img/avatars/1.png" class="w-100 rounded-circle">
+                              </div>
+                            </div>
+                            <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
+                              <div class="me-2">
+                                <h6 class="mb-0">David Emad</h6>
+                              </div>
+                              <div class="dropdown">
+                                <button class="btn p-0" type="button" id="transactionID" data-bs-toggle="dropdown"
+                                  aria-haspopup="true" aria-expanded="false">
+                                  <i class="bx bx-exit" style="font-size: 25px;"></i>
+                                </button>
+                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="transactionID">
+                                  <a class="dropdown-item" href="javascript:void(0);"><i class="fa-solid fa-trash"
+                                      style="font-size: 12px; padding-right: 10px;"></i> Delete</a>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div class="filter-block mt-2" style="display: flex;">
+                            <div class="avatar flex-shrink-0 me-3">
+                              <div class="">
+                                <img src="/assets//img/avatars/1.png" class="w-100 rounded-circle">
+                              </div>
+                            </div>
+                            <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
+                              <div class="me-2">
+                                <h6 class="mb-0">Mohamed Salah</h6>
+                              </div>
+                              <div class="dropdown">
+                                <button class="btn p-0" type="button" id="transactionID" data-bs-toggle="dropdown"
+                                  aria-haspopup="true" aria-expanded="false">
+                                  <i class="bx bx-exit" style="font-size: 25px;"></i>
+                                </button>
+                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="transactionID">
+                                  <a class="dropdown-item" href="javascript:void(0);"><i class="fa-solid fa-trash"
+                                      style="font-size: 12px; padding-right: 10px;"></i> Delete</a>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+
+
+
+
+                      </div>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-outline-secondary" data-bs-target="#invite"
+                        data-bs-toggle="modal">
+                        Back
+                      </button>
+
+
+
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- Link Students  -->
+              <!-- Lecture Invitation Link  -->
+
+
+
+              <script>
+                function copyValue(inputId) {
+                  var input = document.getElementById(inputId);
+                  input.select();
+                  document.execCommand("copy");
+                  alert("Lecture Subscription Link Copied: " + input.value);
+
+                }
+              </script>
+
+
+            </ul>
+
+
+
+
+
+
+
+
+          </div>
+        </div>
+        <!-- Settings Offcanvas  -->
+
+
+
+
+
+
+        <!-- Settings -->
+        <!-- Settings For Instructor  -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <!-- Lecture Parts  -->
+        <!-- Put Class "show" To Make Accordion active if get:lecture == accordion.id  -->
+        <div class="row mt-5">
+
+          <div class="col-12">
+            <div class="card bg-primary">
+              <div class="card-body" style="padding: 15px;">
+                <div class="accordion" id="accordionExample">
+
+                  <div class="card accordion-item active">
+                    <h2 class="accordion-header" id="headingOne">
+                      <button type="button" class="accordion-button" data-bs-toggle="collapse"
+                        data-bs-target="#accordionOne" aria-expanded="true" aria-controls="accordionOne">
+                        First Part
+                      </button>
+                    </h2>
+
+                    <div id="accordionOne" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                      <div class="accordion-body">
+                        <div class="rounded"
+                          style="width: 100%; height: 100%; background-color: #f5f5f9; display: flex; flex-direction: column; padding: 6px;">
+                          <div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+                            <div style="display: flex;">
+                              <div class="avatar flex-shrink-0 me-3">
+                                <div style="background-color: white; border-radius: 10px; padding: 7px;"><i
+                                    class="fa-solid fa-video text-primary" style="font-size: 20px;"></i></div>
+                              </div>
+                              <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
+                                <div class="me-2">
+                                  <h6 class="mb-0">Video</h6>
+                                </div>
+                              </div>
+                            </div>
+                            <div>
+                              <button class="btn btn-outline-primary">Watch</button>
+                            </div>
+                          </div>
+                          <hr class="text-primary">
+                          <div style="display: flex; flex-direction: column; padding: 5px;">
+                            <div class="d-flex justify-content-between">
+                              <div class="d-flex align-items-center">
+                                <i class="fa-solid fa-clock text-primary" style="font-size: 20px;"></i>
+                                <div style="margin-left: 10px;">Content</div>
+                              </div>
+                              <div class="d-flex align-items-center">
+                                <div>49 min</div>
+                              </div>
+                            </div>
+                            <div class="d-flex justify-content-between mt-2">
+                              <div class="d-flex align-items-center">
+                                <i class="fa-solid fa-question text-primary"
+                                  style="font-size: 20px; margin-left: 3px;"></i>
+                                <div style="margin-left: 10px;">Times Opened</div>
+                              </div>
+                              <div class="d-flex align-items-center">
+                                <div>4</div>
+                              </div>
+                            </div>
+                          </div>
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="card accordion-item">
+                    <h2 class="accordion-header" id="headingTwo">
+                      <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse"
+                        data-bs-target="#accordionTwo" aria-expanded="false" aria-controls="accordionTwo">
+                        Second Part
+                      </button>
+                    </h2>
+                    <div id="accordionTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
+                      data-bs-parent="#accordionExample">
+                      <div class="accordion-body">
+                        <div class="rounded"
+                          style="width: 100%; height: 100%; background-color: #f5f5f9; display: flex; flex-direction: column; padding: 6px;">
+                          <div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+                            <div style="display: flex;">
+                              <div class="avatar flex-shrink-0 me-3">
+                                <div style="background-color: white; border-radius: 10px; padding: 7px;"><i
+                                    class="fa-solid fa-file text-primary" style="font-size: 20px;"></i></div>
+                              </div>
+                              <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
+                                <div class="me-2">
+                                  <h6 class="mb-0">Test</h6>
+                                </div>
+                              </div>
+                            </div>
+                            <div>
+                              <button class="btn btn-outline-primary">Open</button>
+                            </div>
+                          </div>
+                          <hr class="text-primary">
+                          <div style="display: flex; flex-direction: column; padding: 5px;">
+                            <div class="d-flex justify-content-between">
+                              <div class="d-flex align-items-center">
+                                <i class="fa-solid fa-question text-primary" style="font-size: 20px;"></i>
+                                <div style="margin-left: 10px;">Questions</div>
+                              </div>
+                              <div class="d-flex align-items-center">
+                                <div>50</div>
+                              </div>
+                            </div>
+                            <div class="d-flex justify-content-between mt-2">
+                              <div class="d-flex align-items-center">
+                                <i class="fa-solid fa-clock text-primary"
+                                  style="font-size: 20px; margin-left: 0px;"></i>
+                                <div style="margin-left: 10px;">Time</div>
+                              </div>
+                              <div class="d-flex align-items-center">
+                                <div>60 min</div>
+                              </div>
+                            </div>
+                          </div>
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="card accordion-item">
+                    <h2 class="accordion-header" id="headingThree">
+                      <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse"
+                        data-bs-target="#accordionThree" aria-expanded="false" aria-controls="accordionThree">
+                        Part 3
+                      </button>
+                    </h2>
+                    <div id="accordionThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
+                      data-bs-parent="#accordionExample">
+                      <div class="accordion-body">
+                        <div class="rounded"
+                          style="width: 100%; height: 100%; background-color: #f5f5f9; display: flex; flex-direction: column; padding: 6px;">
+                          <div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+                            <div style="display: flex;">
+                              <div class="avatar flex-shrink-0 me-3">
+                                <div style="background-color: white; border-radius: 10px; padding: 7px;"><i
+                                    class="fa-solid fa-folder text-primary" style="font-size: 20px;"></i></div>
+                              </div>
+                              <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
+                                <div class="me-2">
+                                  <h6 class="mb-0">PDF</h6>
+                                </div>
+                              </div>
+                            </div>
+                            <div>
+                              <button class="btn btn-outline-primary">Open</button>
+                            </div>
+                          </div>
+                          <hr class="text-primary">
+                          <div style="display: flex; flex-direction: column; padding: 5px;">
+                            <div class="d-flex justify-content-between">
+                              <div class="d-flex align-items-center">
+                                <i class="fa-solid fa-file text-primary" style="font-size: 20px;"></i>
+                                <div style="margin-left: 10px;">Pages</div>
+                              </div>
+                              <div class="d-flex align-items-center">
+                                <div>75</div>
+                              </div>
+                            </div>
+                          </div>
+
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <!-- Lecture Parts  -->
+
+
+
+
+
+
+
+
+
+
+
+
+      </div>
+      <!-- / Content -->
+
+      <!-- Footer -->
+      <footer class="content-footer footer bg-footer-theme">
+        <div class="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column">
+          <div class="mb-2 mb-md-0">
+            ©
+            <script>
+              document.write(new Date().getFullYear());
+            </script>
+            , made with ❤️ by
+            <a href="https://themeselection.com" target="_blank" class="footer-link fw-bolder">ThemeSelection</a>
+          </div>
+          <div>
+            <a href="https://themeselection.com/license/" class="footer-link me-4" target="_blank">License</a>
+            <a href="https://themeselection.com/" target="_blank" class="footer-link me-4">More Themes</a>
+
+            <a href="https://themeselection.com/demo/sneat-bootstrap-html-admin-template/documentation/" target="_blank"
+              class="footer-link me-4">Documentation</a>
+
+            <a href="https://github.com/themeselection/sneat-html-admin-template-free/issues" target="_blank"
+              class="footer-link me-4">Support</a>
+          </div>
+        </div>
+      </footer>
+      <!-- / Footer -->
+
+      <div class="content-backdrop fade"></div>
+    </div>
+    <!-- Content wrapper -->
+
+
+
+
+    <!-- Overlay -->
+    <div class="layout-overlay layout-menu-toggle"></div>
+  </div>
+  <!-- / Layout wrapper -->
+
+
+  {% endblock content %}
+
+
+
+
